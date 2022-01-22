@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 // import { Navigate } from 'react-router-dom';
-import NonrunnableCodeEditor from '../../components/nonrunnable-code-editor/nonrunnable-code-editor.component.jsx'
+// import NonrunnableCodeEditor from '../../components/nonrunnable-code-editor/nonrunnable-code-editor.component.jsx'
 import RunnableCodeEditor from '../../components/runnable-code-editor/runnable-code-editor.component.jsx'
 // import CustomButton from '../../custom-button/custom-button.component.jsx'
 import DecksList from '../../components/decks-list/decks-list.component.jsx'
@@ -149,33 +149,20 @@ const FlashcardPage = ( {currentUser} ) => {
     </button>
   )
 
-  const createNewFlashcard = (newCardData, currentDeckId) => {
-    // const newCardData = { "front" : newFlashcardFront, "back" : newFlashcardBack}
+  const createNewFlashcard = (newCardData) => {
     // newCardData shape -> { "front": flashcardFront, "back": flashcardBack }
     axios
-      .post(`http://127.0.0.1:5000/decks/${currentDeckId}/flashcards`, newCardData)
+      .post(`http://127.0.0.1:5000/decks/${currentDeck.id}/flashcards`, newCardData)
       .then((response) => {
         // console.log("Response:", response);
         const flashcards = [...flashcardsData];
         flashcards.push(response.data);
         setFlashcardsData(flashcards);
-        
-        // reset message to empty after submitting 
-        // setNewFlashcardFront("");
-        // setNewFlashcardBack("");
       })
       .catch((error) => {
         console.log("Error:", error);
       });
   };
-
-  // const updateNewFlashCardFront = (newFrontText) => {
-  //   setNewFlashcardFront(newFrontText);
-  // }
-
-  // const updateNewFlashCardBack = (newBackText) => {
-  //   setNewFlashcardBack(newBackText);
-  // }
 
   return (
     <div className="main-container">
@@ -201,7 +188,7 @@ const FlashcardPage = ( {currentUser} ) => {
           <OptionsButton  onClick={deleteDeck}>Delete Current Deck</OptionsButton >
           <OptionsButton  onClick={()=>{console.log("deleting card")}}>Delete Current Card</OptionsButton >
         </div>
-        <RunnableCodeEditor createNewFlashcard={createNewFlashcard} currentDeckId={currentDeck.id}></RunnableCodeEditor> 
+        <RunnableCodeEditor createNewFlashcard={createNewFlashcard}></RunnableCodeEditor> 
         {/* <NonrunnableCodeEditor updateNewFlashCardBack={updateNewFlashCardBack}></NonrunnableCodeEditor> */}
         {/* <OptionsButton onClick={createNewFlashcard}>Add New Card</OptionsButton > */}
       </section>

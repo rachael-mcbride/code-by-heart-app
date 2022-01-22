@@ -5,12 +5,23 @@ import FlashcardBack from "../flashcard-back/flashcard-back.component.jsx";
 // import NewFlashcard from "../new-flashcard/new-flashcard.component.jsx";
 // import CustomButton from '../custom-button/custom-button.component';
 // import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const FlashcardsContainer = ( { currentCard, currentDeck }) => {
-  const [revealCardAnswer, SetRevealCardAnswer] = useState(false)
+  const [cardBackReveal, setCardBackReveal] = useState(false);
+  
+  const revealCardAnswerFunc = () => {
+    setCardBackReveal(true);
+  }
 
-
+  // resets the CardBackReveal back to false if new card or deck is clicked on 
+  useEffect(() => {
+    const resetReveal = () => {
+      setCardBackReveal(false)
+    }
+    resetReveal();
+  }, [currentCard, currentDeck]);
+  
 
   return (
     <div className="deck-wrapper">
@@ -29,7 +40,9 @@ const FlashcardsContainer = ( { currentCard, currentDeck }) => {
         }
         {currentCard && 
           <FlashcardBack
-            back={currentCard.back} revealAnswer={revealCardAnswer}>
+            cardBackReveal={cardBackReveal}
+            revealCardAnswerFunc={revealCardAnswerFunc}
+            back={currentCard.back}>
           </FlashcardBack>
         }
 
@@ -38,12 +51,12 @@ const FlashcardsContainer = ( { currentCard, currentDeck }) => {
   );
 };
 
-FlashcardsContainer.propTypes = {
-  currentDeck: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    owner_id: PropTypes.string.isRequired,
-  }),
-};
+// FlashcardsContainer.propTypes = {
+//   currentDeck: PropTypes.shape({
+//     id: PropTypes.number.isRequired,
+//     name: PropTypes.string.isRequired,
+//     owner_id: PropTypes.string.isRequired,
+//   }),
+// };
 
 export default FlashcardsContainer;

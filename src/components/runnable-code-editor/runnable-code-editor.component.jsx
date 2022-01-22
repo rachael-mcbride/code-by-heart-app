@@ -12,7 +12,7 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
   const [codeToRun, setCodeToRun] = useState(null)
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null)
   const [newFlashcardFront, setNewFlashcardFront] = useState(null);
-  // const [newFlashcardBack, setNewFlashcardBack] = useState("");
+  const [newFlashcardBack, setNewFlashcardBack] = useState(null);
 
   // func that will call the Jdoodle code compiler
   const runCode = () => {
@@ -34,10 +34,10 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
 
   const submitNewCard = (event) => {
     event.preventDefault();
-    createNewFlashcard ({ "front": newFlashcardFront, "back": "test back" });
-    // reset message to empty after submitting 
+    createNewFlashcard ({ "front": newFlashcardFront, "back": newFlashcardBack});
+    // reset messages to empty after submitting 
     setNewFlashcardFront("");
-    // setNewFlashcardBack("");
+    setNewFlashcardBack("");
   };
 
   const OptionsButton = ({ children, ...otherProps }) => (
@@ -77,6 +77,22 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
             Run Code
           </CustomButton>
         </div>
+
+        <div>
+        <CodeMirror className="code-mirror"
+          value="#create back of new card"
+          options={{
+              theme: 'twilight',
+              indentUnit: 4,
+              mode: 'python'
+            }}
+          height="150px"
+          width="380px"
+          onChange={(editor) => {
+            console.log('value:', editor.getValue());
+            setNewFlashcardBack(editor.getValue())
+          }}/>
+      </div>
 
         <OptionsButton onClick={submitNewCard}>Add New Card</OptionsButton >
     </div>

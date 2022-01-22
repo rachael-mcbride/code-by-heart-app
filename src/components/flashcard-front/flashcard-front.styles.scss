@@ -1,0 +1,23 @@
+.flashcard-front {
+  display: flex;
+  margin-bottom: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 350px;
+  height: 175px;
+  background-color: rgb(39, 38, 38);
+  padding: 10px;
+
+  .front-text{
+    display: flex;
+    color: white;
+  }
+
+  .front-delete-button{
+    display: flex;
+    align-self: flex-end;
+    order: -40;
+  }
+}

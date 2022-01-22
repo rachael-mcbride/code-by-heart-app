@@ -1,0 +1,35 @@
+.new-deck-style{
+  padding: 10px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+
+  .name-box{
+    margin-top: 20px;
+    font-family: 'Roboto Slab', serif;
+  }
+
+  .button {
+    width: 130px;
+    height: 40px;
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    margin: 10px;
+    padding: 0 10px 0 10px;
+    font-size: 15px;
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Roboto Slab', serif;
+    font-size: small;
+    font-weight: bolder;
+    border: none;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+  }
+}

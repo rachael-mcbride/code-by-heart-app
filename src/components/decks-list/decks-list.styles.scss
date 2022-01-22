@@ -1,0 +1,20 @@
+.decks-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.decks-header {
+  font-size: 40px;
+  padding: 5px 30px;
+  border-radius: 10px;
+  background-color: white;
+  padding-bottom: 5px;
+} 
+
+.decks-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} 

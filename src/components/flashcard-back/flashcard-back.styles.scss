@@ -1,0 +1,30 @@
+.flashcard-back-revealed {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  width: 350px;
+  height: 175px;
+  background-color: rgb(39, 38, 38);
+  color: white;
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.flashcard-back-not-revealed {
+  display: flex;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  width: 350px;
+  height: 175px;
+  background-color: white;
+  border: 1px solid black;
+  color: rgb(39, 38, 38);
+  padding: 10px;
+}

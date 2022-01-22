@@ -1,0 +1,29 @@
+.deck-titles {
+  padding: 2px;
+  font-family: 'Roboto Slab', serif;
+
+  button {
+    min-width: 165px;
+    width: 200px;
+    height: 40px;
+    letter-spacing: 0.5px;
+    line-height: 40px;
+    padding: 0 5px 0 5px;
+    background-color: white;
+    color: black;
+    text-transform: uppercase;
+    font-family: 'Roboto Slab', serif;
+    font-size: small;
+    border: 1px solid black;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: black;
+      color: white;
+    }
+  }
+}
+
+// .button {
+//   min-width: 165px;
+// }

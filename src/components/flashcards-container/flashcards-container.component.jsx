@@ -14,7 +14,7 @@ const FlashcardsContainer = ( { currentCard, currentDeck }) => {
     setCardBackReveal(true);
   }
 
-  // resets the CardBackReveal back to false if new card or deck is clicked on 
+  // resets the CardBackReveal back to false if new card or deck is clicked 
   useEffect(() => {
     const resetReveal = () => {
       setCardBackReveal(false)

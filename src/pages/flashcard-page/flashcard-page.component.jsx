@@ -188,7 +188,10 @@ const FlashcardPage = ( {currentUser} ) => {
           <OptionsButton  onClick={deleteDeck}>Delete Current Deck</OptionsButton >
           <OptionsButton  onClick={()=>{console.log("deleting card")}}>Delete Current Card</OptionsButton >
         </div>
-        <RunnableCodeEditor createNewFlashcard={createNewFlashcard}></RunnableCodeEditor> 
+        <RunnableCodeEditor 
+          currentDeckId={currentDeck.id}
+          createNewFlashcard={createNewFlashcard}>
+        </RunnableCodeEditor> 
         {/* <NonrunnableCodeEditor updateNewFlashCardBack={updateNewFlashCardBack}></NonrunnableCodeEditor> */}
         {/* <OptionsButton onClick={createNewFlashcard}>Add New Card</OptionsButton > */}
       </section>

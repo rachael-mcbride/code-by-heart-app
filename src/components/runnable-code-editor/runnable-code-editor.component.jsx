@@ -1,20 +1,22 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
+import CustomButton from '../custom-button/custom-button.component'
 import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/yonce.css'
-// Note: more themes here -- https://codemirror.net/demo/theme.htm
-
 import './runnable-code-editor.styles.scss'
-import CustomButton from '../custom-button/custom-button.component'
 
 
-const RunnableCodeEditor = ( { createNewFlashcard } ) => {
+const RunnableCodeEditor = ( { createNewFlashcard, currentDeckId } ) => {
   const [codeToRun, setCodeToRun] = useState(null)
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null)
-  const [newFlashcardFront, setNewFlashcardFront] = useState(null);
-  const [newFlashcardBack, setNewFlashcardBack] = useState(null);
-  const [frontCodeMirrorValue, setFrontCodeMirrorValue] = useState("#create front of new card")
-  const [backCodeMirrorValue, setBackCodeMirrorValue] = useState("#create back of new card")
+  const [newFlashcardFront, setNewFlashcardFront] = useState("");
+  const [newFlashcardBack, setNewFlashcardBack] = useState("");
+  const [frontCMPlaceholderValue, setFrontCMPlaceholderValue] = useState("#create front of new card")
+  const [backCMPlaceholderValue, setBackCMPlaceholderValue] = useState("#create back of new card")
+
+  // prevents user from adding a flashcard with an empty front or back message
+  const newFlashcardIsEnabled = newFlashcardFront.length > 0 && newFlashcardBack.length > 0;
 
   // func that will call the Jdoodle code compiler
   const runCode = () => {
@@ -22,7 +24,7 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
       .post(`http://127.0.0.1:5000/compile`, {"code" : codeToRun})
       .then((response) => {
           const output = response.data
-          if (response.data.includes("jdoodle.py")) { // error occurred
+          if (response.data.includes("jdoodle.py")) { // error msg should be displayed
             const shorterErrorMsg = output.substring(output.indexOf('E'));
             setCodeInOutputContainer(shorterErrorMsg)
           } else {
@@ -38,10 +40,13 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
     event.preventDefault();
     createNewFlashcard ({ "front": newFlashcardFront, "back": newFlashcardBack});
 
-    // reset messages to empty after submitting 
-    setFrontCodeMirrorValue("");
-    setBackCodeMirrorValue("");
+    // clear placeholder messages as a sign to user that their submission went through
+    setFrontCMPlaceholderValue("");
+    setBackCMPlaceholderValue("");
+    
+    // clean up 
     setNewFlashcardFront("");
+    setNewFlashcardBack("");
   };
 
   const OptionsButton = ({ children, ...otherProps }) => (
@@ -53,11 +58,11 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
     </button>
   )
 
-
+    // make it so add new card button only renders once a deck is clicked on 
   return (
     <div>
       <CodeMirror className="code-mirror"
-        value={frontCodeMirrorValue}
+        value={frontCMPlaceholderValue}
         options={{
             theme: 'yonce',
             indentUnit: 4,
@@ -84,7 +89,7 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
 
         <div>
         <CodeMirror className="code-mirror"
-          value={backCodeMirrorValue}
+          value={backCMPlaceholderValue}
           options={{
               theme: 'yonce',
               indentUnit: 4,
@@ -98,10 +103,20 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
           }}/>
       </div>
 
-        <OptionsButton onClick={submitNewCard}>Add New Card</OptionsButton >
+        {currentDeckId && // only render button if a deck has been selected
+        <OptionsButton 
+          disabled={!newFlashcardIsEnabled}
+          onClick={submitNewCard}>
+            Add New Card
+        </OptionsButton>}
     </div>
-
   )
 }
+
+RunnableCodeEditor.propTypes = {
+  createNewFlashcard: PropTypes.func,
+  currentDeckId: PropTypes.number
+};
+
 
 export default RunnableCodeEditor;

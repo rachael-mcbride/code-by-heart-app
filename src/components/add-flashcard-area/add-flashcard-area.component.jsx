@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import CustomButton from '../custom-button/custom-button.component'
+import LanguageDropDown from '../language-drop-down/language-drop-down.component'
 import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/xq-light.css'
 import './add-flashcard-area.styles.scss'
@@ -12,8 +13,24 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null)
   const [newFlashcardFront, setNewFlashcardFront] = useState("");
   const [newFlashcardBack, setNewFlashcardBack] = useState("");
-  const [frontCMPlaceholderValue, setFrontCMPlaceholderValue] = useState("#create front of new card")
-  const [backCMPlaceholderValue, setBackCMPlaceholderValue] = useState("#create back of new card")
+  const [frontCMPlaceholderValue, setFrontCMPlaceholderValue] = useState("create front of new card")
+  const [backCMPlaceholderValue, setBackCMPlaceholderValue] = useState("create back of new card")
+  const [language, setLanguage] = useState("Markdown");
+  const [indentUnitInfo, setindentUnitInfo] = useState(4);
+
+  const handleLanguageChange = (newLanguage) => {
+    setLanguage(newLanguage);
+    if (language.toLowerCase() === 'python') {
+      setindentUnitInfo(4)
+    } else {
+      setindentUnitInfo(2)
+    }
+    // console.log("current language:", language)
+  }
+
+  useEffect(() => {
+    handleLanguageChange(language)
+  }, [language]); 
 
   // prevents user from adding a flashcard with an empty front or back message
   const newFlashcardIsEnabled = newFlashcardFront.length > 0 && newFlashcardBack.length > 0;
@@ -63,6 +80,10 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
     <div className="add-flashcards-container">
       <div className="add-flashcards-header-container">
         <h2 className="add-flashcards-title">Add Flashcards</h2>
+        <LanguageDropDown
+          language={language}
+          handleLanguageChange={handleLanguageChange}
+        ></LanguageDropDown>
       </div>
 
       <div className="add-card-area">
@@ -70,8 +91,8 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
           value={frontCMPlaceholderValue}
           options={{
               theme: 'xq-light',
-              indentUnit: 4,
-              mode: 'python'
+              indentUnit: `${indentUnitInfo}`,
+              mode: `${language}`
             }}
           height="150px"
           width="380px"
@@ -97,8 +118,8 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
             value={backCMPlaceholderValue}
             options={{
                 theme: 'xq-light',
-                indentUnit: 4,
-                mode: 'python'
+                indentUnit: `${indentUnitInfo}`,
+                mode: `${language}`
               }}
             height="150px"
             width="380px"

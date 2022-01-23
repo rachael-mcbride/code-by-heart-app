@@ -13,6 +13,8 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null)
   const [newFlashcardFront, setNewFlashcardFront] = useState(null);
   const [newFlashcardBack, setNewFlashcardBack] = useState(null);
+  const [frontCodeMirrorValue, setFrontCodeMirrorValue] = useState("#create front of new card")
+  const [backCodeMirrorValue, setBackCodeMirrorValue] = useState("#create back of new card")
 
   // func that will call the Jdoodle code compiler
   const runCode = () => {
@@ -35,9 +37,11 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
   const submitNewCard = (event) => {
     event.preventDefault();
     createNewFlashcard ({ "front": newFlashcardFront, "back": newFlashcardBack});
+
     // reset messages to empty after submitting 
+    setFrontCodeMirrorValue("");
+    setBackCodeMirrorValue("");
     setNewFlashcardFront("");
-    setNewFlashcardBack("");
   };
 
   const OptionsButton = ({ children, ...otherProps }) => (
@@ -53,7 +57,7 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
   return (
     <div>
       <CodeMirror className="code-mirror"
-        value="#test code or create front of new card"
+        value={frontCodeMirrorValue}
         options={{
             theme: 'yonce',
             indentUnit: 4,
@@ -80,7 +84,7 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
 
         <div>
         <CodeMirror className="code-mirror"
-          value="#create back of new card"
+          value={backCodeMirrorValue}
           options={{
               theme: 'yonce',
               indentUnit: 4,

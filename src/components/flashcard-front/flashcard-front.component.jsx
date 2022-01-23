@@ -3,21 +3,21 @@ import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/yonce.css'
 import './flashcard-front.styles.scss'
 
-const FlashcardFront = ({ front, deleteFlashcard }) => {
+const FlashcardFront = ({ frontMsg, deleteFlashcard }) => {
   // console.log("flashcardFront:", front)
-  let frontMsg = "";
+  const frontMsgToRender = (!frontMsg) ? "You have no cards to review." : frontMsg;
 
-  if (!front) {
-    frontMsg = "You have no cards to review.";
-  } else {
-    frontMsg = front;
-  }
+  // if (!frontMsg) {
+  //   frontMsgToRender = "You have no cards to review.";
+  // } else {
+  //   frontMsgToRender= frontMsg;
+  // }
 
   return (
     <div className="flashcard-front">
       <div>
         <CodeMirror className="code-mirror"
-          value={frontMsg}
+          value={frontMsgToRender}
           options={{
               theme: 'yonce',
               indentUnit: 4,

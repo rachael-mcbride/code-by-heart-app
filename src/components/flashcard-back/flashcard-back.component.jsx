@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/yonce.css'
 
-const FlashcardBack = ({ back, revealCardAnswerFunc, cardBackReveal }) => {
-  console.log("flashcardBack:", back)
+const FlashcardBack = ({ backMsg, cardBackReveal, revealCardAnswerFunc }) => {
+  // console.log("flashcardBack:", backMsg)
 
   if (cardBackReveal === true) {
     return (
       <div className="flashcard-back-revealed">
           <CodeMirror className="code-mirror"
-            value={back}
+            value={backMsg}
             options={{
                 theme: 'yonce',
                 indentUnit: 4,
@@ -36,8 +36,9 @@ const FlashcardBack = ({ back, revealCardAnswerFunc, cardBackReveal }) => {
 };
 
 FlashcardBack.propTypes = {
-  deleteFlashcard: PropTypes.func,
-  front: PropTypes.string
+  backMsg: PropTypes.string,
+  cardBackReveal: PropTypes.bool,
+  revealCardAnswerFunc: PropTypes.func
 };
 
 export default FlashcardBack;

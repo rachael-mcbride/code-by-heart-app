@@ -35,14 +35,17 @@ const FlashcardsContainer = ( { currentCard, currentDeck }) => {
       <section className="flashcard">
         {currentCard && 
           <FlashcardFront 
-            front={currentCard.front}>
+            frontMsg={currentCard.front}>
           </FlashcardFront>
+        } 
+        { (!currentCard) && 
+          <div>You have no cards up for review in this deck.</div>
         }
         {currentCard && 
           <FlashcardBack
+            backMsg={currentCard.back}
             cardBackReveal={cardBackReveal}
-            revealCardAnswerFunc={revealCardAnswerFunc}
-            back={currentCard.back}>
+            revealCardAnswerFunc={revealCardAnswerFunc}>
           </FlashcardBack>
         }
 

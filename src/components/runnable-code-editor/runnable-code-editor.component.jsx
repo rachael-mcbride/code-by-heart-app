@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import CodeMirror from "@uiw/react-codemirror"
-import 'codemirror/theme/twilight.css'
+import 'codemirror/theme/yonce.css'
 // Note: more themes here -- https://codemirror.net/demo/theme.htm
 
 import './runnable-code-editor.styles.scss'
@@ -55,7 +55,7 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
       <CodeMirror className="code-mirror"
         value="#test code or create front of new card"
         options={{
-            theme: 'twilight',
+            theme: 'yonce',
             indentUnit: 4,
             mode: 'python'
           }}
@@ -82,7 +82,7 @@ const RunnableCodeEditor = ( { createNewFlashcard } ) => {
         <CodeMirror className="code-mirror"
           value="#create back of new card"
           options={{
-              theme: 'twilight',
+              theme: 'yonce',
               indentUnit: 4,
               mode: 'python'
             }}

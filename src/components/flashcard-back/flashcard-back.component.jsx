@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import './flashcard-back.styles.scss'
 import PropTypes from "prop-types";
 import CodeMirror from "@uiw/react-codemirror"
-import 'codemirror/theme/twilight.css'
+import 'codemirror/theme/yonce.css'
 
 const FlashcardBack = ({ back, revealCardAnswerFunc, cardBackReveal }) => {
   console.log("flashcardBack:", back)
@@ -13,10 +12,12 @@ const FlashcardBack = ({ back, revealCardAnswerFunc, cardBackReveal }) => {
           <CodeMirror className="code-mirror"
             value={back}
             options={{
-                theme: 'twilight',
+                theme: 'yonce',
                 indentUnit: 4,
                 mode: 'python',
                 lineNumbers: false,
+                readOnly: true,
+                cursorBlinkRate: -1
               }}
             height="150px"
             width="320px"

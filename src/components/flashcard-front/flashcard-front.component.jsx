@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import CodeMirror from "@uiw/react-codemirror"
-import 'codemirror/theme/yonce.css'
+import 'codemirror/theme/xq-light.css'
 import './flashcard-front.styles.scss'
 
 const FlashcardFront = ({ frontMsg, deleteFlashcard }) => {
@@ -19,7 +19,7 @@ const FlashcardFront = ({ frontMsg, deleteFlashcard }) => {
         <CodeMirror className="code-mirror"
           value={frontMsgToRender}
           options={{
-              theme: 'yonce',
+              theme: 'xq-light',
               indentUnit: 4,
               mode: 'python',
               lineNumbers: false,

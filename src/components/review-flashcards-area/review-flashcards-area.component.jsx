@@ -3,11 +3,11 @@ import "./review-flashcards-area.styles.scss";
 import FlashcardFront from "../flashcard-front/flashcard-front.component.jsx";
 import FlashcardBack from "../flashcard-back/flashcard-back.component.jsx";
 // import NewFlashcard from "../new-flashcard/new-flashcard.component.jsx";
-// import CustomButton from '../custom-button/custom-button.component';
+import CustomButton from '../custom-button/custom-button.component';
 // import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ReviewFlashcardsContainer = ( { currentCard, currentDeck }) => {
+const ReviewFlashcardsContainer = ({ currentCard, currentDeck, deleteDeck, deleteFlashcard }) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
   
   const revealCardAnswerFunc = () => {
@@ -21,18 +21,32 @@ const ReviewFlashcardsContainer = ( { currentCard, currentDeck }) => {
     }
     resetReveal();
   }, [currentCard, currentDeck]);
+
+  const DeleteButton = ({ children, ...otherProps }) => (
+    <button 
+      className="delete-button" 
+      type="button"
+      {...otherProps}>
+      {children}
+    </button>
+  )
   
 
   return (
-    <div className="deck-wrapper">
+    <div className="review-cards-container">
       <div className="deck-header">
         <h1 className="current-deck-title">{currentDeck.name}</h1>
-        {/* <CustomButton onClick={deleteDeck}>Delete Deck</CustomButton> */}
-      </div> 
-      {/* <div className="new-card-submission-container">
-        <NewFlashcard createNewFlashcard={createNewFlashcard} />
-      </div> */}
-      <section className="flashcard">
+        <div className="delete-buttons-container">
+          <DeleteButton onClick={deleteDeck}>
+            Delete Deck
+          </DeleteButton>
+          <DeleteButton onClick={()=>{console.log("deleting card")}}>
+            Delete Card
+          </DeleteButton>
+        </div>
+      </div>
+
+      <div className="flashcard">
         {currentCard && 
           <FlashcardFront 
             frontMsg={currentCard.front}>
@@ -47,19 +61,21 @@ const ReviewFlashcardsContainer = ( { currentCard, currentDeck }) => {
             cardBackReveal={cardBackReveal}
             revealCardAnswerFunc={revealCardAnswerFunc}>
           </FlashcardBack>
-        }
-
-      </section>
+        } 
+      </div>
     </div>
   );
 };
 
-// FlashcardsContainer.propTypes = {
+// ReviewFlashcardsContainer.propTypes = {
+//   currentCard: PropTypes.shapes({}),
 //   currentDeck: PropTypes.shape({
 //     id: PropTypes.number.isRequired,
 //     name: PropTypes.string.isRequired,
 //     owner_id: PropTypes.string.isRequired,
 //   }),
+//   deleteDeck: PropTypes.func,
+//   deleteFlashcard: PropTypes.func
 // };
 
 export default ReviewFlashcardsContainer;

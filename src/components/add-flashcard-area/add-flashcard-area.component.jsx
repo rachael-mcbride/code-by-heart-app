@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import CustomButton from '../custom-button/custom-button.component'
 import CodeMirror from "@uiw/react-codemirror"
-import 'codemirror/theme/yonce.css'
+import 'codemirror/theme/xq-light.css'
 import './add-flashcard-area.styles.scss'
 
 
@@ -60,38 +60,16 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
 
     // make it so add new card button only renders once a deck is clicked on 
   return (
-    <div>
-      <CodeMirror className="code-mirror"
-        value={frontCMPlaceholderValue}
-        options={{
-            theme: 'yonce',
-            indentUnit: 4,
-            mode: 'python'
-          }}
-        height="150px"
-        width="380px"
-        onChange={(editor) => {
-          console.log('value:', editor.getValue());
-          setCodeToRun(editor.getValue());
-          setNewFlashcardFront(editor.getValue())
-        }}/>
+    <div className="add-flashcards-container">
+      <div className="add-flashcards-header-container">
+        <h2 className="add-flashcards-title">Add Flashcards</h2>
+      </div>
 
-        <div className='output-wrapper'>
-          <div className='output-text-container'>
-            <div className='output-text'>
-              {codeInOutputContainer}
-            </div>
-          </div>
-          <CustomButton onClick={runCode}>
-            Run Code
-          </CustomButton>
-        </div>
-
-        <div>
+      <div className="add-card-area">
         <CodeMirror className="code-mirror"
-          value={backCMPlaceholderValue}
+          value={frontCMPlaceholderValue}
           options={{
-              theme: 'yonce',
+              theme: 'xq-light',
               indentUnit: 4,
               mode: 'python'
             }}
@@ -99,11 +77,38 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
           width="380px"
           onChange={(editor) => {
             console.log('value:', editor.getValue());
-            setNewFlashcardBack(editor.getValue())
+            setCodeToRun(editor.getValue());
+            setNewFlashcardFront(editor.getValue())
           }}/>
-      </div>
 
-        {currentDeckId && // only render button if a deck has been selected
+          <div className='output-wrapper'>
+            <div className='output-text-container'>
+              <div className='output-text'>
+                {codeInOutputContainer}
+              </div>
+            </div>
+            <CustomButton onClick={runCode}>
+              Run Code
+            </CustomButton>
+          </div>
+
+          <div>
+          <CodeMirror className="code-mirror"
+            value={backCMPlaceholderValue}
+            options={{
+                theme: 'xq-light',
+                indentUnit: 4,
+                mode: 'python'
+              }}
+            height="150px"
+            width="380px"
+            onChange={(editor) => {
+              console.log('value:', editor.getValue());
+              setNewFlashcardBack(editor.getValue())
+            }}/>
+        </div>
+      </div>
+      {currentDeckId && // only render button if a deck has been selected
         <OptionsButton 
           disabled={!newFlashcardIsEnabled}
           onClick={submitNewCard}>

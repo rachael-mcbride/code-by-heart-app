@@ -176,18 +176,17 @@ const FlashcardPage = ( {currentUser} ) => {
 
       <section className="review-flashcards-container">
         {currentDeck.id ? (
-          <ReviewFlashcardsContainer currentDeck={currentDeck} currentCard={currentCard} />
+          <ReviewFlashcardsContainer 
+          currentDeck={currentDeck} 
+          currentCard={currentCard}
+          deleteDeck={deleteDeck}
+          deleteFlashcard={deleteFlashcard} />
         ) : (
           <div>Select a deck</div>
         )}
       </section>
 
       <section className="add-flashcard-container">
-        <h2>Options</h2>
-        <div className="delete-buttons">
-          <OptionsButton  onClick={deleteDeck}>Delete Current Deck</OptionsButton >
-          <OptionsButton  onClick={()=>{console.log("deleting card")}}>Delete Current Card</OptionsButton >
-        </div>
         <AddFlashcardArea 
           currentDeckId={currentDeck.id}
           createNewFlashcard={createNewFlashcard}>

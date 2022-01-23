@@ -4,7 +4,7 @@ import axios from "axios";
 import CustomButton from '../custom-button/custom-button.component'
 import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/yonce.css'
-import './runnable-code-editor.styles.scss'
+import './add-flashcard-area.styles.scss'
 
 
 const RunnableCodeEditor = ( { createNewFlashcard, currentDeckId } ) => {

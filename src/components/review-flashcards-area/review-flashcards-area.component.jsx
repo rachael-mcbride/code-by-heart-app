@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import "./flashcards-container.styles.scss";
+// import PropTypes from "prop-types";
+import "./review-flashcards-area.styles.scss";
 import FlashcardFront from "../flashcard-front/flashcard-front.component.jsx";
 import FlashcardBack from "../flashcard-back/flashcard-back.component.jsx";
 // import NewFlashcard from "../new-flashcard/new-flashcard.component.jsx";

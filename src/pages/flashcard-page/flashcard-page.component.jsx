@@ -2,11 +2,11 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 // import { Navigate } from 'react-router-dom';
 // import NonrunnableCodeEditor from '../../components/nonrunnable-code-editor/nonrunnable-code-editor.component.jsx'
-import RunnableCodeEditor from '../../components/runnable-code-editor/runnable-code-editor.component.jsx'
+import RunnableCodeEditor from '../../components/add-flashcard-area/add-flashcard-area.component.jsx'
 // import CustomButton from '../../custom-button/custom-button.component.jsx'
 import DecksList from '../../components/decks-list/decks-list.component.jsx'
 import NewDeck from '../../components/new-deck/new-deck.component.jsx'
-import FlashcardsContainer from '../../components/flashcards-container/flashcards-container.component.jsx'
+import FlashcardsContainer from '../../components/review-flashcards-area/review-flashcards-area.component.jsx'
 
 
 import axios from "axios";

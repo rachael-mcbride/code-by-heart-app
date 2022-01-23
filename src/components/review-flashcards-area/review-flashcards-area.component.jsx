@@ -7,7 +7,7 @@ import FlashcardBack from "../flashcard-back/flashcard-back.component.jsx";
 // import axios from "axios";
 import { useState, useEffect } from "react";
 
-const FlashcardsContainer = ( { currentCard, currentDeck }) => {
+const ReviewFlashcardsContainer = ( { currentCard, currentDeck }) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
   
   const revealCardAnswerFunc = () => {
@@ -62,4 +62,4 @@ const FlashcardsContainer = ( { currentCard, currentDeck }) => {
 //   }),
 // };
 
-export default FlashcardsContainer;
+export default ReviewFlashcardsContainer;

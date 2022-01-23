@@ -19,11 +19,8 @@ const NewDeck = ( { createNewDeck } ) => {
     createNewDeck({
       name: formFields.name
     });
-    console.log(formFields)
-    // reset form
-    setFormFields({
-      name: ""
-    });
+    // console.log(formFields)
+    setFormFields({ name: "" }); // reset form
   };
 
   return (

@@ -7,7 +7,7 @@ import 'codemirror/theme/yonce.css'
 import './add-flashcard-area.styles.scss'
 
 
-const RunnableCodeEditor = ( { createNewFlashcard, currentDeckId } ) => {
+const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
   const [codeToRun, setCodeToRun] = useState(null)
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null)
   const [newFlashcardFront, setNewFlashcardFront] = useState("");
@@ -113,10 +113,10 @@ const RunnableCodeEditor = ( { createNewFlashcard, currentDeckId } ) => {
   )
 }
 
-RunnableCodeEditor.propTypes = {
+AddFlashCardArea.propTypes = {
   createNewFlashcard: PropTypes.func,
   currentDeckId: PropTypes.number
 };
 
 
-export default RunnableCodeEditor;
+export default AddFlashCardArea;

@@ -2,11 +2,11 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 // import { Navigate } from 'react-router-dom';
 // import NonrunnableCodeEditor from '../../components/nonrunnable-code-editor/nonrunnable-code-editor.component.jsx'
-import RunnableCodeEditor from '../../components/add-flashcard-area/add-flashcard-area.component.jsx'
+import AddFlashcardArea from '../../components/add-flashcard-area/add-flashcard-area.component.jsx'
 // import CustomButton from '../../custom-button/custom-button.component.jsx'
 import DecksList from '../../components/decks-list/decks-list.component.jsx'
 import NewDeck from '../../components/new-deck/new-deck.component.jsx'
-import FlashcardsContainer from '../../components/review-flashcards-area/review-flashcards-area.component.jsx'
+import ReviewFlashcardsContainer from '../../components/review-flashcards-area/review-flashcards-area.component.jsx'
 
 
 import axios from "axios";
@@ -60,7 +60,7 @@ const FlashcardPage = ( {currentUser} ) => {
   useEffect(() => {
     updateCurrentDeck(currentDeck)
     console.log("flashcards data:", flashcardsData)
-  }, [currentDeck, flashcardsData]); // if I follow advice, makes infinite loop!
+  }, [currentDeck, flashcardsData]); // if I follow squiggly advice, makes infinite loop!
 
   const createNewDeck = (newDeck) => {
       const newDeckData = {
@@ -174,26 +174,24 @@ const FlashcardPage = ( {currentUser} ) => {
         <NewDeck createNewDeck={createNewDeck} />
       </section>
 
-      <section className="flashcard-area-container">
+      <section className="review-flashcards-container">
         {currentDeck.id ? (
-          <FlashcardsContainer currentDeck={currentDeck} currentCard={currentCard} />
+          <ReviewFlashcardsContainer currentDeck={currentDeck} currentCard={currentCard} />
         ) : (
           <div>Select a deck</div>
         )}
       </section>
 
-      <section className="options-container">
+      <section className="add-flashcard-container">
         <h2>Options</h2>
         <div className="delete-buttons">
           <OptionsButton  onClick={deleteDeck}>Delete Current Deck</OptionsButton >
           <OptionsButton  onClick={()=>{console.log("deleting card")}}>Delete Current Card</OptionsButton >
         </div>
-        <RunnableCodeEditor 
+        <AddFlashcardArea 
           currentDeckId={currentDeck.id}
           createNewFlashcard={createNewFlashcard}>
-        </RunnableCodeEditor> 
-        {/* <NonrunnableCodeEditor updateNewFlashCardBack={updateNewFlashCardBack}></NonrunnableCodeEditor> */}
-        {/* <OptionsButton onClick={createNewFlashcard}>Add New Card</OptionsButton > */}
+        </AddFlashcardArea> 
       </section>
     </div>
   );

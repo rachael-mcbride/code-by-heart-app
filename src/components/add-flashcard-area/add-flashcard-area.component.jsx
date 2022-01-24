@@ -48,13 +48,7 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
       axios
       .post(`http://127.0.0.1:5000/compile`, compileData)
       .then((response) => {
-          const output = response.data
-          // TO DO -- figure out how to output a better error message
-          // if (response.data.includes("jdoodle.py")) { // error msg should be displayed
-          //   const shorterErrorMsg = output.substring(output.indexOf('E'));
-          //   setCodeInOutputContainer(shorterErrorMsg)
-          // } 
-          setCodeInOutputContainer(output)
+          setCodeInOutputContainer(response.data)
       })
       .catch((error) => {
           console.log("there was an error:", error);
@@ -64,15 +58,15 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
 
   const submitNewCard = (event) => {
     event.preventDefault();
-    createNewFlashcard ({ "front": newFlashcardFront, "back": newFlashcardBack});
-
-    // clear placeholder messages as a sign to user that their submission went through
-    setFrontCMPlaceholderValue("");
-    setBackCMPlaceholderValue("");
-    
-    // clean up 
-    setNewFlashcardFront("");
-    setNewFlashcardBack("");
+    if (newFlashcardFront.length === 0 || newFlashcardBack.length === 0) {
+      setCodeInOutputContainer("Alert -- make sure your card contains a front and back!");
+    } else {
+        createNewFlashcard ({ "front": newFlashcardFront, "back": newFlashcardBack});
+        // tell user the card addition went through + clean up 
+        setCodeInOutputContainer("Your card was successfully added.")
+        setNewFlashcardFront("");
+        setNewFlashcardBack("");
+    }
   };
 
   const OptionsButton = ({ children, ...otherProps }) => (
@@ -84,7 +78,6 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
     </button>
   )
 
-    // make it so add new card button only renders once a deck is clicked on 
   return (
     <div className="add-flashcards-container">
       <div className="add-flashcards-header-container">
@@ -140,7 +133,6 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
       </div>
       {currentDeckId && // only render button if a deck has been selected
         <OptionsButton 
-          disabled={!newFlashcardIsEnabled}
           onClick={submitNewCard}>
             Add New Card
         </OptionsButton>}

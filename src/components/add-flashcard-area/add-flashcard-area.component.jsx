@@ -41,20 +41,25 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
 
   // func that will call the Jdoodle code compiler
   const runCode = () => {
-    axios
-      .post(`http://127.0.0.1:5000/compile`, {"code" : codeToRun})
+    if (language.toLowerCase() === "markdown") {
+      setCodeInOutputContainer("Make sure you've selected a programming language.")
+    } else {
+      const compileData = {"code" : codeToRun, "language" : language.toLowerCase()}
+      axios
+      .post(`http://127.0.0.1:5000/compile`, compileData)
       .then((response) => {
           const output = response.data
-          if (response.data.includes("jdoodle.py")) { // error msg should be displayed
-            const shorterErrorMsg = output.substring(output.indexOf('E'));
-            setCodeInOutputContainer(shorterErrorMsg)
-          } else {
-            setCodeInOutputContainer(output)
-          }
+          // TO DO -- figure out how to output a better error message
+          // if (response.data.includes("jdoodle.py")) { // error msg should be displayed
+          //   const shorterErrorMsg = output.substring(output.indexOf('E'));
+          //   setCodeInOutputContainer(shorterErrorMsg)
+          // } 
+          setCodeInOutputContainer(output)
       })
       .catch((error) => {
           console.log("there was an error:", error);
       });
+    }
   }
 
   const submitNewCard = (event) => {

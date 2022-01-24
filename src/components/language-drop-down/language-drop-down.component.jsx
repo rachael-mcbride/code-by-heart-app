@@ -8,8 +8,11 @@ const LanguageDropDown = ({ language, handleLanguageChange } ) => {
     onChange={event => handleLanguageChange(event.target.value)}>
     <option className="language-item" id="0">Markdown</option>
     <option className="language-item" id="1">Python</option>
-    <option className="language-item" id="2">JavaScript</option>
+    <option className="language-item" id="2">Ruby</option>
     <option className="language-item" id="3">Java</option>
+    <option className="language-item" id="4">C</option>
+    <option className="language-item" id="5">Go</option>
+    <option className="language-item" id="6">Kotlin</option>
   </select>
   )
 }

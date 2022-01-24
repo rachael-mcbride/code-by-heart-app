@@ -7,7 +7,7 @@ import CustomButton from '../custom-button/custom-button.component';
 // import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ReviewFlashcardsContainer = ({ currentCard, currentDeck, deleteDeck, deleteFlashcard }) => {
+const ReviewFlashcardsContainer = ({ currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard }) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
   
   const revealCardAnswerFunc = () => {
@@ -22,7 +22,7 @@ const ReviewFlashcardsContainer = ({ currentCard, currentDeck, deleteDeck, delet
     resetReveal();
   }, [currentCard, currentDeck]);
 
-  const DeleteButton = ({ children, ...otherProps }) => (
+  const SmallButton = ({ children, ...otherProps }) => (
     <button 
       className="delete-button" 
       type="button"
@@ -36,13 +36,20 @@ const ReviewFlashcardsContainer = ({ currentCard, currentDeck, deleteDeck, delet
     <div className="review-cards-container">
       <div className="deck-header">
         <h1 className="current-deck-title">{currentDeck.name}</h1>
-        <div className="delete-buttons-container">
-          <DeleteButton onClick={deleteDeck}>
-            Delete Deck
-          </DeleteButton>
-          <DeleteButton onClick={()=>{console.log("deleting card")}}>
-            Delete Card
-          </DeleteButton>
+        <div className="buttons-container">
+          <div className="delete-buttons">
+            <SmallButton onClick={deleteDeck}>
+              Delete Deck
+            </SmallButton>
+            <SmallButton onClick={()=>{console.log("deleting card")}}>
+              Delete Card
+            </SmallButton>
+          </div>
+          <div className="next-card-button">
+            <SmallButton onClick={moveToNextCard}>
+              Next Card
+            </SmallButton>
+          </div>
         </div>
       </div>
 

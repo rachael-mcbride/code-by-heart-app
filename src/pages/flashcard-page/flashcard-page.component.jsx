@@ -48,7 +48,18 @@ const FlashcardPage = ( {currentUser} ) => {
       });
     }
     loadDecks();
-  }, []); // shouldn't loadDecks only run once at the beginning of a user signing in?
+  }, []); 
+
+  // make sure currentCard is always up-to-date (like after clicking `moveToNextCard`)
+  useEffect(() => {
+    setCurrentCard(currentCard)
+  }, [currentCard]); 
+
+  // make sure currentDeck is always up-to-date (like after selecting a new deck)
+  useEffect(() => {
+    updateCurrentDeck(currentDeck)
+    console.log("flashcards data:", flashcardsData)
+  }, [currentDeck, flashcardsData]); // if I follow squiggly advice, makes infinite loop!
 
   // without the useEffect() call under this one, it's always delayed by 1! 
   const updateCurrentDeck = (selectedDeck) => {
@@ -56,11 +67,6 @@ const FlashcardPage = ( {currentUser} ) => {
     console.log("current deck was updated!")
     console.log("Current deck is:", currentDeck);
   };
-
-  useEffect(() => {
-    updateCurrentDeck(currentDeck)
-    console.log("flashcards data:", flashcardsData)
-  }, [currentDeck, flashcardsData]); // if I follow squiggly advice, makes infinite loop!
 
   const createNewDeck = (newDeck) => {
       const newDeckData = {
@@ -124,7 +130,20 @@ const FlashcardPage = ( {currentUser} ) => {
       });
   }, [currentDeck.id]);
 
-  
+  const moveToNextCard = () => {
+    const idxOfNextCard = flashcardsData.indexOf(currentCard, 0) + 1
+    const nextCard = flashcardsData[idxOfNextCard]
+    const currentDeckLength = flashcardsData.length;
+    if (idxOfNextCard === currentDeckLength) {
+      setCurrentCard(null)
+    } else {
+      setCurrentCard(nextCard)
+    }
+    console.log("idx of next card in deck:", idxOfNextCard);
+    console.log("next card details:", nextCard);
+    console.log("current deck length:", currentDeckLength);
+  }
+
   const deleteFlashcard = (deletedCard) => {
     axios
       .delete(`flashcards/${deletedCard.id}`)
@@ -180,6 +199,7 @@ const FlashcardPage = ( {currentUser} ) => {
           currentDeck={currentDeck} 
           currentCard={currentCard}
           deleteDeck={deleteDeck}
+          moveToNextCard={moveToNextCard}
           deleteFlashcard={deleteFlashcard} />
         ) : (
           <div>Select a deck</div>

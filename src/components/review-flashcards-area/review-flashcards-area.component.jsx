@@ -1,7 +1,7 @@
 // import PropTypes from "prop-types";
 import "./review-flashcards-area.styles.scss";
-import FlashcardFront from "../flashcard-front/flashcard-front.component.jsx";
-import FlashcardBack from "../flashcard-back/flashcard-back.component.jsx";
+import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component.jsx";
+import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component.jsx";
 // import NewFlashcard from "../new-flashcard/new-flashcard.component.jsx";
 import CustomButton from '../custom-button/custom-button.component';
 // import axios from "axios";

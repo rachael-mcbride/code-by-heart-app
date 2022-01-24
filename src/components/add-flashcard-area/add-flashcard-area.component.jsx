@@ -20,17 +20,21 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage);
-    if (language.toLowerCase() === 'python') {
-      setindentUnitInfo(4)
-    } else {
-      setindentUnitInfo(2)
-    }
     // console.log("current language:", language)
   }
 
+  // make sure language is always up-to-date
   useEffect(() => {
     handleLanguageChange(language)
+    console.log("current language:", language)
   }, [language]); 
+
+  // make sure indent is always up-to-date
+  useEffect(() => {
+    (language.toLowerCase() === 'python' || language.toLowerCase() === 'markdown') ?
+      setindentUnitInfo(4) : setindentUnitInfo(2)
+    console.log("current indent:", indentUnitInfo)
+  }, [language, indentUnitInfo]); 
 
   // prevents user from adding a flashcard with an empty front or back message
   const newFlashcardIsEnabled = newFlashcardFront.length > 0 && newFlashcardBack.length > 0;

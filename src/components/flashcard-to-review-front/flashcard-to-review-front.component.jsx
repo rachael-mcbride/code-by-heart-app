@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/xq-light.css'
-import './flashcard-front.styles.scss'
+import './flashcard-to-review-front.styles.scss'
 
 const FlashcardFront = ({ frontMsg, deleteFlashcard }) => {
   // console.log("flashcardFront:", front)

@@ -1,11 +1,10 @@
-import './flashcard-back.styles.scss'
+import './flashcard-to-review-back.styles.scss'
 import PropTypes from "prop-types";
 import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/xq-light.css'
 
 const FlashcardBack = ({ backMsg, cardBackReveal, revealCardAnswerFunc }) => {
   // console.log("flashcardBack:", backMsg)
-
   if (cardBackReveal === true) {
     return (
       <div className="flashcard-back-revealed">

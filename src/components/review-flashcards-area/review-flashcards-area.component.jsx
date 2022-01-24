@@ -3,13 +3,15 @@ import "./review-flashcards-area.styles.scss";
 import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component.jsx";
 import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component.jsx";
 // import NewFlashcard from "../new-flashcard/new-flashcard.component.jsx";
-import CustomButton from '../custom-button/custom-button.component';
+// import CustomButton from '../custom-button/custom-button.component';
 // import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ReviewFlashcardsContainer = ({ currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard }) => {
+const ReviewFlashcardsContainer = (
+  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard }
+  ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
-  
+
   const revealCardAnswerFunc = () => {
     setCardBackReveal(true);
   }
@@ -41,7 +43,7 @@ const ReviewFlashcardsContainer = ({ currentCard, currentDeck, deleteDeck, delet
             <SmallButton onClick={deleteDeck}>
               Delete Deck
             </SmallButton>
-            <SmallButton onClick={()=>{console.log("deleting card")}}>
+            <SmallButton onClick={deleteFlashcard}>
               Delete Card
             </SmallButton>
           </div>
@@ -54,14 +56,12 @@ const ReviewFlashcardsContainer = ({ currentCard, currentDeck, deleteDeck, delet
       </div>
 
       <div className="flashcard">
+      { (!currentCard) && "You have no cards up for review." }
         {currentCard && 
           <FlashcardFront 
             frontMsg={currentCard.front}>
           </FlashcardFront>
         } 
-        { (!currentCard) && 
-          <div>You have no cards up for review in this deck.</div>
-        }
         {currentCard && 
           <FlashcardBack
             backMsg={currentCard.back}

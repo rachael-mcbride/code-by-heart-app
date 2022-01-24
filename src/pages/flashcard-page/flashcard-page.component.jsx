@@ -144,15 +144,16 @@ const FlashcardPage = ( {currentUser} ) => {
     console.log("current deck length:", currentDeckLength);
   }
 
-  const deleteFlashcard = (deletedCard) => {
+  const deleteFlashcard = () => {
     axios
-      .delete(`flashcards/${deletedCard.id}`)
+      .delete(`http://127.0.0.1:5000/flashcards/${currentCard.id}`)
       .then((response) => {
-        // console.log(response);
+        console.log(response);
         const updatedCardsData = flashcardsData.filter(
-          (card) => card.id !== deletedCard.id
+          (card) => card.id !== currentCard.id
         );
         setFlashcardsData(updatedCardsData);
+        moveToNextCard();
       })
       .catch((error) => {
         console.log(error);

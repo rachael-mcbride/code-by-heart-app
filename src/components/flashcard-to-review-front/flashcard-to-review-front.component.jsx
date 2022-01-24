@@ -3,21 +3,14 @@ import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/xq-light.css'
 import './flashcard-to-review-front.styles.scss'
 
-const FlashcardFront = ({ frontMsg, deleteFlashcard }) => {
+const FlashcardFront = ({ frontMsg }) => {
   // console.log("flashcardFront:", front)
-  const frontMsgToRender = (!frontMsg) ? "You have no cards to review." : frontMsg;
-
-  // if (!frontMsg) {
-  //   frontMsgToRender = "You have no cards to review.";
-  // } else {
-  //   frontMsgToRender= frontMsg;
-  // }
 
   return (
     <div className="flashcard-front">
       <div>
         <CodeMirror className="code-mirror"
-          value={frontMsgToRender}
+          value={frontMsg}
           options={{
               theme: 'xq-light',
               indentUnit: 4,

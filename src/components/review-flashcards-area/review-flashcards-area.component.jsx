@@ -1,6 +1,6 @@
 // import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-
+import axios from 'axios';
 import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component.jsx";
 import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component.jsx";
 import CardDifficultyDropDown from "../card-difficulty-drop-down/card-difficulty-drop-down.component";
@@ -31,7 +31,7 @@ const ReviewFlashcardsArea = (
   // note: move this/change this... isn't needed!
   const SmallButton = ({ children, ...otherProps }) => (
     <button 
-      className="delete-button" 
+      className="small-button" 
       type="button"
       {...otherProps}>
       {children}
@@ -42,8 +42,23 @@ const ReviewFlashcardsArea = (
     setCardDifficultyLevel(newLevel);
   }
 
-  // make a Click button taht saves this difficulty level in the database so
-  // that the "date to review" and other attributes get updated accordingly!
+  const submitDifficultyLevel = () => {
+    console.log("card pre-click:", currentCard)
+    const difficultyData = { "difficultyString" : cardDifficultyLevel }
+    axios
+      .put(`http://127.0.0.1:5000/flashcards/${currentCard.id}`, difficultyData)
+      .then((response) => {
+          console.log("updated card post-click:", response)
+      })
+      .catch((error) => {
+          console.log("there was an error", error);
+      });
+      // card gets updated in the DB + app moves onto the next card
+      moveToNextCard() 
+    };
+    
+  
+
 
   return (
     <div className="review-cards-container">
@@ -69,7 +84,7 @@ const ReviewFlashcardsArea = (
       <div className="flashcard">
       { (!currentCard) && "You have no cards up for review." }
         {currentCard && 
-        <div>
+          <div>
             <FlashcardFront 
               language = {currentCard.language}
               frontMsg = {currentCard.front}>
@@ -80,13 +95,15 @@ const ReviewFlashcardsArea = (
               cardBackReveal={cardBackReveal}
               revealCardAnswerFunc={revealCardAnswerFunc}>
             </FlashcardBack>
-            <CardDifficultyDropDown 
-              difficultyLevel={cardDifficultyLevel}
-              handleDifficultyChange={handleDifficultyChange}>
-            </CardDifficultyDropDown>
-            <SmallButton onClick={() => {console.log("submitting difficulty")}}>
-              Submit Difficulty Level
-            </SmallButton>
+            <div className="card-difficulty-submission-features">
+              <CardDifficultyDropDown 
+                difficultyLevel={cardDifficultyLevel}
+                handleDifficultyChange={handleDifficultyChange}>
+              </CardDifficultyDropDown>
+              <SmallButton onClick={submitDifficultyLevel}>
+                Submit
+              </SmallButton>
+            </div>
         </div>
         } 
       </div>

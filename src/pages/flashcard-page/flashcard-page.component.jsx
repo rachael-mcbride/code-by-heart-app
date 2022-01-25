@@ -68,7 +68,7 @@ const FlashcardPage = ( {currentUser} ) => {
   // (like after selecting a new deck)
   useEffect(() => {
     updateCurrentDeck(currentDeck)
-    console.log("flashcards data:", flashcardsData)
+    // console.log("flashcards data:", flashcardsData)
   }, [currentDeck, flashcardsData]); // if I follow squiggly advice, makes infinite loop!
 
   // DECK METHODS // 
@@ -79,7 +79,7 @@ const FlashcardPage = ( {currentUser} ) => {
     axios
     .post(`http://127.0.0.1:5000/decks/${currentUser.id}`, newDeckData)
     .then((response) => {
-      console.log("response:", response.data);
+      // console.log("response:", response.data);
       const decks = [...decksData];
       decks.push(response.data);
       setDecksData(decks);
@@ -91,15 +91,15 @@ const FlashcardPage = ( {currentUser} ) => {
 
   const updateCurrentDeck = (selectedDeck) => {
     setCurrentDeck(selectedDeck);
-    console.log("current deck was updated!")
-    console.log("Current deck is:", currentDeck);
+    // console.log("current deck was updated!")
+    // console.log("Current deck is:", currentDeck);
   };
   
   const deleteDeck = () => {
     axios
       .delete(`http://127.0.0.1:5000/decks/${currentDeck.id}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const updatedDecksData = decksData.filter(
           (deck) => deck.id !== currentDeck.id
         );
@@ -141,7 +141,7 @@ const FlashcardPage = ( {currentUser} ) => {
       setCurrentCard(nextCard)
     }
     // console.log("idx of next card in deck:", idxOfNextCard);
-    console.log("next card details:", nextCard);
+    // console.log("next card details:", nextCard);
     // console.log("current deck length:", currentDeckLength);
   }
 

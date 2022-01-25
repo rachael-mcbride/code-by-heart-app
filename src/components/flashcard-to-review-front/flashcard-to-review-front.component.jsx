@@ -4,7 +4,7 @@ import 'codemirror/theme/xq-light.css'
 import './flashcard-to-review-front.styles.scss'
 
 const FlashcardFront = ({ frontMsg, language }) => {
-  console.log("language:", language)
+  // console.log("language:", language)
   // console.log("flashcardFront:", front)
   let indentUnit = 2;
   if (language === "python") {

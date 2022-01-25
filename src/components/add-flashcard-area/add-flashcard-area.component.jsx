@@ -15,11 +15,15 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
   const [newFlashcardBack, setNewFlashcardBack] = useState("");
   const [frontCMPlaceholderValue, setFrontCMPlaceholderValue] = useState("create front of new card")
   const [backCMPlaceholderValue, setBackCMPlaceholderValue] = useState("create back of new card")
-  const [language, setLanguage] = useState("Markdown");
+  const [language, setLanguage] = useState("markdown");
   const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
   const handleLanguageChange = (newLanguage) => {
-    setLanguage(newLanguage);
+    if (newLanguage.toLowerCase() === "python") {
+      setLanguage("python3");
+    } else {
+      setLanguage(newLanguage);
+    }
     // console.log("current language:", language)
   }
 
@@ -37,7 +41,7 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
   }, [language, indentUnitInfo]); 
 
   // prevents user from adding a flashcard with an empty front or back message
-  const newFlashcardIsEnabled = newFlashcardFront.length > 0 && newFlashcardBack.length > 0;
+  // const newFlashcardIsEnabled = newFlashcardFront.length > 0 && newFlashcardBack.length > 0;
 
   // func that will call the Jdoodle code compiler
   const runCode = () => {
@@ -61,7 +65,10 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
     if (newFlashcardFront.length === 0 || newFlashcardBack.length === 0) {
       setCodeInOutputContainer("Alert -- make sure your card contains a front and back!");
     } else {
-        createNewFlashcard ({ "front": newFlashcardFront, "back": newFlashcardBack});
+      const newData = { "front": newFlashcardFront, 
+                        "back": newFlashcardBack, 
+                        "language" : language.toLowerCase() }
+        createNewFlashcard(newData);
         // tell user the card addition went through + clean up 
         setCodeInOutputContainer("Your card was successfully added.")
         setNewFlashcardFront("");

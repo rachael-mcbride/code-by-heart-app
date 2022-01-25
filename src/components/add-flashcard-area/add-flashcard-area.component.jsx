@@ -48,7 +48,15 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
       axios
       .post(`http://127.0.0.1:5000/compile`, compileData)
       .then((response) => {
-          setCodeInOutputContainer(response.data)
+          const data = response.data;
+          console.log("response from call to compile:", data)
+          if (Array.isArray(data)) {
+            setCodeInOutputContainer(`[${data}]`) 
+          } else if (typeof data === 'object') {
+            setCodeInOutputContainer(`{${data}}`)
+          } else {
+            setCodeInOutputContainer(data)
+          }
       })
       .catch((error) => {
           console.log("there was an error:", error);
@@ -97,6 +105,7 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
           options={{
               theme: 'xq-light',
               indentUnit: `${indentUnitInfo}`,
+              smartIndent: false,
               mode: `${language}`
             }}
           height="150px"
@@ -124,6 +133,7 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
             options={{
                 theme: 'xq-light',
                 indentUnit: `${indentUnitInfo}`,
+                smartIndent: false,
                 mode: `${language}`
               }}
             height="150px"

@@ -95,6 +95,7 @@ const ReviewFlashcardsArea = (
               cardBackReveal={cardBackReveal}
               revealCardAnswerFunc={revealCardAnswerFunc}>
             </FlashcardBack>
+            { cardBackReveal && 
             <div className="card-difficulty-submission-features">
               <CardDifficultyDropDown 
                 difficultyLevel={cardDifficultyLevel}
@@ -103,7 +104,7 @@ const ReviewFlashcardsArea = (
               <SmallButton onClick={submitDifficultyLevel}>
                 Submit
               </SmallButton>
-            </div>
+            </div> }
         </div>
         } 
       </div>

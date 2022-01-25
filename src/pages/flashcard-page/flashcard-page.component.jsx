@@ -24,7 +24,7 @@ const FlashcardPage = ( {currentUser} ) => {
           email: currentUser.email
       }
       axios
-      .post("http://127.0.0.1:5000/load_decks", userData)
+      .post("http://127.0.0.1:5000/load-user-decks", userData)
       .then((response) => {
           setDecksData(response.data);
       })

@@ -19,11 +19,7 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
   const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
   const handleLanguageChange = (newLanguage) => {
-    if (newLanguage.toLowerCase() === "python") {
-      setLanguage("python3");
-    } else {
-      setLanguage(newLanguage);
-    }
+    setLanguage(newLanguage);
     // console.log("current language:", language)
   }
 

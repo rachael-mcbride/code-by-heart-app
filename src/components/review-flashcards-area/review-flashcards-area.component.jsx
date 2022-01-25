@@ -7,14 +7,10 @@ import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.
 // import axios from "axios";
 import { useState, useEffect } from "react";
 
-const ReviewFlashcardsContainer = (
+const ReviewFlashcardsArea = (
   { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
-
-  const revealCardAnswerFunc = () => {
-    setCardBackReveal(true);
-  }
 
   // resets the CardBackReveal back to false if new card or deck is clicked 
   useEffect(() => {
@@ -24,6 +20,11 @@ const ReviewFlashcardsContainer = (
     resetReveal();
   }, [currentCard, currentDeck]);
 
+  const revealCardAnswerFunc = () => {
+    setCardBackReveal(true);
+  }
+
+  // note: move this/change this... isn't needed!
   const SmallButton = ({ children, ...otherProps }) => (
     <button 
       className="delete-button" 
@@ -32,7 +33,6 @@ const ReviewFlashcardsContainer = (
       {children}
     </button>
   )
-  
 
   return (
     <div className="review-cards-container">
@@ -59,12 +59,14 @@ const ReviewFlashcardsContainer = (
       { (!currentCard) && "You have no cards up for review." }
         {currentCard && 
           <FlashcardFront 
-            frontMsg={currentCard.front}>
+          language = {currentCard.language}
+          frontMsg = {currentCard.front}>
           </FlashcardFront>
         } 
         {currentCard && 
           <FlashcardBack
-            backMsg={currentCard.back}
+            language = {currentCard.language}
+            backMsg = {currentCard.back}
             cardBackReveal={cardBackReveal}
             revealCardAnswerFunc={revealCardAnswerFunc}>
           </FlashcardBack>
@@ -75,14 +77,26 @@ const ReviewFlashcardsContainer = (
 };
 
 // ReviewFlashcardsContainer.propTypes = {
-//   currentCard: PropTypes.shapes({}),
+//   currentCard: PropTypes.shapes({
+//     id: PropTypes.number.isRequired,
+//     front: PropTypes.string.isRequired,
+//     back: PropTypes.string.isRequired,
+//     language: PropTypes.string.isRequired,
+//     deck_id: PropTypes.number.isRequired,
+//     difficulty_level: PropTypes.number.isRequired,
+//     previous_repetitions: PropTypes.number.isRequired,
+//     previous_ease_factor: PropTypes.number.isRequired,
+//     interval: PropTypes.number.isRequired,
+//     date_to_review: PropTypes.instanceOf(Date).isRequired,
+//   }),
 //   currentDeck: PropTypes.shape({
 //     id: PropTypes.number.isRequired,
 //     name: PropTypes.string.isRequired,
 //     owner_id: PropTypes.string.isRequired,
 //   }),
 //   deleteDeck: PropTypes.func,
-//   deleteFlashcard: PropTypes.func
+//   deleteFlashcard: PropTypes.func,
+//   moveToNextCard: PropTypes.func
 // };
 
-export default ReviewFlashcardsContainer;
+export default ReviewFlashcardsArea;

@@ -1,10 +1,14 @@
 import './flashcard-to-review-back.styles.scss'
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/xq-light.css'
 
-const FlashcardBack = ({ backMsg, cardBackReveal, revealCardAnswerFunc }) => {
-  // console.log("flashcardBack:", backMsg)
+const FlashcardBack = ({ backMsg, language, cardBackReveal, revealCardAnswerFunc }) => {
+  let indentUnit = 2
+  if (language === "python") {
+    indentUnit = 4;
+  } 
+
   if (cardBackReveal === true) {
     return (
       <div className="flashcard-back-revealed">
@@ -12,8 +16,8 @@ const FlashcardBack = ({ backMsg, cardBackReveal, revealCardAnswerFunc }) => {
             value={backMsg}
             options={{
                 theme: 'xq-light',
-                indentUnit: 4,
-                mode: 'python',
+                indentUnit: `${indentUnit}`,
+                mode: `${language}`,
                 lineNumbers: false,
                 readOnly: true,
                 cursorBlinkRate: -1
@@ -34,10 +38,10 @@ const FlashcardBack = ({ backMsg, cardBackReveal, revealCardAnswerFunc }) => {
   }
 };
 
-FlashcardBack.propTypes = {
-  backMsg: PropTypes.string,
-  cardBackReveal: PropTypes.bool,
-  revealCardAnswerFunc: PropTypes.func
-};
+// FlashcardBack.propTypes = {
+//   backMsg: PropTypes.string,
+//   cardBackReveal: PropTypes.bool,
+//   revealCardAnswerFunc: PropTypes.func
+// };
 
 export default FlashcardBack;

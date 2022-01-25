@@ -1,13 +1,11 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
+
 import AddFlashcardArea from '../../components/add-flashcard-area/add-flashcard-area.component.jsx'
-// import CustomButton from '../../custom-button/custom-button.component.jsx'
 import DecksList from '../../components/decks-list/decks-list.component.jsx'
 import NewDeck from '../../components/new-deck/new-deck.component.jsx'
-import ReviewFlashcardsContainer from '../../components/review-flashcards-area/review-flashcards-area.component.jsx'
+import ReviewFlashcardsArea from '../../components/review-flashcards-area/review-flashcards-area.component.jsx'
 
-
-import axios from "axios";
 import './flashcard-page.styles.scss'
 
 const FlashcardPage = ( {currentUser} ) => {
@@ -143,7 +141,7 @@ const FlashcardPage = ( {currentUser} ) => {
       setCurrentCard(nextCard)
     }
     // console.log("idx of next card in deck:", idxOfNextCard);
-    // console.log("next card details:", nextCard);
+    console.log("next card details:", nextCard);
     // console.log("current deck length:", currentDeckLength);
   }
 
@@ -175,7 +173,7 @@ const FlashcardPage = ( {currentUser} ) => {
 
       <section className="review-flashcards-container">
         {currentDeck.id ? (
-          <ReviewFlashcardsContainer 
+          <ReviewFlashcardsArea
           currentDeck={currentDeck} 
           currentCard={currentCard}
           deleteDeck={deleteDeck}

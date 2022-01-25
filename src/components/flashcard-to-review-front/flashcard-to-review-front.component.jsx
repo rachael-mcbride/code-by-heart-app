@@ -1,10 +1,15 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import CodeMirror from "@uiw/react-codemirror"
 import 'codemirror/theme/xq-light.css'
 import './flashcard-to-review-front.styles.scss'
 
-const FlashcardFront = ({ frontMsg }) => {
+const FlashcardFront = ({ frontMsg, language }) => {
+  console.log("language:", language)
   // console.log("flashcardFront:", front)
+  let indentUnit = 2;
+  if (language === "python") {
+    indentUnit = 4;
+  }
 
   return (
     <div className="flashcard-front">
@@ -13,8 +18,8 @@ const FlashcardFront = ({ frontMsg }) => {
           value={frontMsg}
           options={{
               theme: 'xq-light',
-              indentUnit: 4,
-              mode: 'python',
+              indentUnit: `${indentUnit}`,
+              mode: `${language}`,
               lineNumbers: false,
             }}
           height="150px"
@@ -27,9 +32,9 @@ const FlashcardFront = ({ frontMsg }) => {
   );
 };
 
-FlashcardFront.propTypes = {
-  deleteFlashcard: PropTypes.func,
-  front: PropTypes.string
-};
+// FlashcardFront.propTypes = {
+//   deleteFlashcard: PropTypes.func,
+//   front: PropTypes.string
+// };
 
 export default FlashcardFront;

@@ -9,10 +9,10 @@ import ReviewFlashcardsArea from '../../components/review-flashcards-area/review
 import './flashcard-page.styles.scss'
 
 const FlashcardPage = ( {currentUser} ) => {
-  const [flashcardsData, setFlashcardsData] = useState([]);
-  const [currentCard, setCurrentCard] = useState(null);
   const [decksData, setDecksData] = useState([])
   const [currentDeck, setCurrentDeck] = useState({id: "", owner_id: "", name: ""});
+  const [flashcardsData, setFlashcardsData] = useState([]);
+  const [currentCard, setCurrentCard] = useState(null);
 
   // USE EFFECT // 
   // load user decks when user signs in 
@@ -26,6 +26,7 @@ const FlashcardPage = ( {currentUser} ) => {
       axios
       .post("http://127.0.0.1:5000/load-user-decks", userData)
       .then((response) => {
+          console.log(response)
           setDecksData(response.data);
       })
       .catch((error) => {
@@ -33,7 +34,23 @@ const FlashcardPage = ( {currentUser} ) => {
       });
     }
     loadDecks();
-  }, []); 
+  }, [flashcardsData]); 
+
+  const deleteFlashcard = () => {
+    axios
+      .delete(`http://127.0.0.1:5000/flashcards/${currentCard.id}`)
+      .then((response) => {
+        console.log(response);
+        const updatedCardsData = flashcardsData.filter(
+          (card) => card.id !== currentCard.id
+        );
+        setFlashcardsData(updatedCardsData);
+        moveToNextCard();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   // load new flashcards whenever the current deck changes
   useEffect(() => {
@@ -67,7 +84,7 @@ const FlashcardPage = ( {currentUser} ) => {
   // make sure current deck is always up-to-date 
   // (like after selecting a new deck)
   useEffect(() => {
-    updateCurrentDeck(currentDeck)
+    updateCurrentDeck(currentDeck);
     // console.log("flashcards data:", flashcardsData)
   }, [currentDeck, flashcardsData]); // if I follow squiggly advice, makes infinite loop!
 
@@ -144,22 +161,6 @@ const FlashcardPage = ( {currentUser} ) => {
     // console.log("next card details:", nextCard);
     // console.log("current deck length:", currentDeckLength);
   }
-
-  const deleteFlashcard = () => {
-    axios
-      .delete(`http://127.0.0.1:5000/flashcards/${currentCard.id}`)
-      .then((response) => {
-        console.log(response);
-        const updatedCardsData = flashcardsData.filter(
-          (card) => card.id !== currentCard.id
-        );
-        setFlashcardsData(updatedCardsData);
-        moveToNextCard();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   return (
     <div className="main-container">

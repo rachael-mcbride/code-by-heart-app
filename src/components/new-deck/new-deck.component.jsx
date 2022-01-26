@@ -28,7 +28,7 @@ const NewDeck = ( { createNewDeck } ) => {
       <input
         className="name-box"
         type="text"
-        maxLength={20}
+        maxLength={18}
         placeholder="type new deck name"
         value={formFields.name}
         onChange={onNameChange}

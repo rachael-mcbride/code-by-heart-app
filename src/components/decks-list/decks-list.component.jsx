@@ -2,19 +2,18 @@ import PropTypes from "prop-types";
 import "./decks-list.styles.scss";
 import DeckTitle from "../deck-title/deck-title.component";
 
-const DecksList = ({ decksData, updateCurrentDeck }) => {
+const DecksList = ({ decksData, updateCurrentDeck, flashcardsCount }) => {
   const decks = decksData;
   const myDecksList = decks.map((deck) => {
-    // console.log(deck)
     return (
       <DeckTitle
         key={deck.id}
         deckData={deck}
         updateCurrentDeck={updateCurrentDeck}
+        flashcardsCount={flashcardsCount}
       />
     );
   });
-
 
   return (
     <div className="decks-list-container">

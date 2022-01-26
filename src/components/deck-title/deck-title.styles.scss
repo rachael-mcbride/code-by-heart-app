@@ -3,20 +3,29 @@
   font-family: 'Roboto Slab', serif;
 
   button {
-    min-width: 165px;
-    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    min-width: 210px;
+    width: 210px;
     height: 40px;
-    letter-spacing: 0.5px;
     line-height: 40px;
     padding: 0 5px 0 5px;
     background-color: white;
     color: black;
     text-transform: uppercase;
     font-family: 'Roboto Slab', serif;
-    font-size: small;
+    font-size: 12px;
     border: 1px solid black;
     cursor: pointer;
   
+    .deck-name {
+      margin-left: 10px;
+    }
+
+    .flashcard-number {
+      margin-right: 10px;
+    }
+
     &:hover {
       background-color: black;
       color: white;

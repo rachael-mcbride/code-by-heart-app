@@ -8,20 +8,25 @@ const DeckTitle = ({ updateCurrentDeck, deckData }) => {
     const newCurrentDeck = {
       id: deckData.id,
       name: deckData.name,
-      owner_id: deckData.owner_id
+      owner_id: deckData.owner_id,
+      number_of_cards: deckData.number_of_cards
     };
     updateCurrentDeck(newCurrentDeck);
   };
 
   return (
     <section className='deck-titles'>
-      <button onClick={selectCurrentDeck}>{deckData.name}</button>
+      <button onClick={selectCurrentDeck}>
+        <span className='deck-name'>{deckData.name}</span> 
+        <span className='flashcard-number'>{deckData.number_of_cards}</span>
+      </button>
     </section>
   );
 };
 
 DeckTitle.propTypes = {
   updateCurrentDeck: PropTypes.func,
+  flashcardCount: PropTypes.number,
   deckData: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

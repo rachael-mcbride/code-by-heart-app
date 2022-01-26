@@ -6,12 +6,10 @@ const LanguageDropDown = ({ language, handleLanguageChange } ) => {
     className="language-drop-down-menu"
     value={language} 
     onChange={event => handleLanguageChange(event.target.value)}>
-    <option className="language-item" id="0">Markdown</option>
+    <option className="language-item" id="0">Plain Text</option>
     <option className="language-item" id="1">Python</option>
     <option className="language-item" id="2">Ruby</option>
-    <option className="language-item" id="3">C</option>
-    <option className="language-item" id="4">Go</option>
-    <option className="language-item" id="5">Kotlin</option>
+    <option className="language-item" id="4">Golang</option>
   </select>
   )
 }

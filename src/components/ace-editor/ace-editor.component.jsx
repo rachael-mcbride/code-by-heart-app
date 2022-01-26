@@ -9,7 +9,7 @@ import 'ace-builds/src-noconflict/mode-swift'
 
 const CustomAceEditor = ({ msg, language }) => {
   return (
-    <AceEditor
+    <AceEditor 
       style={{
         height: '150px',
         width: '320px',            
@@ -31,7 +31,7 @@ const CustomAceEditor = ({ msg, language }) => {
           showLineNumbers: true,
           readOnly: true,
           hScrollBarAlwaysVisible: true,
-          vScrollBarAlwaysVisible: true
+          vScrollBarAlwaysVisible: true,
       }}        
   />)
 };

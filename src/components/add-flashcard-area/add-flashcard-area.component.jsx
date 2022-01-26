@@ -48,7 +48,7 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
       axios
       .post(`http://127.0.0.1:5000/compile`, compileData)
       .then((response) => {
-          // note: empty objs and arrays are a special case
+          // note: empty objs and arrays are a special case 
           if (JSON.stringify(response.data) === '{}') { 
             setCodeInOutputContainer(`${`{}`}`)
           } else if (JSON.stringify(response.data) === '[]') {
@@ -56,21 +56,7 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
           } else {
             setCodeInOutputContainer(response.data)
           }
-        console.log(response.data)
-
-        // setCodeInOutputContainer(response.data)
-        //   const data = response.data;
-        //   console.log("response from call to compile:", data)
-        //   if (data === "{}") {
-        //     setCodeInOutputContainer("empty object")
-        //   }
-        //   else if (Array.isArray(data)) {
-        //     setCodeInOutputContainer(`[${data}]`) 
-        //   } else if (typeof data === 'object') {
-        //     setCodeInOutputContainer(`{${data}}`)
-        //   } else {
-        //     setCodeInOutputContainer(data)
-        //   }
+        // console.log(response.data)
       })
       .catch((error) => {
           console.log("there was an error:", error);

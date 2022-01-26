@@ -1,32 +1,21 @@
+import { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
+import CustomAceEditor from '../ace-editor/ace-editor.component';
 import './flashcard-to-review-back.styles.scss'
-// import PropTypes from "prop-types";
-import CodeMirror from "@uiw/react-codemirror"
-import 'codemirror/theme/xq-light.css'
 
 const FlashcardBack = ({ backMsg, language, cardBackReveal, revealCardAnswerFunc }) => {
-  let indentUnit = 2
-  if (language === "python") {
-    indentUnit = 4;
-  } 
+  const [cardBack, setCardBack] = useState(null);
 
+  // update back of card's Ace editor when the backMsg changes
+  useEffect(() => {
+    setCardBack(
+      <CustomAceEditor msg={backMsg} language={language} />)
+  }, [backMsg]);
+    
   if (cardBackReveal === true) {
     return (
       <div className="flashcard-back-revealed">
-          <CodeMirror className="code-mirror"
-            value={backMsg}
-            options={{
-                theme: 'xq-light',
-                indentUnit: `${indentUnit}`,
-                mode: `${language}`,
-                lineNumbers: false,
-                readOnly: true,
-                cursorBlinkRate: -1
-              }}
-            height="150px"
-            width="320px"
-            onChange={(editor) => {
-              console.log('value:', editor.getValue());
-            }}/>
+        {cardBack}
       </div>)
   } else {
     return (
@@ -38,10 +27,11 @@ const FlashcardBack = ({ backMsg, language, cardBackReveal, revealCardAnswerFunc
   }
 };
 
-// FlashcardBack.propTypes = {
-//   backMsg: PropTypes.string,
-//   cardBackReveal: PropTypes.bool,
-//   revealCardAnswerFunc: PropTypes.func
-// };
+FlashcardBack.propTypes = {
+  language: PropTypes.string,
+  frontMsg: PropTypes.string,
+  cardBackReveal: PropTypes.bool,
+  revealCardAnswerFunc: PropTypes.func
+};
 
 export default FlashcardBack;

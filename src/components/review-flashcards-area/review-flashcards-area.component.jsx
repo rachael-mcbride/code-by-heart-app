@@ -24,7 +24,7 @@ const ReviewFlashcardsArea = (
     resetReveal();
   }, [currentCard, currentDeck]);
 
-  const revealCardAnswerFunc = () => {
+  const revealCardAnswerFunc = (event) => {
     setCardBackReveal(true);
   }
 
@@ -57,9 +57,6 @@ const ReviewFlashcardsArea = (
       moveToNextCard() 
     };
     
-  
-
-
   return (
     <div className="review-cards-container">
       <div className="deck-header">

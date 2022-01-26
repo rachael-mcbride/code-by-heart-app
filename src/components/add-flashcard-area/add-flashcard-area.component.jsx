@@ -1,44 +1,31 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+
 import CustomButton from '../custom-button/custom-button.component'
 import LanguageDropDown from '../language-drop-down/language-drop-down.component'
-import CodeMirror from "@uiw/react-codemirror"
-import 'codemirror/theme/xq-light.css'
-import './add-flashcard-area.styles.scss'
-
 import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
 
-import AceEditor from 'react-ace';
-import "ace-builds/src-noconflict/theme-github";
-import 'ace-builds/src-noconflict/ext-language_tools'
-import 'ace-builds/src-noconflict/ext-beautify'
-import 'ace-builds/src-noconflict/mode-javascript'
-import 'ace-builds/src-noconflict/mode-python'
-import 'ace-builds/src-noconflict/mode-ruby'
-import 'ace-builds/src-noconflict/mode-swift'
+import './add-flashcard-area.styles.scss'
 
-
-const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
-  const [codeToRun, setCodeToRun] = useState(null) // note - this is always the flashcard front
+const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
+  const [newFlashcardFront, setNewFlashcardFront] = useState(null);
   const [newFlashcardBack, setNewFlashcardBack] = useState("");
-  const [codeInOutputContainer, setCodeInOutputContainer] = useState(null)
-  const [frontCMPlaceholderValue, setFrontCMPlaceholderValue] = useState("create front of new card")
-  const [backCMPlaceholderValue, setBackCMPlaceholderValue] = useState("create back of new card")
+  const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
   const [language, setLanguage] = useState("markdown");
   const [languageMode, setLanguageMode] = useState("");
   const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
-  const handleLanguageChange = (newLanguage) => {
-    setLanguage(newLanguage);
-    if (newLanguage.toLowerCase() == "plain text") {
-        setLanguageMode("markdown");
-      } else {
-        setLanguageMode(language.toLowerCase());
-    };
-    // console.log("current language:", language)
-  }
+  const frontPlaceholder = "\nCreate the front of a new flashcard here or just \
+test some code.\n\nMake sure you've selected a programming language \
+before\nrunning your code.";
 
+  const backPlaceholder = "\nCreate the back of a new flashcard here.\n\nWhen \
+you're happy with your new card's front and back, make\nsure you've \
+selected the correct deck to which you want your\ncard to be added, then \
+click the \"Add New Card\" button."
+
+  // useEffects // 
   // make sure language is always up-to-date
   useEffect(() => {
     handleLanguageChange(language)
@@ -52,12 +39,31 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
     console.log("current indent:", indentUnitInfo)
   }, [language, indentUnitInfo]); 
 
-  // func that will call the Jdoodle code compiler
+  // funcs that update states // 
+  const handleLanguageChange = (newLanguage) => {
+    setLanguage(newLanguage);
+    if (newLanguage.toLowerCase() == "plain text") {
+        setLanguageMode("markdown");
+      } else {
+        setLanguageMode(language.toLowerCase());
+    };
+    // console.log("current language:", language)
+  }
+
+  const updateCardFront = (event) => {
+    setNewFlashcardFront(event)
+  }
+
+  const updateCardBack = (event) => {
+    setNewFlashcardBack(event)
+  }
+
+  // func that will call the Jdoodle code compiler // 
   const runCode = () => {
     if (language.toLowerCase() === "plain text") {
       setCodeInOutputContainer("Make sure you've selected a programming language.")
     } else {
-      const compileData = {"code" : codeToRun, "language" : language.toLowerCase()}
+      const compileData = {"code" : newFlashcardFront, "language" : language.toLowerCase()}
       axios
       .post(`http://127.0.0.1:5000/compile`, compileData)
       .then((response) => {
@@ -77,18 +83,19 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
     }
   }
 
+  // func that will add card to the DB // 
   const submitNewCard = (event) => {
     event.preventDefault();
-    if (codeToRun.length === 0 || newFlashcardBack.length === 0) {
+    if (newFlashcardFront.length === 0 || newFlashcardBack.length === 0) {
       setCodeInOutputContainer("Alert -- make sure your card contains a front and back!");
     } else {
-      const newData = { "front": codeToRun, 
+      const newData = { "front": newFlashcardFront, 
                         "back": newFlashcardBack, 
                         "language" : language.toLowerCase() }
         createNewFlashcard(newData);
         // tell user the card addition went through + clean up 
         setCodeInOutputContainer("Your card was successfully added.")
-        // setNewFlashcardFront("");
+        setNewFlashcardFront("");
         setNewFlashcardBack("");
     }
   };
@@ -101,10 +108,6 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
       {children}
     </button>
   )
-
-  const updateCodeToRun = (event) => {
-    setCodeToRun(event)
-  }
 
   return (
     <div className="add-flashcards-container">
@@ -119,8 +122,10 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
       <div className="add-card-area">
           <EditableAceEditor 
             languageMode={languageMode}
-            codeToRun={codeToRun}
-            updateCodeToRun={updateCodeToRun}>
+            code={newFlashcardFront}
+            updateCode={updateCardFront}
+            height={"300px"}
+            placeholderText={frontPlaceholder}>
           </EditableAceEditor>
           <div className='output-wrapper'>
             <div className='output-text-container'>
@@ -133,20 +138,13 @@ const AddFlashCardArea = ( { createNewFlashcard, currentDeckId } ) => {
             </CustomButton>
           </div>
           <div>
-          <CodeMirror className="code-mirror"
-            value={backCMPlaceholderValue}
-            options={{
-                theme: 'xq-light',
-                indentUnit: `${indentUnitInfo}`,
-                smartIndent: false,
-                mode: `${language}`
-              }}
-            height="150px"
-            width="380px"
-            onChange={(editor) => {
-              console.log('value:', editor.getValue());
-              setNewFlashcardBack(editor.getValue())
-            }}/>
+          <EditableAceEditor 
+            languageMode={languageMode}
+            code={newFlashcardBack}
+            updateCode={updateCardBack}
+            height={"100px"}
+            placeholderText={backPlaceholder}>
+          </EditableAceEditor>
         </div>
       </div>
       {currentDeckId && // only render button if a deck has been selected
@@ -162,6 +160,5 @@ AddFlashCardArea.propTypes = {
   createNewFlashcard: PropTypes.func,
   currentDeckId: PropTypes.number
 };
-
 
 export default AddFlashCardArea;

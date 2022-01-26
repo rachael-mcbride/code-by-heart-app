@@ -2,7 +2,7 @@
   display: flex;
   margin-bottom: 15px;
   border: 1px solid black;
-  box-shadow: 5px 10px;
+  box-shadow: 3px 3px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -10,9 +10,5 @@
   width: 350px;
   height: 175px;
   padding: 10px;
-
-  .front-text{
-    display: flex;
-    color: white;
-  }
+  // pointer-events: none;
 }

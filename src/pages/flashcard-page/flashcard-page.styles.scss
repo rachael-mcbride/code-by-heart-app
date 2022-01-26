@@ -1,16 +1,18 @@
 .main-container {
   display: grid;
-  grid-gap: 3px;
   height: 100vh;
+  margin: 25px;
   grid-template-columns: repeat(15, 1fr);
   grid-template-areas: 
-      "m m m c c c c c c e e e e e e";
+      "m m m c c c c c c c e e e e e";
 }
 
-.decks-list-container {
-  background-color: rgb(252, 239, 122);
+.decks-list-wrapper {
+  // background-color: rgb(252, 239, 122);
+  background-color: #DC143C;
   border-radius: 10px;
-  width: 220px;
+  width: 230px;
+  border: 1px solid black;
   grid-area: m;
   display: flex;
   flex-direction: column;
@@ -23,6 +25,27 @@
   align-items: center;
   min-width: 360px;
   grid-area: c;
+
+  .select-a-deck-wrapper {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 10px;
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid black;
+    color: rgb(39, 38, 38);
+    padding: 30px;
+  }
 }
 
 .add-flashcard-container {

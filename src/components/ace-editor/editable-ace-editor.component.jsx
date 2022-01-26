@@ -2,37 +2,37 @@ import AceEditor from 'react-ace';
 import "ace-builds/src-noconflict/theme-github";
 import 'ace-builds/src-noconflict/ext-language_tools'
 import 'ace-builds/src-noconflict/ext-beautify'
-import 'ace-builds/src-noconflict/mode-javascript'
 import 'ace-builds/src-noconflict/mode-python'
 import 'ace-builds/src-noconflict/mode-markdown'
 import 'ace-builds/src-noconflict/mode-ruby'
-import 'ace-builds/src-noconflict/mode-swift'
+import 'ace-builds/src-noconflict/mode-golang'
 
-const EditableAceEditor = ( { languageMode, codeToRun, updateCodeToRun }) => {
+const EditableAceEditor = ({ languageMode, code, placeholderText, height, updateCode }) => {
   return (
     <AceEditor 
     style={{
-      height: '150px',
+      height: `${height}`,
       width: '380px',            
       }}
-    placeholder={"Test out some code or create the front of a new card here"}
+    placeholder={placeholderText}
     mode={languageMode}
     theme='github'
     name='basic-code-editor' 
-    onChange={(event) => updateCodeToRun(event)}
+    onChange={(event) => updateCode(event)}
     fontSize={12}
     showPrintMargin={false}
     showGutter={true}
     highlightActiveLine={false}
-    value={codeToRun}
+    value={code}
     setOptions={{
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: false,
         enableSnippets: true,
         showLineNumbers: true,
         readOnly: false,
-        hScrollBarAlwaysVisible: true,
-        vScrollBarAlwaysVisible: true,
+        cursorStyle: "slim"
+        // hScrollBarAlwaysVisible: true,
+        // vScrollBarAlwaysVisible: true,
     }}              
   />)
 }

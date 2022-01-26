@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import './flashcard-to-review-front.styles.scss'
-import CustomAceEditor from '../ace-editor/ace-editor.component';
+import FixedAceEditor from '../ace-editor/fixed-ace-editor.component';
 
 const FlashcardFront = ({ frontMsg, language }) => {
   return (
     <div className="flashcard-front">
-      <CustomAceEditor msg={frontMsg} language={language} />
+      <FixedAceEditor msg={frontMsg} language={language}/>
     </div>
   );
 };

@@ -163,13 +163,13 @@ const FlashcardPage = ( {currentUser} ) => {
 
   return (
     <div className="main-container">
-      <section className="decks-list-container">
+      <div className="decks-list-wrapper">
         <DecksList 
           decksData={decksData}
           updateCurrentDeck={updateCurrentDeck}
         />
         <NewDeck createNewDeck={createNewDeck} />
-      </section>
+      </div>
 
       <section className="review-flashcards-container">
         {currentDeck.id ? (
@@ -180,7 +180,11 @@ const FlashcardPage = ( {currentUser} ) => {
           moveToNextCard={moveToNextCard}
           deleteFlashcard={deleteFlashcard} />
         ) : (
-          <div>Select a deck</div>
+          <div className="select-a-deck-wrapper">
+            <div className="select-a-deck-text">
+              Select a deck to begin reviewing flashcards
+            </div>
+          </div>
         )}
       </section>
 

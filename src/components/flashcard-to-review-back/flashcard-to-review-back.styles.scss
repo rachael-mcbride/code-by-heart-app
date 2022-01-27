@@ -20,15 +20,21 @@
   align-items: center;
   justify-content: center;
   font-family: 'Roboto Slab', serif;
-  box-shadow: 5px 10px;
+  box-shadow: 3px 3px;
   font-weight: bold;
   text-transform: uppercase;
   border-radius: 10px;
   width: 350px;
   height: 175px;
   background-color: white;
-  box-shadow: 5px 10px;
   border: 1px solid black;
-  color: rgb(39, 38, 38);
   padding: 10px;
+
+  .button-in-flashcard {
+    width: 350px;
+    height: 175px;
+    font-size: large;
+    background-color: white;
+    border: none;
+  }
 }

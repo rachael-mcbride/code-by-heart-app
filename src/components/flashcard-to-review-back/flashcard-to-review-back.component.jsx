@@ -18,10 +18,12 @@ const FlashcardBack = ({ backMsg, language, cardBackReveal, revealCardAnswerFunc
       </div>)
   } else {
     return (
-      <button className="flashcard-back-not-revealed" 
-        onClick={revealCardAnswerFunc}>
-        Reveal Answer
-      </button>
+      <div className="flashcard-back-not-revealed">
+        <button className="button-in-flashcard"
+          onClick={revealCardAnswerFunc}>
+          Reveal Answer
+        </button>
+      </div>
     );
   }
 };

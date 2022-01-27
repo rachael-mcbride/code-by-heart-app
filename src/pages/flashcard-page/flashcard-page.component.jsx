@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
-import AddFlashcardArea from '../../components/add-flashcard-area/add-flashcard-area.component.jsx'
-import DecksList from '../../components/decks-list/decks-list.component.jsx'
-import NewDeck from '../../components/new-deck/new-deck.component.jsx'
-import ReviewFlashcardsArea from '../../components/review-flashcards-area/review-flashcards-area.component.jsx'
+import AddFlashcardArea from '../../components/add-flashcard-area/add-flashcard-area.component'
+import DecksList from '../../components/decks-list/decks-list.component'
+import NewDeck from '../../components/new-deck/new-deck.component'
+import ReviewFlashcardsArea from '../../components/review-flashcards-area/review-flashcards-area.component'
 
 import './flashcard-page.styles.scss'
 
@@ -14,71 +14,25 @@ const FlashcardPage = ( {currentUser} ) => {
   const [flashcardsData, setFlashcardsData] = useState([]);
   const [currentCard, setCurrentCard] = useState(null);
 
-  // USE EFFECT // 
-  // load user decks when user signs in and when data in the decks changes
-  useEffect(() => {
-    const loadDecks = () => {
-      const userData = {
-          uid: currentUser.id,
-          displayName: currentUser.displayName,
-          email: currentUser.email
-      }
-      axios
-      .post("http://127.0.0.1:5000/load-user-decks", userData)
-      .then((response) => {
-          // console.log(response)
-          setDecksData(response.data);
-      })
-      .catch((error) => {
-          console.log("there was an error", error);
-      });
-    }
-    loadDecks();
+  // DECK METHODS // 
 
-    // whenever a new card is added to a previously-empty deck, 
-    // set the current card to the card that was just added
-    if (flashcardsData.length === 1) {
-      setCurrentCard(flashcardsData[0]);
-    }
-  }, [flashcardsData]); 
-
-  // load new flashcards whenever the current deck changes
-  useEffect(() => {
-    if (currentDeck.id === null) {
-      console.log('User has signed in, but no deck has been selected yet.');
-      return;
+  const loadDecks = () => {
+    const userData = {
+      uid: currentUser.id,
+      displayName: currentUser.displayName,
+      email: currentUser.email
     }
     axios
-      .get(
-        `http://127.0.0.1:5000/decks/${currentDeck.id}/flashcards`
-      )
+      .post("http://127.0.0.1:5000/load-user-decks", userData)
       .then((response) => {
-        setFlashcardsData(response.data);
-        if (response.data.length > 0) {
-          setCurrentCard(response.data[0])
-        } else {
-          setCurrentCard(null)
-        }
+        // console.log(response)
+        setDecksData(response.data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log("there was an error", error);
       });
-  }, [currentDeck.id]);
+  };
 
-  // make sure current flashcard is always up-to-date 
-  // (like after clicking `moveToNextCard`)
-  useEffect(() => {
-    setCurrentCard(currentCard)
-  }, [currentCard]); 
-
-  // make sure current deck is always up-to-date 
-  // (like after selecting a new deck)
-  useEffect(() => {
-    updateCurrentDeck(currentDeck);
-    // console.log("flashcards data:", flashcardsData)
-  }, [currentDeck, flashcardsData]); 
-
-  // DECK METHODS // 
   const createNewDeck = (newDeck) => {
       const newDeckData = {
         deck_name: newDeck["name"]
@@ -114,6 +68,7 @@ const FlashcardPage = ( {currentUser} ) => {
           id: null,
           owner_id: "",
           name: "",
+          number_of_cards: 0
         })
         setDecksData(updatedDecksData);
       })
@@ -123,6 +78,29 @@ const FlashcardPage = ( {currentUser} ) => {
   };
 
   // FLASHCARD METHODS // 
+
+  const loadFlashcards = () => {
+    if (currentDeck.id === null) {
+      console.log('User has signed in, but no deck has been selected yet.');
+      return;
+    }
+    axios
+      .get(
+        `http://127.0.0.1:5000/decks/${currentDeck.id}/flashcards`
+      )
+      .then((response) => {
+        setFlashcardsData(response.data);
+        if (response.data.length > 0) {
+          setCurrentCard(response.data[0])
+        } else {
+          setCurrentCard(null)
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const createNewFlashcard = (newCardData) => {
     // newCardData shape -> { "front": flashcardFront, "back": flashcardBack }
     axios
@@ -167,6 +145,34 @@ const FlashcardPage = ( {currentUser} ) => {
     // console.log("next card details:", nextCard);
     // console.log("current deck length:", currentDeckLength);
   }
+
+  // USE EFFECTS // 
+
+  // load deck list when user logs in or when data in decks changes
+  useEffect(() => {
+    loadDecks();
+    // when a new card is added to a previously-empty deck, 
+    // set the current card to this card that was just added
+    if (flashcardsData.length === 1) {
+      setCurrentCard(flashcardsData[0]);
+    }
+  }, [flashcardsData]); 
+
+  // load new flashcards whenever the current deck changes
+  useEffect(() => {
+    loadFlashcards()
+  }, [currentDeck.id]);
+
+  // ensure current flashcard always up-to-date (like post-`moveToNextCard` click)
+  useEffect(() => {
+    setCurrentCard(currentCard)
+  }, [currentCard]); 
+
+  // ensure current deck always up-to-date (like after selecting new deck)
+  useEffect(() => {
+    updateCurrentDeck(currentDeck);
+    // console.log("flashcards data:", flashcardsData)
+  }, [currentDeck, flashcardsData]); 
 
   return (
     <div className="main-container">

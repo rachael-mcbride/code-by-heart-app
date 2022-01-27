@@ -10,12 +10,12 @@ import './flashcard-page.styles.scss'
 
 const FlashcardPage = ( {currentUser} ) => {
   const [decksData, setDecksData] = useState([])
-  const [currentDeck, setCurrentDeck] = useState({id: "", owner_id: "", name: ""});
+  const [currentDeck, setCurrentDeck] = useState({id: "", owner_id: "", name: "", number_of_cards : 0});
   const [flashcardsData, setFlashcardsData] = useState([]);
   const [currentCard, setCurrentCard] = useState(null);
 
   // USE EFFECT // 
-  // load user decks when user signs in 
+  // load user decks when user signs in and when data in the decks changes
   useEffect(() => {
     const loadDecks = () => {
       const userData = {
@@ -26,7 +26,7 @@ const FlashcardPage = ( {currentUser} ) => {
       axios
       .post("http://127.0.0.1:5000/load-user-decks", userData)
       .then((response) => {
-          console.log(response)
+          // console.log(response)
           setDecksData(response.data);
       })
       .catch((error) => {
@@ -34,23 +34,13 @@ const FlashcardPage = ( {currentUser} ) => {
       });
     }
     loadDecks();
-  }, [flashcardsData]); 
 
-  const deleteFlashcard = () => {
-    axios
-      .delete(`http://127.0.0.1:5000/flashcards/${currentCard.id}`)
-      .then((response) => {
-        console.log(response);
-        const updatedCardsData = flashcardsData.filter(
-          (card) => card.id !== currentCard.id
-        );
-        setFlashcardsData(updatedCardsData);
-        moveToNextCard();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+    // whenever a new card is added to a previously-empty deck, 
+    // set the current card to the card that was just added
+    if (flashcardsData.length === 1) {
+      setCurrentCard(flashcardsData[0]);
+    }
+  }, [flashcardsData]); 
 
   // load new flashcards whenever the current deck changes
   useEffect(() => {
@@ -86,7 +76,7 @@ const FlashcardPage = ( {currentUser} ) => {
   useEffect(() => {
     updateCurrentDeck(currentDeck);
     // console.log("flashcards data:", flashcardsData)
-  }, [currentDeck, flashcardsData]); // if I follow squiggly advice, makes infinite loop!
+  }, [currentDeck, flashcardsData]); 
 
   // DECK METHODS // 
   const createNewDeck = (newDeck) => {
@@ -145,6 +135,22 @@ const FlashcardPage = ( {currentUser} ) => {
       })
       .catch((error) => {
         console.log("Error:", error);
+      });
+  };
+
+  const deleteFlashcard = () => {
+    axios
+      .delete(`http://127.0.0.1:5000/flashcards/${currentCard.id}`)
+      .then((response) => {
+        console.log(response);
+        const updatedCardsData = flashcardsData.filter(
+          (card) => card.id !== currentCard.id
+        );
+        setFlashcardsData(updatedCardsData);
+        moveToNextCard();
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 

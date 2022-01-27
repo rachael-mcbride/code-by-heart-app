@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from 'react';
 import './deck-title.styles.scss'
 
-const DeckTitle = ({ updateCurrentDeck, deckData }) => {
+const DeckTitle = ({ updateCurrentDeck, deckData, selected }) => {
   const selectCurrentDeck = (event) => {
     event.preventDefault()
     const newCurrentDeck = {
@@ -14,11 +14,26 @@ const DeckTitle = ({ updateCurrentDeck, deckData }) => {
     updateCurrentDeck(newCurrentDeck);
   };
 
+  // conditional styling features //  
+  // change color of number based on how many cards are up for review 
+  let inputStyle = { color: '#DC143C' };
+  if (deckData.number_of_cards === 0) {
+    inputStyle = { color: 'green' };
+  }; 
+
+  // change button color depending on if this is a selected deck of not 
+  let typeOfDeckTitle = 'not-selected-deck-title';
+  if (selected) {
+    typeOfDeckTitle = 'selected-deck-title'
+  }
+
   return (
-    <section className='deck-titles'>
+    <section className={typeOfDeckTitle}>
       <button onClick={selectCurrentDeck}>
         <span className='deck-name'>{deckData.name}</span> 
-        <span className='flashcard-number'>{deckData.number_of_cards}</span>
+        <span className='flashcard-number' style={inputStyle}>
+          {deckData.number_of_cards}
+        </span>
       </button>
     </section>
   );
@@ -26,7 +41,7 @@ const DeckTitle = ({ updateCurrentDeck, deckData }) => {
 
 DeckTitle.propTypes = {
   updateCurrentDeck: PropTypes.func,
-  flashcardCount: PropTypes.number,
+  selected: PropTypes.bool,
   deckData: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,

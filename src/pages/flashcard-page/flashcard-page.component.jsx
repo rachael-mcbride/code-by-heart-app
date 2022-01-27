@@ -172,6 +172,7 @@ const FlashcardPage = ( {currentUser} ) => {
     <div className="main-container">
       <div className="decks-list-wrapper">
         <DecksList 
+          currentDeck={currentDeck}
           decksData={decksData}
           updateCurrentDeck={updateCurrentDeck}
         />

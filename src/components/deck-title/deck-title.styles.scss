@@ -1,4 +1,4 @@
-.deck-titles {
+.not-selected-deck-title {
   padding: 2px;
   font-family: 'Roboto Slab', serif;
 
@@ -32,7 +32,33 @@
     }
   }
 }
+ 
+.selected-deck-title {
+  padding: 2px;
+  font-family: 'Roboto Slab', serif;
 
-// .button {
-//   min-width: 165px;
-// }
+  button {
+    display: flex;
+    justify-content: space-between;
+    min-width: 210px;
+    width: 210px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 5px 0 5px;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-family: 'Roboto Slab', serif;
+    font-size: 12px;
+  
+    .deck-name {
+      margin-left: 10px;
+    }
+
+    .flashcard-number {
+      margin-right: 10px;
+    }
+  }
+}

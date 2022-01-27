@@ -5,23 +5,31 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import './header.styles.scss'
 
-const Header = ( { currentUser }) => (
-  <div className='header'>
-    <div className='logo-container'>
-      <Logo className='logo' />
+const Header = ({ currentUser }) => {
+  // change button color depending on if this is a selected deck of not 
+  let headerSignedIn = 'not-signed-in';
+  if (currentUser) {
+    headerSignedIn = 'signed-in';
+  }
+  return (
+  <div className="header">
+    <div className={headerSignedIn}>
+      <div className='logo-container'>
+        <Logo className='logo' />
+      </div>
+      <div className='options'>
+        {currentUser ? (
+          <CustomButton onClick={() => auth.signOut()}>
+            Sign out
+          </CustomButton>
+        ) : (
+          <CustomButton onClick={signInWithGoogle}> 
+            Sign in
+          </CustomButton>
+        )}
+      </div>
     </div>
-    <div className='options'>
-      {currentUser ? (
-        <CustomButton  onClick={() => auth.signOut()}>
-          Sign out
-        </CustomButton>
-      ) : (
-        <CustomButton onClick={signInWithGoogle}> 
-          Sign in
-        </CustomButton>
-      )}
-    </div>
-  </div>
-)
+  </div>)
+};
 
 export default Header;

@@ -5,6 +5,7 @@ import AddFlashcardArea from '../../components/add-flashcard-area/add-flashcard-
 import DecksList from '../../components/decks-list/decks-list.component'
 import NewDeck from '../../components/new-deck/new-deck.component'
 import ReviewFlashcardsArea from '../../components/review-flashcards-area/review-flashcards-area.component'
+import ReviewFlashcardsMsg from '../../components/review-flashcards-msg/review-flashcards-msg.component'
 
 import './flashcard-page.styles.scss'
 
@@ -196,7 +197,7 @@ const FlashcardPage = ( {currentUser} ) => {
         ) : (
           <div className="select-a-deck-wrapper">
             <div className="select-a-deck-text">
-              Select a deck to begin reviewing flashcards
+              <ReviewFlashcardsMsg decksLength={decksData.length}></ReviewFlashcardsMsg>
             </div>
           </div>
         )}

@@ -1,11 +1,16 @@
 import AceEditor from 'react-ace';
+import 'ace-builds/webpack-resolver'
+import 'ace-builds/src-noconflict/ext-language_tools';
+import 'ace-builds/src-noconflict/ext-beautify';
+
+// theme 
 import "ace-builds/src-noconflict/theme-github";
-import 'ace-builds/src-noconflict/ext-language_tools'
-import 'ace-builds/src-noconflict/ext-beautify'
-import 'ace-builds/src-noconflict/mode-python'
-import 'ace-builds/src-noconflict/mode-markdown'
-import 'ace-builds/src-noconflict/mode-ruby'
-import 'ace-builds/src-noconflict/mode-golang'
+
+// languages 
+import 'ace-builds/src-noconflict/mode-python';
+import 'ace-builds/src-noconflict/mode-markdown';
+import 'ace-builds/src-noconflict/mode-ruby';
+import 'ace-builds/src-noconflict/mode-golang';
 
 const EditableAceEditor = ({ languageMode, code, placeholderText, height, updateCode }) => {
   return (
@@ -31,10 +36,9 @@ const EditableAceEditor = ({ languageMode, code, placeholderText, height, update
         showLineNumbers: true,
         readOnly: false,
         cursorStyle: "slim"
-        // hScrollBarAlwaysVisible: true,
-        // vScrollBarAlwaysVisible: true,
     }}              
   />)
 }
 
+// EditableAceEditor.config.set('basePath', 'path'); 
 export default EditableAceEditor;

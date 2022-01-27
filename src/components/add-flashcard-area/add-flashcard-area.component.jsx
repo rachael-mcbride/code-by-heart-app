@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import axios from "axios";
 
 import CustomButton from '../custom-button/custom-button.component'
@@ -13,7 +13,7 @@ const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
   const [newFlashcardBack, setNewFlashcardBack] = useState("");
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
   const [language, setLanguage] = useState("markdown");
-  const [languageMode, setLanguageMode] = useState("");
+  const [languageMode, setLanguageMode] = useState("markdown");
   const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
   const frontPlaceholder = "Create the front of a new flashcard here or just \
@@ -42,11 +42,8 @@ click the \"Add New Card\" button."
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage);
-    if (newLanguage.toLowerCase() == "plain text") {
-        setLanguageMode("markdown");
-      } else {
-        setLanguageMode(language.toLowerCase());
-    };
+    setLanguageMode(language.toLowerCase());
+
     // console.log("current language:", language)
   }
 
@@ -156,9 +153,9 @@ click the \"Add New Card\" button."
   )
 }
 
-AddFlashCardArea.propTypes = {
-  createNewFlashcard: PropTypes.func,
-  currentDeckId: PropTypes.number
-};
+// AddFlashCardArea.propTypes = {
+//   createNewFlashcard: PropTypes.func,
+//   currentDeckId: PropTypes.string
+// };
 
 export default AddFlashCardArea;

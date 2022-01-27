@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
@@ -52,7 +52,6 @@ class App extends React.Component {
       return currentUser ? children : <Navigate to="/" replace />;
     };
 
-    // Note to self - CONSIDER ADDING A "PAGE NOT FOUND" ROUTE
     return (
       <div>
         <Header currentUser={this.state.currentUser} />

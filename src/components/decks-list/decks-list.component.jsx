@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import "./decks-list.styles.scss";
 import DeckTitle from "../deck-title/deck-title.component";
 
-const DecksList = ({ decksData, updateCurrentDeck, flashcardsCount, currentDeck }) => {
+const DecksList = ({ decksData, updateCurrentDeck, currentDeck }) => {
   const decks = decksData;
   const myDecksList = decks.map((deck) => {
     let selectedBool = false;
@@ -15,7 +15,6 @@ const DecksList = ({ decksData, updateCurrentDeck, flashcardsCount, currentDeck 
         selected={selectedBool}
         deckData={deck}
         updateCurrentDeck={updateCurrentDeck}
-        flashcardsCount={flashcardsCount}
       />
     );
   });
@@ -35,6 +34,8 @@ const DecksList = ({ decksData, updateCurrentDeck, flashcardsCount, currentDeck 
 //       id: PropTypes.number.isRequired,
 //       name: PropTypes.string.isRequired,
 //       owner_id: PropTypes.string.isRequired,
+//       num_total_cards: PropTypes.number.isRequired,
+//       num_cards_up_for_review: PropTypes.number.isRequired,
 //     })
 //   ),
 // };

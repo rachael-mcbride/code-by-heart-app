@@ -11,10 +11,11 @@ import "./review-flashcards-area.styles.scss";
 // import axios from "axios";
 
 const ReviewFlashcardsArea = (
-  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard }
+  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard, currentTotalCardsInDeck, currentUpForReviewCardsInDeck }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
   const [cardDifficultyLevel, setCardDifficultyLevel] = useState("Very Easy");
+  // const [cardsUpForReview, setCardsUpForReview] = useState(currentUpForReviewCardsInDeck);
 
   // resets the CardBackReveal back to false if new card or deck is clicked 
   useEffect(() => {
@@ -26,6 +27,7 @@ const ReviewFlashcardsArea = (
 
   const revealCardAnswerFunc = (event) => {
     setCardBackReveal(true);
+    console.log(currentDeck)
   }
 
   // note: move this/change this... isn't needed!
@@ -48,7 +50,14 @@ const ReviewFlashcardsArea = (
     axios
       .put(`http://127.0.0.1:5000/flashcards/${currentCard.id}`, difficultyData)
       .then((response) => {
-          console.log("updated card post-click:", response)
+          console.log("updated card post-click:", response.data)
+          const newDate = new Date(response.data.date_to_review);
+          const rightNow = new Date(0);
+          if (newDate > rightNow) {
+            console.log('the date_to_review is now later than right now')
+            // WILL MAYBE NEED TO LIFT THIS STUFF UP SO THAT WHEN THIS CHANGES, 
+            // THE OTHER THINGS THAT NEED TO GET UPDATED CAN GET UPDATED 
+          }
       })
       .catch((error) => {
           console.log("there was an error", error);
@@ -57,10 +66,15 @@ const ReviewFlashcardsArea = (
       moveToNextCard() 
     };
     
+    // note -- move lines 67 and 68 into the main flashcard-page area and pass them in as props!
+    // this way they'll get updated appropriately whenever the flashcardsData there changes! 
   return (
     <div className="review-cards-container">
       <div className="deck-header">
         <h1 className="current-deck-title">{currentDeck.name}</h1>
+        
+        {/* <span>Total cards: {currentTotalCardsInDeck}</span> */}
+        {/* <span>Cards up for review: {currentUpForReviewCardsInDeck}</span> */}
         <div className="buttons-container">
           <div className="delete-buttons">
             <SmallButton onClick={deleteDeck}>
@@ -70,17 +84,18 @@ const ReviewFlashcardsArea = (
               Delete Card
             </SmallButton>
           </div>
-          <div className="next-card-button">
+          {/* <div className="next-card-button">
             <SmallButton onClick={moveToNextCard}>
               Next Card
             </SmallButton>
-          </div>
+          </div> */}
         </div>
       </div>
 
       <div className="flashcard">
-      { (!currentCard) && "You have no cards up for review." }
-        {currentCard && 
+
+
+        {currentCard.id && 
           <div>
             <FlashcardFront 
               language = {currentCard.language}
@@ -104,6 +119,12 @@ const ReviewFlashcardsArea = (
             </div> }
         </div>
         } 
+
+        { (!currentCard.id) && 
+        <div className="review-session-finished">
+          There are no cards currently up-for-review in this deck.
+        </div>
+        }
       </div>
     </div>
   );

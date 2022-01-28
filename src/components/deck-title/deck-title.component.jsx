@@ -4,12 +4,14 @@ import './deck-title.styles.scss'
 
 const DeckTitle = ({ updateCurrentDeck, deckData, selected }) => {
   const selectCurrentDeck = (event) => {
+    console.log(deckData)
     event.preventDefault()
     const newCurrentDeck = {
       id: deckData.id,
       name: deckData.name,
-      owner_id: deckData.owner_id,
-      number_of_cards: deckData.number_of_cards
+      ownder_id: deckData.owner_id,
+      num_total_cards: deckData.num_total_cards,
+      num_cards_up_for_review: deckData.num_cards_up_for_review
     };
     updateCurrentDeck(newCurrentDeck);
   };
@@ -17,7 +19,7 @@ const DeckTitle = ({ updateCurrentDeck, deckData, selected }) => {
   // conditional styling features //  
   // change color of number based on how many cards are up for review 
   let inputStyle = { color: '#DC143C' };
-  if (deckData.number_of_cards === 0) {
+  if (deckData.num_cards_up_for_review === 0) {
     inputStyle = { color: 'green' };
   }; 
 
@@ -32,7 +34,7 @@ const DeckTitle = ({ updateCurrentDeck, deckData, selected }) => {
       <button onClick={selectCurrentDeck}>
         <span className='deck-name'>{deckData.name}</span> 
         <span className='flashcard-number' style={inputStyle}>
-          {deckData.number_of_cards}
+          {deckData.num_cards_up_for_review}
         </span>
       </button>
     </section>

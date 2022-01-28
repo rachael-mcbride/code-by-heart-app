@@ -11,9 +11,23 @@ import './flashcard-page.styles.scss'
 
 const FlashcardPage = ( {currentUser} ) => {
   const [decksData, setDecksData] = useState([])
-  const [currentDeck, setCurrentDeck] = useState({id: "", owner_id: "", name: "", number_of_cards : 0});
+  const [currentDeck, setCurrentDeck] = useState(
+    {id: "", owner_id: "", name: "", num_total_cards : 0, num_cards_up_for_review : 0});
   const [flashcardsData, setFlashcardsData] = useState([]);
-  const [currentCard, setCurrentCard] = useState(null);
+  const [currentCard, setCurrentCard] = useState({
+    back: "",
+    date_to_review: new Date(0),
+    deck_id: null,
+    difficulty_level: 0,
+    front: "",
+    id: null,
+    interval: 0,
+    language: "",
+    previous_ease_factor: 0,
+    previous_repetitions: 0
+  });
+  const [currentTotalCardsInDeck, setCurrentTotalCardsInDeck] = useState(currentDeck.num_total_cards);
+  const [currentUpForReviewCardsInDeck, setCurrentUpForReviewCardsInDeck] = useState(currentDeck.num_cards_up_for_review);
 
   // DECK METHODS // 
 
@@ -67,9 +81,10 @@ const FlashcardPage = ( {currentUser} ) => {
         );
         setCurrentDeck({
           id: null,
-          owner_id: "",
+          ownerId: "",
           name: "",
-          number_of_cards: 0
+          numTotalCards: 0,
+          numCardsUpForReview: 0
         })
         setDecksData(updatedDecksData);
       })
@@ -87,14 +102,25 @@ const FlashcardPage = ( {currentUser} ) => {
     }
     axios
       .get(
-        `http://127.0.0.1:5000/decks/${currentDeck.id}/flashcards`
+        `http://127.0.0.1:5000/decks/${currentDeck.id}/flashcards_to_review`
       )
       .then((response) => {
         setFlashcardsData(response.data);
         if (response.data.length > 0) {
           setCurrentCard(response.data[0])
         } else {
-          setCurrentCard(null)
+          setCurrentCard({
+            back: "", 
+            date_to_review: new Date(0),
+            deck_id: null,
+            difficulty_level: 0,
+            front: "",
+            id: null,
+            interval: 0,
+            language: "",
+            previous_ease_factor: 0,
+            previous_repetitions: 0
+          })
         }
       })
       .catch((error) => {
@@ -108,9 +134,12 @@ const FlashcardPage = ( {currentUser} ) => {
       .post(`http://127.0.0.1:5000/decks/${currentDeck.id}/flashcards`, newCardData)
       .then((response) => {
         // console.log("Response:", response);
-        const flashcards = [...flashcardsData];
-        flashcards.push(response.data);
-        setFlashcardsData(flashcards);
+        const updatedCardsData  = [...flashcardsData];
+        updatedCardsData .push(response.data);
+        setFlashcardsData(updatedCardsData);
+        setCurrentCard(currentCard)
+        setCurrentTotalCardsInDeck(currentTotalCardsInDeck+1);
+        setCurrentUpForReviewCardsInDeck(currentUpForReviewCardsInDeck+1);
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -127,6 +156,8 @@ const FlashcardPage = ( {currentUser} ) => {
         );
         setFlashcardsData(updatedCardsData);
         moveToNextCard();
+        setCurrentTotalCardsInDeck(currentTotalCardsInDeck-1);
+        setCurrentUpForReviewCardsInDeck(currentUpForReviewCardsInDeck-1);
       })
       .catch((error) => {
         console.log(error);
@@ -138,9 +169,21 @@ const FlashcardPage = ( {currentUser} ) => {
     const nextCard = flashcardsData[idxOfNextCard]
     const currentDeckLength = flashcardsData.length;
     if (idxOfNextCard === currentDeckLength) {
-      setCurrentCard(null)
+      setCurrentCard({
+        back: "", 
+        date_to_review: new Date(0),
+        deck_id: null,
+        difficulty_level: 0,
+        front: "",
+        id: null,
+        interval: 0,
+        language: "",
+        previous_ease_factor: 0,
+        previous_repetitions: 0
+        })
+      setCurrentDeck({id: "", owner_id: "", name: "", num_total_cards : 0, num_cards_up_for_review : 0})
     } else {
-      setCurrentCard(nextCard)
+      setCurrentCard(nextCard);
     }
     // console.log("idx of next card in deck:", idxOfNextCard);
     // console.log("next card details:", nextCard);
@@ -149,17 +192,20 @@ const FlashcardPage = ( {currentUser} ) => {
 
   // USE EFFECTS // 
 
-  // load deck list when user logs in or when data in decks changes
+  // load deck list when user logs in, when data in decks changes, or 
+  // when the date to review changes 
   useEffect(() => {
     loadDecks();
     // when a new card is added to a previously-empty deck, 
     // set the current card to this card that was just added
     if (flashcardsData.length === 1) {
       setCurrentCard(flashcardsData[0]);
-    }
-  }, [flashcardsData]); 
+    };
 
-  // load new flashcards whenever the current deck changes
+  }, [flashcardsData, currentCard]); 
+
+  // load new flashcards whenever the current deck changes or a card may have 
+  // left the current deck b/c it's no longer up for review
   useEffect(() => {
     loadFlashcards()
   }, [currentDeck.id]);
@@ -169,9 +215,12 @@ const FlashcardPage = ( {currentUser} ) => {
     setCurrentCard(currentCard)
   }, [currentCard]); 
 
-  // ensure current deck always up-to-date (like after selecting new deck)
+  // ensure current deck always up-to-date (like after selecting new deck) 
+  // as well as the numerical data for that deck
   useEffect(() => {
     updateCurrentDeck(currentDeck);
+    setCurrentTotalCardsInDeck(currentDeck.num_total_cards);
+    setCurrentUpForReviewCardsInDeck(currentDeck.num_cards_up_for_review);
     // console.log("flashcards data:", flashcardsData)
   }, [currentDeck, flashcardsData]); 
 
@@ -187,11 +236,13 @@ const FlashcardPage = ( {currentUser} ) => {
       </div>
 
       <section className="review-flashcards-container">
-        {currentDeck.id ? (
+        {currentDeck.id  ? (
           <ReviewFlashcardsArea
           currentDeck={currentDeck} 
           currentCard={currentCard}
           deleteDeck={deleteDeck}
+          currentTotalCardsInDeck={currentTotalCardsInDeck}
+          currentUpForReviewCardsInDeck={currentUpForReviewCardsInDeck}
           moveToNextCard={moveToNextCard}
           deleteFlashcard={deleteFlashcard} />
         ) : (

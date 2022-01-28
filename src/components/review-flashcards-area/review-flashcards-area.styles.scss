@@ -38,6 +38,11 @@
   }
 }
 
+.review-session-finished {
+  display: flex;
+  flex-direction: column;
+}
+
 .small-button {
       width: 120px;
       // height: 40px;

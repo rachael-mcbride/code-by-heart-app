@@ -28,6 +28,7 @@ const FlashcardPage = ( {currentUser} ) => {
   });
   const [currentTotalCardsInDeck, setCurrentTotalCardsInDeck] = useState(currentDeck.num_total_cards);
   const [currentUpForReviewCardsInDeck, setCurrentUpForReviewCardsInDeck] = useState(currentDeck.num_cards_up_for_review);
+  const [addNewCardAreaRenders, setAddNewCardAreaRenders] = useState(false);
 
   // DECK METHODS // 
 
@@ -190,6 +191,10 @@ const FlashcardPage = ( {currentUser} ) => {
     // console.log("current deck length:", currentDeckLength);
   }
 
+  const renderAddCardArea = () => {
+    setAddNewCardAreaRenders(true);
+  }
+
   // USE EFFECTS // 
 
   // load deck list when user logs in, when data in decks changes, or 
@@ -207,12 +212,15 @@ const FlashcardPage = ( {currentUser} ) => {
   // load new flashcards whenever the current deck changes or a card may have 
   // left the current deck b/c it's no longer up for review
   useEffect(() => {
-    loadFlashcards()
+    loadFlashcards();
   }, [currentDeck.id]);
 
   // ensure current flashcard always up-to-date (like post-`moveToNextCard` click)
+  // also, whenever the current card changes, make what's rendered is the "practice area"
+  // rather than the "add flashcard area"
   useEffect(() => {
-    setCurrentCard(currentCard)
+    setCurrentCard(currentCard);
+    setAddNewCardAreaRenders(false);
   }, [currentCard]); 
 
   // ensure current deck always up-to-date (like after selecting new deck) 
@@ -241,6 +249,7 @@ const FlashcardPage = ( {currentUser} ) => {
           currentDeck={currentDeck} 
           currentCard={currentCard}
           deleteDeck={deleteDeck}
+          renderAddCardArea={renderAddCardArea}
           currentTotalCardsInDeck={currentTotalCardsInDeck}
           currentUpForReviewCardsInDeck={currentUpForReviewCardsInDeck}
           moveToNextCard={moveToNextCard}
@@ -255,10 +264,12 @@ const FlashcardPage = ( {currentUser} ) => {
       </section>
 
       <section className="add-flashcard-container">
-        <AddFlashcardArea 
+      { addNewCardAreaRenders ? 
+      (<AddFlashcardArea 
           currentDeckId={currentDeck.id}
           createNewFlashcard={createNewFlashcard}>
-        </AddFlashcardArea> 
+        </AddFlashcardArea>) : 
+      ("Practice here") } 
       </section>
     </div>
   );

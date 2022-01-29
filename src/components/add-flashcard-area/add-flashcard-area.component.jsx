@@ -57,7 +57,7 @@ click the \"Add New Card\" button."
 
   // func that will call the Jdoodle code compiler // 
   const runCode = () => {
-    if (language.toLowerCase() === "plain text") {
+    if (language.toLowerCase() === "markdown") {
       setCodeInOutputContainer("Make sure you've selected a programming language.")
     } else {
       const compileData = {"code" : newFlashcardFront, "language" : language.toLowerCase()}
@@ -121,7 +121,7 @@ click the \"Add New Card\" button."
             languageMode={languageMode}
             code={newFlashcardFront}
             updateCode={updateCardFront}
-            height={"300px"}
+            height={"200px"}
             placeholderText={frontPlaceholder}>
           </EditableAceEditor>
           <div className='output-wrapper'>
@@ -139,7 +139,7 @@ click the \"Add New Card\" button."
             languageMode={languageMode}
             code={newFlashcardBack}
             updateCode={updateCardBack}
-            height={"100px"}
+            height={"200px"}
             placeholderText={backPlaceholder}>
           </EditableAceEditor>
         </div>

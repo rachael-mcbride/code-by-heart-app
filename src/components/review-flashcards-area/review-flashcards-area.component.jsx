@@ -11,7 +11,7 @@ import "./review-flashcards-area.styles.scss";
 // import axios from "axios";
 
 const ReviewFlashcardsArea = (
-  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard, currentTotalCardsInDeck, currentUpForReviewCardsInDeck }
+  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard, renderAddCardArea }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
   const [cardDifficultyLevel, setCardDifficultyLevel] = useState("Very Easy");
@@ -76,6 +76,9 @@ const ReviewFlashcardsArea = (
         {/* <span>Total cards: {currentTotalCardsInDeck}</span> */}
         {/* <span>Cards up for review: {currentUpForReviewCardsInDeck}</span> */}
         <div className="buttons-container">
+            <SmallButton onClick={() => {console.log('more info about deck will open')}}>
+              Deck details
+            </SmallButton>
           <div className="delete-buttons">
             <SmallButton onClick={deleteDeck}>
               Delete Deck
@@ -84,6 +87,9 @@ const ReviewFlashcardsArea = (
               Delete Card
             </SmallButton>
           </div>
+          <SmallButton onClick={renderAddCardArea}>
+            Add Card
+          </SmallButton>
           {/* <div className="next-card-button">
             <SmallButton onClick={moveToNextCard}>
               Next Card
@@ -150,7 +156,8 @@ const ReviewFlashcardsArea = (
 //   }),
 //   deleteDeck: PropTypes.func,
 //   deleteFlashcard: PropTypes.func,
-//   moveToNextCard: PropTypes.func
+//   moveToNextCard: PropTypes.func,
+//   renderAddCardArea: PropTypes.func
 // };
 
 export default ReviewFlashcardsArea;

@@ -109,9 +109,10 @@ click the \"Add New Card\" button."
   return (
     <div className="add-flashcards-container">
       <div className="add-flashcards-header-container">
-        <h2 className="add-flashcards-title">Add Flashcards</h2>
+        <h2 className="add-flashcards-title">Add New Flashcard</h2>
         <LanguageDropDown
           language={language}
+          includesMarkdown={true}
           handleLanguageChange={handleLanguageChange}
         />
       </div>
@@ -147,7 +148,7 @@ click the \"Add New Card\" button."
       {currentDeckId && // only render button if a deck has been selected
         <OptionsButton 
           onClick={submitNewCard}>
-            Add New Card
+            Submit Card
         </OptionsButton>}
     </div>
   )

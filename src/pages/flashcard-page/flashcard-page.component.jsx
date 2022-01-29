@@ -5,6 +5,7 @@ import AddFlashcardArea from '../../components/add-flashcard-area/add-flashcard-
 import DecksList from '../../components/decks-list/decks-list.component'
 import NewDeck from '../../components/new-deck/new-deck.component'
 import ReviewFlashcardsArea from '../../components/review-flashcards-area/review-flashcards-area.component'
+import PracticeCodeSandbox from '../../components/practice-code-sandbox/practice-code-sandbox.component'
 import ReviewFlashcardsMsg from '../../components/review-flashcards-msg/review-flashcards-msg.component'
 
 import './flashcard-page.styles.scss'
@@ -265,11 +266,12 @@ const FlashcardPage = ( {currentUser} ) => {
 
       <section className="add-flashcard-container">
       { addNewCardAreaRenders ? 
-      (<AddFlashcardArea 
+        (<AddFlashcardArea 
           currentDeckId={currentDeck.id}
           createNewFlashcard={createNewFlashcard}>
         </AddFlashcardArea>) : 
-      ("Practice here") } 
+        (<PracticeCodeSandbox></PracticeCodeSandbox>) 
+      } 
       </section>
     </div>
   );

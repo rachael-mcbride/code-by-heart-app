@@ -10,13 +10,13 @@ import 'ace-builds/src-noconflict/mode-golang'
 
 import './fixed-ace-editor.styles.scss'
 
-const FixedAceEditor = ({ msg, language }) => {
+const FixedAceEditor = ({ msg, language, height, width }) => {
   return (
     <AceEditor 
       className = "fixed-editor"
       style={{
-        height: '150px',
-        width: '320px',            
+        height: height,
+        width: width,            
         }}
       // placeholder={msg}
       mode={language}

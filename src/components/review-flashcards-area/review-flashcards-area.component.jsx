@@ -1,29 +1,18 @@
 // import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
+import { useNavigate, useHistory } from "react-router-dom";
 import axios from 'axios';
 import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component.jsx";
 import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component.jsx";
 import CardDifficultyDropDown from "../card-difficulty-drop-down/card-difficulty-drop-down.component";
 
 import "./review-flashcards-area.styles.scss";
-// import NewFlashcard from "../new-flashcard/new-flashcard.component.jsx";
-// import CustomButton from '../custom-button/custom-button.component';
-// import axios from "axios";
 
 const ReviewFlashcardsArea = (
-  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard, renderAddCardArea }
+  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard, renderAddCardArea, setDeckDetailsButtonClicked }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
   const [cardDifficultyLevel, setCardDifficultyLevel] = useState("Very Easy");
-  // const [cardsUpForReview, setCardsUpForReview] = useState(currentUpForReviewCardsInDeck);
-
-  // resets the CardBackReveal back to false if new card or deck is clicked 
-  useEffect(() => {
-    const resetReveal = () => {
-      setCardBackReveal(false)
-    }
-    resetReveal();
-  }, [currentCard, currentDeck]);
 
   const revealCardAnswerFunc = (event) => {
     setCardBackReveal(true);
@@ -65,9 +54,21 @@ const ReviewFlashcardsArea = (
       // card gets updated in the DB + app moves onto the next card
       moveToNextCard() 
     };
+
+    const navigate = useNavigate(); 
+    const routeChange = () => { 
+      const path = `/deck-details?deck=${currentDeck.id}`; 
+      navigate(path);
+    };
+
+    // resets the CardBackReveal back to false if new card or deck is clicked 
+    useEffect(() => {
+      const resetReveal = () => {
+        setCardBackReveal(false)
+      }
+      resetReveal();
+    }, [currentCard, currentDeck]);
     
-    // note -- move lines 67 and 68 into the main flashcard-page area and pass them in as props!
-    // this way they'll get updated appropriately whenever the flashcardsData there changes! 
   return (
     <div className="review-cards-container">
       <div className="deck-header">
@@ -76,7 +77,7 @@ const ReviewFlashcardsArea = (
         {/* <span>Total cards: {currentTotalCardsInDeck}</span> */}
         {/* <span>Cards up for review: {currentUpForReviewCardsInDeck}</span> */}
         <div className="buttons-container">
-            <SmallButton onClick={() => {console.log('more info about deck will open')}}>
+            <SmallButton onClick={setDeckDetailsButtonClicked}>
               Deck details
             </SmallButton>
           <div className="delete-buttons">
@@ -99,8 +100,6 @@ const ReviewFlashcardsArea = (
       </div>
 
       <div className="flashcard">
-
-
         {currentCard.id && 
           <div>
             <FlashcardFront 

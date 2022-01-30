@@ -1,0 +1,84 @@
+.one-flashcard-container {
+  // border: 1px solid black;
+  border-radius: 10px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+
+
+.flashcard-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px;
+  // align-items: center;
+  justify-content: center;
+  font-family: 'Roboto Slab', serif;
+  // box-shadow: 3px 3px;
+  // border-radius: 10px;
+  width: 300px;
+  height: 150px;
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px;
+
+  .flashcard-details-title {
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 20px;
+  }
+
+  .flashcard-text {
+    margin: 2px;
+    margin-left: 10px;
+    font-size: 14px;
+
+    b {
+      color: #DC143C;
+    }
+  }
+}
+
+.flashcard-front {
+  display: flex;
+  width: 300px;
+  height: 150px;
+  flex-direction: column;
+  margin: 5px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 3px 3px;
+
+  .flashcard-number {
+    margin-top: 15px;
+    text-transform: uppercase;
+    font-weight: bolder;
+  }
+  
+  .ace-editor-in-flashcard {
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+}
+
+
+
+
+
+// .popout-styles {
+//   display: flex;
+//   flex-direction: column;
+//   margin: 5px;
+//   // align-items: center;
+//   justify-content: center;
+//   font-family: 'Roboto Slab', serif;
+//   box-shadow: 3px 3px;
+//   border-radius: 10px;
+//   width: 350px;
+//   height: 175px;
+//   background-color: white;
+//   border: 1px solid black;
+//   padding: 10px;
+// }

@@ -6,6 +6,7 @@ import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import Header from "./components/header/header.component";
 import LandingPage from "./pages/landing-page/landing-page.component";
 import FlashcardPage from "./pages/flashcard-page/flashcard-page.component";
+import DeckDetailsPage from "./pages/deck-details-page/deck-details-page.component";
 import NotFoundPage from "./pages/not-found-page/not-found-page.component";
 
 class App extends React.Component {
@@ -69,6 +70,14 @@ class App extends React.Component {
             element={
               <SignOutWrapper currentUser={this.state.currentUser}>
                 <FlashcardPage currentUser={this.state.currentUser} />
+              </SignOutWrapper>
+            }
+          />
+          <Route
+            path="/deck-details"
+            element={
+              <SignOutWrapper currentUser={this.state.currentUser}>
+                <DeckDetailsPage />
               </SignOutWrapper>
             }
           />

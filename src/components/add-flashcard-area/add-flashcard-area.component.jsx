@@ -16,14 +16,9 @@ const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
   const [languageMode, setLanguageMode] = useState("markdown");
   const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
-  const frontPlaceholder = "Create the front of a new flashcard here or just \
-test some code.\n\nMake sure you've selected a programming language \
-before\nrunning your code.";
+  const frontPlaceholder = "Front of new flashcard";
 
-  const backPlaceholder = "Create the back of a new flashcard here.\n\nWhen \
-you're happy with your new card's front and back, make\nsure you've \
-selected the correct deck to which you want your\ncard to be added, then \
-click the \"Add New Card\" button."
+  const backPlaceholder = "Back of new flashcard";
 
   // useEffects // 
   // make sure language is always up-to-date

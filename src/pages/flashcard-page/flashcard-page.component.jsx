@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 
+import DeckDetailsPage from '../deck-details-page/deck-details-page.component'
 import AddFlashcardArea from '../../components/add-flashcard-area/add-flashcard-area.component'
 import DecksList from '../../components/decks-list/decks-list.component'
 import NewDeck from '../../components/new-deck/new-deck.component'
@@ -11,6 +12,8 @@ import ReviewFlashcardsMsg from '../../components/review-flashcards-msg/review-f
 import './flashcard-page.styles.scss'
 
 const FlashcardPage = ( {currentUser} ) => {
+  const [deckDetailsButtonClicked, setDeckDetailsButtonClicked] = useState(false);
+
   const [decksData, setDecksData] = useState([])
   const [currentDeck, setCurrentDeck] = useState(
     {id: "", owner_id: "", name: "", num_total_cards : 0, num_cards_up_for_review : 0});
@@ -233,46 +236,65 @@ const FlashcardPage = ( {currentUser} ) => {
     // console.log("flashcards data:", flashcardsData)
   }, [currentDeck, flashcardsData]); 
 
+  const toggleDeckDetailsPage = () => {
+    if (deckDetailsButtonClicked) {
+      setDeckDetailsButtonClicked(false);
+    } else {
+      setDeckDetailsButtonClicked(true);
+    }
+  };
+
   return (
-    <div className="main-container">
-      <div className="decks-list-wrapper">
-        <DecksList 
-          currentDeck={currentDeck}
-          decksData={decksData}
-          updateCurrentDeck={updateCurrentDeck}
-        />
-        <NewDeck createNewDeck={createNewDeck} />
-      </div>
+    <div>
+      { deckDetailsButtonClicked ? 
+      (<div>
+      <DeckDetailsPage 
+        deckId={currentDeck.id} 
+        deckName={currentDeck.name}
+        toggleDeckDetailsPage={toggleDeckDetailsPage} />
+      </div>)
+      : 
+      (<div className="main-container">
+        <div className="decks-list-wrapper">
+          <DecksList 
+            currentDeck={currentDeck}
+            decksData={decksData}
+            updateCurrentDeck={updateCurrentDeck}
+          />
+          <NewDeck createNewDeck={createNewDeck} />
+        </div>
 
-      <section className="review-flashcards-container">
-        {currentDeck.id  ? (
-          <ReviewFlashcardsArea
-          currentDeck={currentDeck} 
-          currentCard={currentCard}
-          deleteDeck={deleteDeck}
-          renderAddCardArea={renderAddCardArea}
-          currentTotalCardsInDeck={currentTotalCardsInDeck}
-          currentUpForReviewCardsInDeck={currentUpForReviewCardsInDeck}
-          moveToNextCard={moveToNextCard}
-          deleteFlashcard={deleteFlashcard} />
-        ) : (
-          <div className="select-a-deck-wrapper">
-            <div className="select-a-deck-text">
-              <ReviewFlashcardsMsg decksLength={decksData.length}></ReviewFlashcardsMsg>
+        <section className="review-flashcards-container">
+          {currentDeck.id  ? (
+            <ReviewFlashcardsArea
+            currentDeck={currentDeck} 
+            currentCard={currentCard}
+            setDeckDetailsButtonClicked={toggleDeckDetailsPage}
+            deleteDeck={deleteDeck}
+            renderAddCardArea={renderAddCardArea}
+            currentTotalCardsInDeck={currentTotalCardsInDeck}
+            currentUpForReviewCardsInDeck={currentUpForReviewCardsInDeck}
+            moveToNextCard={moveToNextCard}
+            deleteFlashcard={deleteFlashcard} />
+          ) : (
+            <div className="select-a-deck-wrapper">
+              <div className="select-a-deck-text">
+                <ReviewFlashcardsMsg decksLength={decksData.length}></ReviewFlashcardsMsg>
+              </div>
             </div>
-          </div>
-        )}
-      </section>
+          )}
+        </section>
 
-      <section className="add-flashcard-container">
-      { addNewCardAreaRenders ? 
-        (<AddFlashcardArea 
-          currentDeckId={currentDeck.id}
-          createNewFlashcard={createNewFlashcard}>
-        </AddFlashcardArea>) : 
-        (<PracticeCodeSandbox></PracticeCodeSandbox>) 
-      } 
-      </section>
+        <section className="add-flashcard-container">
+        { addNewCardAreaRenders ? 
+          (<AddFlashcardArea 
+            currentDeckId={currentDeck.id}
+            createNewFlashcard={createNewFlashcard}>
+          </AddFlashcardArea>) : 
+          (<PracticeCodeSandbox></PracticeCodeSandbox>) 
+        } 
+        </section>
+      </div>)};
     </div>
   );
 };

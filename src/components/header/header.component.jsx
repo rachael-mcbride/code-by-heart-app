@@ -19,9 +19,11 @@ const Header = ({ currentUser }) => {
       </div>
       <div className='options'>
         {currentUser ? (
+          <div>
           <CustomButton onClick={() => auth.signOut()}>
             Sign out
           </CustomButton>
+          </div>
         ) : (
           <CustomButton onClick={signInWithGoogle}> 
             Sign in

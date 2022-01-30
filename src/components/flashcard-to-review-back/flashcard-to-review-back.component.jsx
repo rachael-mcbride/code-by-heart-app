@@ -8,7 +8,12 @@ const FlashcardBack = ({ backMsg, language, cardBackReveal, revealCardAnswerFunc
 
   // update back of card's Ace editor when the backMsg changes
   useEffect(() => {
-    setCardBack(<FixedAceEditor msg={backMsg} language={language}/>)
+    setCardBack(
+    <FixedAceEditor 
+      msg={backMsg} 
+      language={language} 
+      height={'200px'} 
+      width={'350px'}/>)
   }, [backMsg]);
     
   if (cardBackReveal === true) {

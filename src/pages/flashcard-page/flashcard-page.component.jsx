@@ -213,11 +213,11 @@ const FlashcardPage = ( {currentUser} ) => {
 
   }, [flashcardsData, currentCard]); 
 
-  // load new flashcards whenever the current deck changes or a card may have 
-  // left the current deck b/c it's no longer up for review
+  // load new flashcards whenever the current deck changes or the user clicks the 
+  // deckDetailsButton (b/c they could have edited the flashcards on that page)
   useEffect(() => {
     loadFlashcards();
-  }, [currentDeck.id]);
+  }, [currentDeck.id, deckDetailsButtonClicked]);
 
   // ensure current flashcard always up-to-date (like post-`moveToNextCard` click)
   // also, whenever the current card changes, make what's rendered is the "practice area"

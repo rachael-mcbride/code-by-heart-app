@@ -12,6 +12,7 @@ const FlashcardDetailsList = ({ flashcardsData }) => {
       />
     );
   });
+
   return <div className="flashcards-list">{flashcardList}</div>;
 };
 

@@ -10,7 +10,7 @@ import 'ace-builds/src-noconflict/mode-golang'
 
 import './fixed-ace-editor.styles.scss'
 
-const FixedAceEditor = ({ msg, language, height, width }) => {
+const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
   return (
     <AceEditor 
       className = "fixed-editor"

@@ -7,7 +7,7 @@ import CustomButton from '../custom-button/custom-button.component';
 import './one-flashcard-details.styles.scss'
 
 const OneFlashcardDetails = ({ flashcard }) => {
-  // attributes to display in card details box 
+  // attributes to display in "card details" box 
   const reviewDate = flashcard.date_to_review.slice(0, 22);
   const firstLetterOfLanguage = flashcard.language.slice(0, 1).toUpperCase();
   const restOfLanguage = flashcard.language.slice(1, flashcard.language.length);
@@ -69,7 +69,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
       });
   };
 
-  // useEffects to make sure button clicks take hold immediately
+  // useEffects to make sure states change immediately upon button clicks
   useEffect(() => {
     setEditButtonFrontClicked(editButtonFrontClicked);
   }, [editButtonFrontClicked]);
@@ -82,10 +82,6 @@ const OneFlashcardDetails = ({ flashcard }) => {
   return(
     <div className="one-flashcard-container">
       <div className="flashcard-details">
-        {/* <div className="flashcard-text">
-          <b>Front</b>: <i>{shortenedFront}</i>
-        </div>
-        <div className="flashcard-text"><b>Back</b>: <i>{shortenedBack}</i></div> */}
         <div className="flashcard-details-title">Card Details</div>
         <div className="flashcard-text"><b>Language</b>: {language}</div>
         <div className="flashcard-text"><b>Up for review on</b>: {reviewDate}</div>
@@ -102,8 +98,8 @@ const OneFlashcardDetails = ({ flashcard }) => {
           </div> }
       </div>
 
+  {/* renders fixed or editable area based on 'editButtonFrontClicked' state */}
       <div>
-      {/* CONDITIONALLY RENDERS FLASHCARD FRONT DEPENDING ON IF IT'S BEING EDITED OR NOT */}
       {editButtonFrontClicked && 
       // <div className="flashcard-front">
         <div>

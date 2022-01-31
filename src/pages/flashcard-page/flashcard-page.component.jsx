@@ -34,8 +34,20 @@ const FlashcardPage = ( {currentUser} ) => {
   const [currentUpForReviewCardsInDeck, setCurrentUpForReviewCardsInDeck] = useState(currentDeck.num_cards_up_for_review);
   const [addNewCardAreaRenders, setAddNewCardAreaRenders] = useState(false);
 
-  // DECK METHODS // 
+  // CONDITIONAL COMPONENT RENDERING METHODS // 
+  const toggleDeckDetailsPage = () => {
+    if (deckDetailsButtonClicked) {
+      setDeckDetailsButtonClicked(false);
+    } else {
+      setDeckDetailsButtonClicked(true);
+    }
+  };
 
+  const renderAddCardArea = () => {
+    setAddNewCardAreaRenders(true);
+  }
+
+  // DECK METHODS // 
   const loadDecks = () => {
     const userData = {
       uid: currentUser.id,
@@ -72,8 +84,6 @@ const FlashcardPage = ( {currentUser} ) => {
 
   const updateCurrentDeck = (selectedDeck) => {
     setCurrentDeck(selectedDeck);
-    // console.log("current deck was updated!")
-    // console.log("Current deck is:", currentDeck);
   };
   
   const deleteDeck = () => {
@@ -99,7 +109,6 @@ const FlashcardPage = ( {currentUser} ) => {
   };
 
   // FLASHCARD METHODS // 
-
   const loadFlashcards = () => {
     if (currentDeck.id === null) {
       console.log('User has signed in, but no deck has been selected yet.');
@@ -195,10 +204,6 @@ const FlashcardPage = ( {currentUser} ) => {
     // console.log("current deck length:", currentDeckLength);
   }
 
-  const renderAddCardArea = () => {
-    setAddNewCardAreaRenders(true);
-  }
-
   // USE EFFECTS // 
 
   // load deck list when user logs in, when data in decks changes, or 
@@ -213,7 +218,7 @@ const FlashcardPage = ( {currentUser} ) => {
 
   }, [flashcardsData, currentCard]); 
 
-  // load new flashcards whenever the current deck changes or the user clicks the 
+  // load or reload flashcards whenever the current deck changes or the user clicks the 
   // deckDetailsButton (b/c they could have edited the flashcards on that page)
   useEffect(() => {
     loadFlashcards();
@@ -236,17 +241,9 @@ const FlashcardPage = ( {currentUser} ) => {
     // console.log("flashcards data:", flashcardsData)
   }, [currentDeck, flashcardsData]); 
 
-  const toggleDeckDetailsPage = () => {
-    if (deckDetailsButtonClicked) {
-      setDeckDetailsButtonClicked(false);
-    } else {
-      setDeckDetailsButtonClicked(true);
-    }
-  };
-
   return (
     <div>
-    {/* either render a page of deck details OR the default flashcard page  */}
+    {/* either render a page of deck details or the default flashcard page  */}
       { deckDetailsButtonClicked ? 
       (<div>
       <DeckDetailsPage 
@@ -267,6 +264,7 @@ const FlashcardPage = ( {currentUser} ) => {
           <NewDeck createNewDeck={createNewDeck} />
         </div>
 
+      {/* either render flashcards-to-review or a msg if no deck is selected */}
         <section className="review-flashcards-container">
           {currentDeck.id  ? (
             <ReviewFlashcardsArea
@@ -288,6 +286,7 @@ const FlashcardPage = ( {currentUser} ) => {
           )}
         </section>
 
+        {/* either render add-flashcard-area or just a code sandbox */}
         <section className="add-flashcard-container">
         { addNewCardAreaRenders ? 
           (<AddFlashcardArea 

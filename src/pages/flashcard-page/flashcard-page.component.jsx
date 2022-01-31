@@ -246,11 +246,14 @@ const FlashcardPage = ( {currentUser} ) => {
 
   return (
     <div>
+    {/* either render a page of deck details OR the default flashcard page  */}
       { deckDetailsButtonClicked ? 
       (<div>
       <DeckDetailsPage 
         deckId={currentDeck.id} 
         deckName={currentDeck.name}
+        totalCardNum={currentDeck.num_total_cards}
+        cardsUpForReview={currentDeck.num_cards_up_for_review}
         toggleDeckDetailsPage={toggleDeckDetailsPage} />
       </div>)
       : 
@@ -269,7 +272,7 @@ const FlashcardPage = ( {currentUser} ) => {
             <ReviewFlashcardsArea
             currentDeck={currentDeck} 
             currentCard={currentCard}
-            setDeckDetailsButtonClicked={toggleDeckDetailsPage}
+            toggleDeckDetailsPage={toggleDeckDetailsPage}
             deleteDeck={deleteDeck}
             renderAddCardArea={renderAddCardArea}
             currentTotalCardsInDeck={currentTotalCardsInDeck}
@@ -294,7 +297,7 @@ const FlashcardPage = ( {currentUser} ) => {
           (<PracticeCodeSandbox></PracticeCodeSandbox>) 
         } 
         </section>
-      </div>)};
+      </div>)}
     </div>
   );
 };

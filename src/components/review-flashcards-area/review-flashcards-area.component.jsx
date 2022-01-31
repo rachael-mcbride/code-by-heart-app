@@ -1,6 +1,6 @@
 // import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import { useNavigate, useHistory } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component.jsx";
 import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component.jsx";
@@ -9,14 +9,15 @@ import CardDifficultyDropDown from "../card-difficulty-drop-down/card-difficulty
 import "./review-flashcards-area.styles.scss";
 
 const ReviewFlashcardsArea = (
-  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard, renderAddCardArea, setDeckDetailsButtonClicked }
+  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard, 
+    renderAddCardArea, toggleDeckDetailsPage }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
   const [cardDifficultyLevel, setCardDifficultyLevel] = useState("Very Easy");
 
   const revealCardAnswerFunc = (event) => {
     setCardBackReveal(true);
-    console.log(currentDeck)
+    // console.log(currentDeck)
   }
 
   // note: move this/change this... isn't needed!
@@ -55,11 +56,11 @@ const ReviewFlashcardsArea = (
       moveToNextCard() 
     };
 
-    const navigate = useNavigate(); 
-    const routeChange = () => { 
-      const path = `/deck-details?deck=${currentDeck.id}`; 
-      navigate(path);
-    };
+    // const navigate = useNavigate(); 
+    // const routeChange = () => { 
+    //   const path = `/deck-details?deck=${currentDeck.id}`; 
+    //   navigate(path);
+    // };
 
     // resets the CardBackReveal back to false if new card or deck is clicked 
     useEffect(() => {
@@ -77,7 +78,7 @@ const ReviewFlashcardsArea = (
         {/* <span>Total cards: {currentTotalCardsInDeck}</span> */}
         {/* <span>Cards up for review: {currentUpForReviewCardsInDeck}</span> */}
         <div className="buttons-container">
-            <SmallButton onClick={setDeckDetailsButtonClicked}>
+            <SmallButton onClick={toggleDeckDetailsPage}>
               Deck details
             </SmallButton>
           <div className="delete-buttons">

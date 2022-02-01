@@ -1,8 +1,8 @@
 // import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import axios from 'axios';
-import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component.jsx";
-import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component.jsx";
+import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component";
+import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component";
 import CardDifficultyDropDown from "../card-difficulty-drop-down/card-difficulty-drop-down.component";
 
 import "./review-flashcards-area.styles.scss";

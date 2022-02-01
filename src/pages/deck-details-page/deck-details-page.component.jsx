@@ -50,15 +50,16 @@ const DeckDetailsPage = (
         </div>
       </div>
       { flashcardsData && 
-      <div className="flashcards-list">
-        <FlashcardDetailsList flashcardsData={flashcardsData} />
+      <div className="deck-details-page">
+        <div className="flashcards-list">
+          <FlashcardDetailsList flashcardsData={flashcardsData} />
+        </div> 
+        <div className="delete-deck">
+          <button onClick={deleteDeck}>
+            Delete Deck
+          </button>
+        </div>
       </div> }
-
-      <div className="delete-deck">
-        <button onClick={deleteDeck}>
-          Delete Deck
-        </button>
-      </div>
     </div>
   );
 };

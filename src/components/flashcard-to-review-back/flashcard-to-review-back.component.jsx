@@ -14,13 +14,15 @@ const FlashcardBack = (
       msg={backMsg} 
       language={language} 
       height={'200px'} 
-      width={'350px'}/>)
+      width={'380px'}/>)
   }, [backMsg]);
     
   if (cardBackReveal === true) {
     return (
-      <div className="flashcard-back-revealed">
-        {cardBack}
+      <div>
+        <div className="flashcard-back-revealed">
+          {cardBack}
+        </div>
       </div>)
   } else {
     return (

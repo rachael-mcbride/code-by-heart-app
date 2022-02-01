@@ -1,15 +1,16 @@
 .flashcard-back-revealed, .flashcard-back-not-revealed {
-  display: flex;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  width: 400px;
-  height: 180px;
-  border: 1px solid black;
-  box-shadow: 3px 3px;
-  padding: 10px;
+    display: flex;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    box-shadow: 3px 3px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 400px;
+    height: 180px;
+    padding: 20px 10px 20px 10px;
+  
 }
 
 .flashcard-back-not-revealed {

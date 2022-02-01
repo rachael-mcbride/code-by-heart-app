@@ -49,34 +49,25 @@ const ReviewFlashcardsArea = (
       }
       resetReveal();
     }, [currentCard, currentDeck]);
-  
-    // note: move this/change this... isn't needed!
-    const SmallButton = ({ children, ...otherProps }) => (
-      <button 
-        className="small-button" 
-        type="button"
-        {...otherProps}>
-        {children}
-      </button>
-    )
     
     return (
       <div className="review-cards-container">
         <div className="deck-header">
-          <h1 className="current-deck-title">{currentDeck.name}</h1>
+          <div className="current-deck-title">{currentDeck.name}</div>
           <div className="buttons-container">
-              <SmallButton onClick={toggleDeckDetailsPage}>
-                Deck details
-              </SmallButton>
-              {/* <SmallButton onClick={deleteDeck}>
-                Delete Deck
-              </SmallButton> */}
-              <SmallButton onClick={deleteFlashcard}>
-                Delete Card
-              </SmallButton>
-            <SmallButton onClick={renderAddCardArea}>
-              Add Card
-            </SmallButton>
+              <div className="deck-details-button-container">
+                <button className="deck-details-button" onClick={toggleDeckDetailsPage}>
+                  Deck details
+                </button>
+              </div>
+              <div className="card-buttons">
+                <button className="card-button" onClick={renderAddCardArea}>
+                  Add Card
+                </button>
+                <button className="card-button" onClick={deleteFlashcard}>
+                  Delete Card
+                </button>
+              </div>
           </div>
         </div>
 
@@ -99,9 +90,9 @@ const ReviewFlashcardsArea = (
                   difficultyLevel={cardDifficultyLevel}
                   handleDifficultyChange={handleDifficultyChange}>
                 </CardDifficultyDropDown>
-                <SmallButton onClick={submitDifficultyLevel}>
+                <button onClick={submitDifficultyLevel}>
                   Submit
-                </SmallButton>
+                </button>
               </div> }
           </div>
         } 

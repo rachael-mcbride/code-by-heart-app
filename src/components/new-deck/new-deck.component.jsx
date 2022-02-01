@@ -28,7 +28,7 @@ const NewDeck = ({ createNewDeck }) => {
         type="text"
         maxLength={18}
         placeholder="type new deck name"
-        value={formFields}
+        value={formFields.name}
         onChange={onNameChange}
       />
       <div className="submit-button">

@@ -17,17 +17,13 @@ const DeckTitle = ({ updateCurrentDeck, deckData, selected }) => {
   };
 
   // conditional styling features //  
-  // change color of number based on how many cards are up for review 
-  let inputStyle = { color: '#DC143C' };
-  if (deckData.num_cards_up_for_review === 0) {
-    inputStyle = { color: 'green' };
-  }; 
+  // change color of # based on how many cards are up for review 
+  const inputStyle = (deckData.num_cards_up_for_review === 0) ? 
+  { color: 'green' } : { color: '#DC143C' } ;
 
   // change button color depending on if this is a selected deck of not 
-  let typeOfDeckTitle = 'not-selected-deck-title';
-  if (selected) {
-    typeOfDeckTitle = 'selected-deck-title'
-  }
+  const typeOfDeckTitle = (selected) ? 
+  'selected-deck-title' : 'not-selected-deck-title';
 
   return (
     <section className={typeOfDeckTitle}>

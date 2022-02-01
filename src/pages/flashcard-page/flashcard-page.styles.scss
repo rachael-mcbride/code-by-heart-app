@@ -1,89 +1,45 @@
 .main-container {
   display: grid;
   height: 100vh;
-  margin: 25px;
+  margin: 15px;
   grid-template-columns: repeat(15, 1fr);
   grid-template-areas: 
-      "m m m c c c c c c c e e e e e";
+      "m m c c c c c c c e e e e e e";
 }
 
 .decks-list-wrapper {
-  // background-color: rgb(252, 239, 122);
   background-color: #DC143C;
-  border-radius: 10px;
   width: 230px;
   border: 1px solid black;
   grid-area: m;
   display: flex;
   flex-direction: column;
+  box-shadow: 4px 4px 2px -2px gray;
 }
 
 .review-flashcards-container {
   // background-color: rgb(250, 184, 250);
   display: flex;
   flex-direction: column;
+  // border: 1px solid black;
+  background-color: white;
+  // box-shadow: 4px 4px 2px -2px gray;
+  padding: 12px;
+  margin: 0px 10px;
   align-items: center;
   min-width: 480px;
   grid-area: c;
-
-  .select-a-deck-wrapper {
-    margin-top: 80px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 5px;
-    font-family: 'Roboto Slab', serif;
-    font-size: 25px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 10px;
-    width: 360px;
-    height: 200px;
-    background-color: white;
-    border: 1px solid black;
-    color: rgb(39, 38, 38);
-    padding: 30px;
-  }
 }
 
 .add-flashcard-container {
   // background-color: rgb(232, 237, 238);
   min-width: 380px;
+  border: 1px solid black;
+  box-shadow: 4px 4px 2px -2px gray;
   grid-area: e;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  .delete-buttons{
-    display: flex;
-    margin: 10px 10px;
-  }
-}
-
-.options-button {
-  width: 180px;
-  height: 40px;
-  letter-spacing: 0.5px;
-  line-height: 20px;
-  margin: 10px;
-  padding: 0 10px 0 10px;
-  text-transform: uppercase;
-  font-size: 15px;
-  background-color: black;
-  color: white;
-  font-family: 'Roboto Slab', serif;
-  font-size: x-small;
-  font-weight: bolder;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: white;
-    color: black;
-    border: 1px solid black;
-  }
 }
 
 button {

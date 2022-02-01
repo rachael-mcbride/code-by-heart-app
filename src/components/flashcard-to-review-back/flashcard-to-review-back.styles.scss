@@ -1,4 +1,4 @@
-.flashcard-back-revealed {
+.flashcard-back-revealed, .flashcard-back-not-revealed {
   display: flex;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -6,29 +6,14 @@
   justify-content: center;
   border-radius: 10px;
   width: 400px;
-  height: 200px;
+  height: 180px;
   border: 1px solid black;
   box-shadow: 3px 3px;
   padding: 10px;
 }
 
 .flashcard-back-not-revealed {
-  display: flex;
   cursor: pointer;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Roboto Slab', serif;
-  box-shadow: 3px 3px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 10px;
-  width: 400px;
-  height: 200px;
-  background-color: white;
-  border: 1px solid black;
-  padding: 10px;
 
   .button-in-flashcard {
     width: 350px;

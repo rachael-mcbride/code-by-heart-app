@@ -11,12 +11,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 5px;
+  margin: 10px;
   justify-content: center;
   font-family: 'Roboto Slab', serif;
   // box-shadow: 3px 3px;
   // border-radius: 10px;
-  width: 300px;
+  width: 360px;
   height: 160px;
   background-color: white;
   border: 1px solid black;
@@ -40,24 +40,73 @@
   }
 }
 
-.flashcard-front {
+// .edit-button {
+//   width: 30px;
+//   height: 28px;
+//   letter-spacing: 0.5px;
+//   line-height: 20px;
+//   padding: 0 10px 0 10px;
+//   font-size: 11.5px;
+//   background-color: black;
+//   color: white;
+//   text-transform: uppercase;
+//   font-family: 'Roboto Slab', serif;
+//   font-weight: bolder;
+//   border: none;
+//   cursor: pointer;
+
+//   &:hover {
+//     background-color: white;
+//     color: black;
+//     border: 1px solid black;
+//   }
+// }
+
+
+.flashcard-container {
   display: flex;
-  width: 300px;
-  height: 150px;
+  width: 340px;
+  height: 180px;
   flex-direction: column;
-  margin: 5px;
+  align-items: center;
+  margin: 5px 10px 5px 20px;
   background-color: white;
   border: 1px solid black;
   border-radius: 10px;
-  box-shadow: 3px 3px;
+  box-shadow: 2px 2px;
 
-  .flashcard-number {
-    margin-top: 15px;
+  .flashcard-side {
+    margin-top: 10px;
     text-transform: uppercase;
     font-weight: bolder;
   }
+
+  .edit-button {
+    // align-self: right;
+    margin-left: 240px;
+    width: 60px;
+    height: 28px;
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    padding: 0 10px 0 10px;
+    font-size: 11.5px;
+    background-color: black;
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Roboto Slab', serif;
+    font-weight: bolder;
+    border: none;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
+  }
   
   .ace-editor-in-flashcard {
+    margin-left: 10px;
     margin-top: 15px;
     margin-bottom: 20px;
   }

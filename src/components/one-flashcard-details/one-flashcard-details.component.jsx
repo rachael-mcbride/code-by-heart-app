@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import FixedAceEditor from '../ace-editor/fixed-ace-editor.component';
 import EditableAceEditor from '../ace-editor/editable-ace-editor.component';
-import CustomButton from '../custom-button/custom-button.component';
 
 import './one-flashcard-details.styles.scss'
 
@@ -78,6 +77,15 @@ const OneFlashcardDetails = ({ flashcard }) => {
     setEditButtonBackClicked(editButtonBackClicked);
   }, [editButtonBackClicked]);
 
+  const EditButton = ({ children, ...otherProps }) => (
+    <button 
+      className="edit-button" 
+      type="button"
+      {...otherProps}>
+      {children}
+    </button>
+  )
+
 
   return(
     <div className="one-flashcard-container">
@@ -90,58 +98,73 @@ const OneFlashcardDetails = ({ flashcard }) => {
         <div className="flashcard-text"> </div>
         { historyMessage && 
           <div className="flashcard-text">
-            <b>Last marked</b> <i>"{flashcard.most_recent_difficulty_level}"</i> <b>on</b>:
-          </div> }
-        { historyMessage && 
-          <div className="flashcard-text">
-            <div>{flashcard.most_recent_review_date.slice(0, 16)}</div>
+            <b>Last marked</b> <i>"{flashcard.most_recent_difficulty_level}"</i>
+            <b> on</b> {flashcard.most_recent_review_date.slice(0, 16)}
           </div> }
       </div>
 
-  {/* renders fixed or editable area based on 'editButtonFrontClicked' state */}
+    {/* renders fixed or editable area based on 'editButtonFrontClicked' state */}
       <div>
-      {editButtonFrontClicked && 
-      // <div className="flashcard-front">
-        <div>
-        <div className="flashcard-number">Front</div>
-          <div className="ace-editor-in-flashcard">
-            <EditableAceEditor 
-              placeholderText={"Click \"save\" when you are done editing."} 
-              code={newFlashcardFront}
-              language={"python"}
-              updateCode={updateCardFront}
-              height={'100px'}
-              width={'280px'}/> 
-            <CustomButton onClick={saveFlashcardFront}>Save</CustomButton>
-          </div>
-        </div>
-      }
-      {!editButtonFrontClicked && 
-        <div>
-
-        <div className="flashcard-number">Front</div>
+        { editButtonFrontClicked ? (
+          <div className="flashcard-container">
+            <div className="flashcard-side">Front</div>
+            <div className="ace-editor-in-flashcard">
+              <EditableAceEditor 
+                placeholderText={"Click \"save\" when you are done editing."} 
+                code={newFlashcardFront}
+                language={"python"}
+                updateCode={updateCardFront}
+                showLineNums={false}
+                height={'95px'}
+                width={'300px'}/> 
+              <EditButton onClick={saveFlashcardFront}>Save</EditButton>
+            </div>
+          </div>)
+          :
+          (
+          <div className="flashcard-container">
+            <div className="flashcard-side">Front</div>
             <div className="ace-editor-in-flashcard">
               <FixedAceEditor 
                 msg={newFlashcardFront} 
                 language={flashcard.language}
-                height={'100px'}
-                width={'280px'}/>
-              <CustomButton onClick={editFlashcardFront}>Edit</CustomButton>
+                height={'95px'}
+                width={'300px'}/>
+              <EditButton onClick={editFlashcardFront}>Edit</EditButton>
             </div>
-        </div>
-      }
+          </div>) }
       </div>
-    
-      <div className="flashcard-front">
-        <div className="flashcard-number">Back</div>
-        <div className="ace-editor-in-flashcard">
-          <FixedAceEditor 
-          msg={flashcard.back} 
-          language={flashcard.language}
-          height={'100px'}
-          width={'280px'}/>
-          <CustomButton onClick={editFlashcardBack}>Edit</CustomButton>
-        </div>
+
+    {/* renders fixed or editable area based on 'editButtonBackClicked' state */}
+      <div>
+        { editButtonBackClicked ? (
+          <div className="flashcard-container">
+            <div className="flashcard-side">Back</div>
+            <div className="ace-editor-in-flashcard">
+              <EditableAceEditor 
+                placeholderText={"Click \"save\" when you are done editing."} 
+                code={newFlashcardBack}
+                language={"python"}
+                updateCode={updateCardBack}
+                showLineNums={false}
+                height={'95px'}
+                width={'300px'}/> 
+              <EditButton onClick={saveFlashcardBack}>Save</EditButton>
+            </div>
+          </div>)
+          :
+          (
+          <div className="flashcard-container">
+            <div className="flashcard-side">Back</div>
+            <div className="ace-editor-in-flashcard">
+              <FixedAceEditor 
+                msg={newFlashcardBack} 
+                language={"python"}
+                height={'95px'}
+                width={'300px'}/>
+              <EditButton onClick={editFlashcardBack}>Edit</EditButton>
+            </div>
+          </div>) }
       </div>
     </div>
   )

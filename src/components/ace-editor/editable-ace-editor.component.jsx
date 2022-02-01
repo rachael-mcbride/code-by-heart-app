@@ -12,12 +12,12 @@ import 'ace-builds/src-noconflict/mode-markdown';
 import 'ace-builds/src-noconflict/mode-ruby';
 import 'ace-builds/src-noconflict/mode-golang';
 
-const EditableAceEditor = ({ languageMode, code, placeholderText, height, updateCode }) => {
+const EditableAceEditor = ({ languageMode, code, placeholderText, height, width, updateCode, showLineNums }) => {
   return (
     <AceEditor 
     style={{
       height: `${height}`,
-      width: '380px',            
+      width: `${width}`,            
       }}
     placeholder={placeholderText}
     mode={languageMode}
@@ -26,14 +26,14 @@ const EditableAceEditor = ({ languageMode, code, placeholderText, height, update
     onChange={(event) => updateCode(event)}
     fontSize={12}
     showPrintMargin={false}
-    showGutter={true}
+    showGutter={showLineNums}
     highlightActiveLine={false}
     value={code}
     setOptions={{
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: false,
         enableSnippets: true,
-        showLineNumbers: true,
+        showLineNumbers: showLineNums,
         readOnly: false,
         cursorStyle: "slim"
     }}              

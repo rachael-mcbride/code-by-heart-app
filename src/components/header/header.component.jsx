@@ -6,11 +6,9 @@ import CustomButton from '../custom-button/custom-button.component';
 import './header.styles.scss'
 
 const Header = ({ currentUser }) => {
-  // change button color depending on if this is a selected deck of not 
-  let headerSignedIn = 'not-signed-in';
-  if (currentUser) {
-    headerSignedIn = 'signed-in';
-  }
+  // change header color depending on whether user is signed in 
+  const headerSignedIn = (currentUser) ? 'signed-in' : 'not-signed-in' ;
+
   return (
   <div className="header">
     <div className={headerSignedIn}>

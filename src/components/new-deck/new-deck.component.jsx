@@ -3,24 +3,22 @@ import PropTypes from "prop-types";
 import './new-deck.styles.scss';
 
 const NewDeck = ({ createNewDeck }) => {
-  const [formFields, setFormFields] = useState({ name: "" });
+  const [formFields, setFormFields] = useState("");
 
   // this prevents user from adding a deck with no name to decks 
-  const newDeckIsEnabled = formFields.name.length > 0;
+  const newDeckIsEnabled = formFields.length > 0;
 
   const onNameChange = (event) => {
-    setFormFields({
-      name: event.target.value
-    });
+    setFormFields(event.target.value);
   };
 
   const submitNewDeck = (event) => {
     event.preventDefault();
     createNewDeck({
-      name: formFields.name
+      name: formFields
     });
     // console.log(formFields)
-    setFormFields({ name: "" }); // reset form
+    setFormFields(""); // reset form
   };
 
   return (
@@ -30,7 +28,7 @@ const NewDeck = ({ createNewDeck }) => {
         type="text"
         maxLength={18}
         placeholder="type new deck name"
-        value={formFields.name}
+        value={formFields}
         onChange={onNameChange}
       />
       <div className="submit-button">

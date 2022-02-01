@@ -17,7 +17,6 @@ const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
   const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
   const frontPlaceholder = "Front of new flashcard";
-
   const backPlaceholder = "Back of new flashcard";
 
   // useEffects // 

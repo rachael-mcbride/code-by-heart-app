@@ -3,8 +3,7 @@ import OneFlashcardDetails from '../one-flashcard-details/one-flashcard-details.
 import './flashcard-details-list.styles.scss'
 
 const FlashcardDetailsList = ({ flashcardsData }) => {
-  const flashcards = flashcardsData;
-  const flashcardList = flashcards.map((flashcard) => {
+  const flashcardList = flashcardsData.map((flashcard) => {
     return (
       <OneFlashcardDetails
         key={flashcard.id}

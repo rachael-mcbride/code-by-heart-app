@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import FixedAceEditor from '../ace-editor/fixed-ace-editor.component';
 import './flashcard-to-review-back.styles.scss'
 
-const FlashcardBack = ({ backMsg, language, cardBackReveal, revealCardAnswerFunc }) => {
+const FlashcardBack = (
+  { backMsg, language, cardBackReveal, revealCardAnswerFunc }) => {
   const [cardBack, setCardBack] = useState(null);
 
-  // update back of card's Ace editor when the backMsg changes
+  // update back of card's Ace editor component when the backMsg changes
   useEffect(() => {
     setCardBack(
     <FixedAceEditor 

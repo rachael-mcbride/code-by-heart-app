@@ -11,7 +11,7 @@ const CardDifficultyDropDown = ({ difficultyLevel, handleDifficultyChange } ) =>
     <option className="language-item" id="1">Easy</option>
     <option className="language-item" id="2">Medium</option>
     <option className="language-item" id="3">Hard</option>
-    <option className="language-item" id="4">Too hard/review again!</option>
+    <option className="language-item" id="4">Review again!</option>
   </select>
   )
 }

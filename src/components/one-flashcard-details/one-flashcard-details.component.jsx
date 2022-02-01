@@ -12,10 +12,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
   const restOfLanguage = flashcard.language.slice(1, flashcard.language.length);
   const language = firstLetterOfLanguage + restOfLanguage;
   const timesReviewed = flashcard.total_times_reviewed;
-  let historyMessage = false;
-  if (flashcard.most_recent_difficulty_level !== null) {
-    historyMessage = true;
-  } 
+  const historyMessage = (flashcard.most_recent_difficulty_level !== null);
 
   // states for editing front and/or back of flashcard
   const [newFlashcardFront, setNewFlashcardFront] = useState(flashcard.front);
@@ -77,6 +74,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
     setEditButtonBackClicked(editButtonBackClicked);
   }, [editButtonBackClicked]);
 
+  // Edit Button 
   const EditButton = ({ children, ...otherProps }) => (
     <button 
       className="edit-button" 
@@ -86,14 +84,17 @@ const OneFlashcardDetails = ({ flashcard }) => {
     </button>
   )
 
-
   return(
     <div className="one-flashcard-container">
       <div className="flashcard-details">
         <div className="flashcard-details-title">Card Details</div>
         <div className="flashcard-text"><b>Language</b>: {language}</div>
-        <div className="flashcard-text"><b>Up for review on</b>: {reviewDate}</div>
-        <div className="flashcard-text"><b>Previous times reviewed</b>: {timesReviewed}</div>
+        <div className="flashcard-text">
+          <b>Up for review on</b>: {reviewDate}
+        </div>
+        <div className="flashcard-text">
+          <b>Previous times reviewed</b>: {timesReviewed}
+        </div>
         <div className="flashcard-text"> </div>
         <div className="flashcard-text"> </div>
         { historyMessage && 

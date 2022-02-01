@@ -1,14 +1,11 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import "./decks-list.styles.scss";
 import DeckTitle from "../deck-title/deck-title.component";
 
 const DecksList = ({ decksData, updateCurrentDeck, currentDeck }) => {
   const decks = decksData;
   const myDecksList = decks.map((deck) => {
-    let selectedBool = false;
-    if (currentDeck.id === deck.id) {
-      selectedBool = true;
-    };
+    const selectedBool = (currentDeck.id === deck.id) ? true : false;
     return (
       <DeckTitle
         key={deck.id}

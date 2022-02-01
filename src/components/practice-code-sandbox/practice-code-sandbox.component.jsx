@@ -33,7 +33,7 @@ const PracticeCodeSandbox = () => {
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage);
-    setLanguageMode(language.toLowerCase());
+    setLanguageMode(newLanguage.toLowerCase());
 
     // console.log("current language:", language)
   }
@@ -70,21 +70,29 @@ const PracticeCodeSandbox = () => {
   return (
     <div className="add-flashcards-container">
       <div className="add-flashcards-header-container">
-        <h2 className="add-flashcards-title">Code Sandbox</h2>
-        <LanguageDropDown
-          language={language}
-          includesMarkdown={false}
-          handleLanguageChange={handleLanguageChange}
-        />
+        <div className="run-code-title">
+            <button onClick={runCode}>
+              Run Code
+            </button>
+        </div>
+        <div className="add-flashcards-language-dropdown">
+          <LanguageDropDown
+            language={language}
+            includesMarkdown={false}
+            handleLanguageChange={handleLanguageChange}
+          />
+        </div>
       </div>
 
       <div className="add-card-area">
           <EditableAceEditor 
             languageMode={languageMode}
+            showLineNums={true}
             code={codeInInputContainer}
             updateCode={updateInputContainer}
-            height={"450px"}
-            placeholderText="Test out your code here">
+            width={"430px"}
+            height={"485px"}
+            placeholderText="Select a language and type some code here.">
           </EditableAceEditor>
           <div className='output-wrapper'>
             <div className='output-text-container'>
@@ -92,9 +100,6 @@ const PracticeCodeSandbox = () => {
                 {codeInOutputContainer}
               </div>
             </div>
-            <CustomButton onClick={runCode}>
-              Run Code
-            </CustomButton>
           </div>
         </div>
       </div>

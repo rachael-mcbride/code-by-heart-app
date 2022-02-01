@@ -19,7 +19,8 @@ const ReviewFlashcardsArea = (
   }
 
   const handleDifficultyChange = (newLevel) => {
-    setCardDifficultyLevel(newLevel);
+    console.log(newLevel)
+    setCardDifficultyLevel(newLevel.value);
   }
 
   const submitDifficultyLevel = () => {

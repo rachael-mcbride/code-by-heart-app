@@ -36,7 +36,7 @@ const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage);
-    setLanguageMode(language.toLowerCase());
+    setLanguageMode(newLanguage.toLowerCase());
 
     // console.log("current language:", language)
   }

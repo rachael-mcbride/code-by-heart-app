@@ -4,14 +4,18 @@
   align-items: center;
 }
 
-.add-flashcards-header-container{
+.add-flashcards-header-container {
   display: flex;
   flex-direction: column;
   align-items:center;
+  height: 80px;
 }
 
 .add-card-area {
-  border: 1px solid black;
+  // border: 1px solid black;
+  // border-radius: 25px;
+  background-color: black;
+  padding: 10px;
 }
 
 .output-wrapper {

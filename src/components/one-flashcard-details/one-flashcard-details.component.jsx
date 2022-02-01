@@ -98,7 +98,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
         <div className="flashcard-text"> </div>
         { historyMessage && 
           <div className="flashcard-text">
-            <b>Last marked</b> <i>"{flashcard.most_recent_difficulty_level}"</i>
+            <b>Last marked</b> "{flashcard.most_recent_difficulty_level}"
             <b> on</b> {flashcard.most_recent_review_date.slice(0, 16)}
           </div> }
       </div>

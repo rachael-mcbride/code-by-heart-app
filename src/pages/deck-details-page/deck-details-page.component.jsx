@@ -33,14 +33,20 @@ const DeckDetailsPage = (
   return (
     <div className="deck-details-page">
       <div className="deck-info">
-        <div>Deck name: {deckName}</div>
-        <div>Number of total cards in this deck: {totalCardNum}</div>
-        <div>Number of cards up for review: {cardsUpForReview}</div>
-      </div>
-      <div className="return-button">
-        <button onClick={toggleDeckDetailsPage}>
-          Return to Review Session
-        </button>
+        <div className="deck-title">{deckName}</div>
+        <div className="number-info">
+          <div className="total-card-num">
+            Total cards:<b>{totalCardNum}</b>
+          </div>
+          <div className="up-for-review-num">
+            Cards up for review: <b>{cardsUpForReview}</b>
+          </div>
+        </div>
+        <div className="return-button">
+          <button onClick={toggleDeckDetailsPage}>
+            Return to Review Session
+          </button>
+        </div>
       </div>
       { flashcardsData && 
       <div className="flashcards-list">

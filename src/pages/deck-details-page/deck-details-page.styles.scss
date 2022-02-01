@@ -1,12 +1,70 @@
 .deck-details-page {
   display: flex;
   flex-direction: column;
+  margin-top: 25px;
   align-items: center;
 
   .deck-info {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
+    width: 1085px;
+    background-color: #DC143C;
+    border: 1px solid black;
+
+    .deck-title {
+      font-size: 35px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      background-color: white;
+      border: 2px solid black;
+      padding: 10px 30px 10px 30px;
+    }
+
+    .number-info {
+      display: flex;
+      align-items: space-around;
+    }
+
+    .total-card-num {
+      font-size: 15px;
+      margin-bottom: 5px;
+      background-color: white;
+      padding: 5px;
+      border: 1px solid black;
+      width: 200px;
+      display: flex;
+      margin-right: 5px;
+      justify-content: center;
+      b {
+        margin-left: 5px;
+      }
+    }
+
+    .up-for-review-num {
+      font-size: 15px;
+      margin-bottom: 5px;
+      background-color: white;
+      padding: 5px;
+      margin-left: 5px;
+      border: 1px solid black;
+      width: 200px;
+      display: flex;
+      justify-content: center;
+      b {
+        margin-left: 5px;
+      }
+    }
+
+    b {
+      color: #DC143C;
+    }
+  }
+
+  .return-button {
+    margin-top: 10px;
   }
 
   .flashcards-list {
@@ -16,8 +74,8 @@
   }
 
   button {
-    width: 200px;
-    height: 28px;
+    width: 230px;
+    height: 30px;
     letter-spacing: 0.5px;
     line-height: 20px;
     padding: 0 10px 0 10px;

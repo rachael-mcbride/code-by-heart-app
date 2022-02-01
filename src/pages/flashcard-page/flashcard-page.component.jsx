@@ -29,18 +29,14 @@ const FlashcardPage = ( {currentUser} ) => {
   const [currentUpForReviewCardsInDeck, setCurrentUpForReviewCardsInDeck] = 
   useState(currentDeck.num_cards_up_for_review);
 
-  // conditional rendering methods // 
+  // Conditional rendering methods // 
   const toggleDeckDetailsPage = () => {
-    if (deckDetailsButtonClicked) {
-      setDeckDetailsButtonClicked(false);
-    } else {
-      setDeckDetailsButtonClicked(true);
-    }
+    setDeckDetailsButtonClicked(!deckDetailsButtonClicked);
   };
 
   const renderAddCardArea = () => {
     setAddNewCardAreaRenders(true);
-  }
+  };
 
   // Deck methods // 
   const loadDecks = () => {
@@ -94,13 +90,10 @@ const FlashcardPage = ( {currentUser} ) => {
           (deck) => deck.id !== currentDeck.id
         );
         setCurrentDeck({
-          id: null,
-          ownerId: "",
-          name: "",
-          numTotalCards: 0,
-          numCardsUpForReview: 0
-        })
+          id: null, ownerId: "", name: "", numTotalCards: 0, 
+          numCardsUpForReview: 0 })
         setDecksData(updatedDecksData);
+        toggleDeckDetailsPage();
       })
       .catch((error) => {
         console.log(error);
@@ -232,6 +225,7 @@ const FlashcardPage = ( {currentUser} ) => {
         deckName={currentDeck.name}
         totalCardNum={currentDeck.num_total_cards}
         cardsUpForReview={currentDeck.num_cards_up_for_review}
+        deleteDeck={deleteDeck}
         toggleDeckDetailsPage={toggleDeckDetailsPage} />
       </div>)
       : 
@@ -252,7 +246,6 @@ const FlashcardPage = ( {currentUser} ) => {
             currentDeck={currentDeck} 
             currentCard={currentCard}
             toggleDeckDetailsPage={toggleDeckDetailsPage}
-            deleteDeck={deleteDeck}
             renderAddCardArea={renderAddCardArea}
             decrementUpForReviewCards={decrementUpForReviewCards}
             moveToNextCard={moveToNextCard}

@@ -8,7 +8,8 @@ import FlashcardDetailsList from '../../components/flashcard-details-list/flashc
 import './deck-details-page.styles.scss';
 
 const DeckDetailsPage = (
-  { deckId, deckName, totalCardNum, toggleDeckDetailsPage, cardsUpForReview }
+  { deckId, deckName, totalCardNum, toggleDeckDetailsPage, 
+  cardsUpForReview, deleteDeck }
   ) => {
   const [flashcardsData, setFlashcardsData] = useState(null);
 
@@ -52,6 +53,12 @@ const DeckDetailsPage = (
       <div className="flashcards-list">
         <FlashcardDetailsList flashcardsData={flashcardsData} />
       </div> }
+
+      <div className="delete-deck">
+        <button onClick={deleteDeck}>
+          Delete Deck
+        </button>
+      </div>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import CardDifficultyDropDown from "../card-difficulty-drop-down/card-difficulty
 import "./review-flashcards-area.styles.scss";
 
 const ReviewFlashcardsArea = (
-  { currentCard, currentDeck, deleteDeck, deleteFlashcard, moveToNextCard, 
+  { currentCard, currentDeck, deleteFlashcard, moveToNextCard, 
     renderAddCardArea, toggleDeckDetailsPage, decrementUpForReviewCards }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
@@ -68,14 +68,12 @@ const ReviewFlashcardsArea = (
               <SmallButton onClick={toggleDeckDetailsPage}>
                 Deck details
               </SmallButton>
-            <div className="delete-buttons">
-              <SmallButton onClick={deleteDeck}>
+              {/* <SmallButton onClick={deleteDeck}>
                 Delete Deck
-              </SmallButton>
+              </SmallButton> */}
               <SmallButton onClick={deleteFlashcard}>
                 Delete Card
               </SmallButton>
-            </div>
             <SmallButton onClick={renderAddCardArea}>
               Add Card
             </SmallButton>

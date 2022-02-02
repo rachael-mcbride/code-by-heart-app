@@ -7,7 +7,7 @@ import CardDifficultyDropDown from "../card-difficulty-drop-down/card-difficulty
 
 import "./review-flashcards-area.styles.scss";
 
-const ReviewFlashcardsArea = (
+const ReviewFlashcardsArea = ( 
   { currentCard, currentDeck, deleteFlashcard, moveToNextCard, 
     renderAddCardArea, toggleDeckDetailsPage, decrementUpForReviewCards }
   ) => {

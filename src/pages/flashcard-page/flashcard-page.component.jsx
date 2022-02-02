@@ -208,7 +208,7 @@ const FlashcardPage = ( {currentUser} ) => {
   // rather than the "add flashcard area"
   useEffect(() => {
     setCurrentCard(currentCard);
-    // setAddNewCardAreaRenders(false);
+    setAddNewCardAreaRenders(false);
   }, [currentCard]); 
 
   // ensure current deck always up-to-date (like after selecting new deck) 

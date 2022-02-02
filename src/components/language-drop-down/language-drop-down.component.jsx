@@ -40,7 +40,7 @@ const languageStyles = {
   }),
   control: () => ({
     // none of react-select's styles are passed to <Control />
-    width: 80,
+    width: 100,
     fontSize: 14,
     fontFamily: 'Roboto Slab', 
     color: '#DC143C',

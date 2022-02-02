@@ -50,7 +50,7 @@ const DeckDetailsPage = (
         </div>
       </div>
       { flashcardsData && 
-      <div className="deck-details-page">
+      <div className="flashcard-details-area">
         <div className="flashcards-list">
           <FlashcardDetailsList flashcardsData={flashcardsData} />
         </div> 

@@ -52,16 +52,19 @@
   .output-text-container {
       display: flex;
       align-items: center;
+      justify-content: center;
       background-color: black;
+      width: 415px;
       font-size: 12px;
       color: white;
   }
 
   .output-text {
     display: flex;
+    align-items: center;
+    max-width: 420px;
     color: white;
     background-color: black;
-    // margin: 20px;
     font-size: small;
     font-family: 'Roboto Slab', serif;
   }

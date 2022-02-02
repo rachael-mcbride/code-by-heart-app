@@ -90,6 +90,11 @@
     }
   }
 
+  .flashcard-details-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .flashcards-list {
     display: flex;

@@ -143,6 +143,10 @@ const FlashcardPage = ( {currentUser} ) => {
       });
   };
 
+  const cancelAddingNewCard = () => {
+    setAddNewCardAreaRenders(false);
+  };
+
   const deleteFlashcard = () => {
     axios
       .delete(`http://127.0.0.1:5000/flashcards/${currentCard.id}`)
@@ -204,7 +208,7 @@ const FlashcardPage = ( {currentUser} ) => {
   // rather than the "add flashcard area"
   useEffect(() => {
     setCurrentCard(currentCard);
-    setAddNewCardAreaRenders(false);
+    // setAddNewCardAreaRenders(false);
   }, [currentCard]); 
 
   // ensure current deck always up-to-date (like after selecting new deck) 
@@ -264,6 +268,7 @@ const FlashcardPage = ( {currentUser} ) => {
         { addNewCardAreaRenders ? 
           (<AddFlashcardArea 
             currentDeckId={currentDeck.id}
+            cancelAddingNewCard={cancelAddingNewCard}
             createNewFlashcard={createNewFlashcard}>
           </AddFlashcardArea>) : 
           (<PracticeCodeSandbox></PracticeCodeSandbox>) 

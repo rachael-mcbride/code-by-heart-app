@@ -12,7 +12,7 @@ import './practice-code-sandbox.styles.scss'
 const PracticeCodeSandbox = () => {
   const [codeInInputContainer, setCodeInIntputContainer] = useState(null);
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
-  const [language, setLanguage] = useState("python");
+  const [language, setLanguage] = useState("not selected");
   const [languageMode, setLanguageMode] = useState("python");
   const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
@@ -44,7 +44,7 @@ const PracticeCodeSandbox = () => {
 
   // func that will call the Jdoodle code compiler // 
   const runCode = () => {
-    if (language.toLowerCase() === "markdown") {
+    if (language.toLowerCase() === "not selected") {
       setCodeInOutputContainer("Make sure you've selected a programming language.")
     } else {
       const compileData = {"code" : codeInInputContainer, "language" : language.toLowerCase()}
@@ -71,9 +71,9 @@ const PracticeCodeSandbox = () => {
     <div className="add-flashcards-container">
       <div className="add-flashcards-header-container">
         <div className="run-code-title">
-            <button onClick={runCode}>
-              Run Code
-            </button>
+          <button className="run-code-button" onClick={runCode}>
+            Run Code
+          </button>
         </div>
         <div className="add-flashcards-language-dropdown">
           <LanguageDropDown

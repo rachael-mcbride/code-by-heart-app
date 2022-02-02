@@ -1,3 +1,9 @@
+.add-flashcards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .add-flashcards-header-container {
   display: flex;
   justify-content: center;
@@ -34,6 +40,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: black;
+  padding: 10px;
 }
 
 // .output-wrapper {

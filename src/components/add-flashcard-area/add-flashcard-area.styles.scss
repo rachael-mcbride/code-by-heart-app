@@ -6,14 +6,40 @@
 
 .add-flashcards-header-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  font-size: 40px;
+  width: 448px;
+  height: 53px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 5px 0px 5px 0px;
+  // margin-left: 10px;
+  display: flex;
   align-items:center;
-  height: 80px;
+  flex-direction: row;
+  // border: 1px solid black;
+  
+    .add-flashcards-language-dropdown {
+      margin-left: 150px;
+    }
+    .run-code-title {
+      // align-self: flex-end;
+      margin-right: 80px;
+      margin-top: 20px;
+      // margin-bottom: 10px;
+      color: white;
+      // border: 1px solid black;
+      padding: 5px 18px 5px 18px;
+      // border-radius: 25px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
 }
 
 .add-card-area {
-  // border: 1px solid black;
-  // border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: black;
   padding: 10px;
 }
@@ -21,23 +47,29 @@
 .output-wrapper {
   display: flex;
   justify-content: space-between;
-  width: 380px;
-  height: 50px;
-  border: 2px;
-  background-color: rgb(36, 43, 43);
+  background-color: black;
 
   .output-text-container {
-    display: flex;
-    align-items: center;
+      display: flex;
+      align-items: center;
+      background-color: black;
+      font-size: 12px;
+      color: white;
   }
 
   .output-text {
     display: flex;
-    color: rgb(238, 237, 237);
-    margin: 20px;
+    color: white;
+    background-color: black;
+    // margin: 20px;
     font-size: small;
     font-family: 'Roboto Slab', serif;
   }
+}
+
+.divider {
+  height: 10px;
+  background-color: black;
 }
 
 // .language-drop-down {
@@ -54,26 +86,31 @@
 //   }
 // }
 
-button {
-    width: 130px;
-    height: 40px;
-    letter-spacing: 0.5px;
-    line-height: 20px;
-    margin: 10px;
-    padding: 0 10px 0 10px;
-    font-size: 15px;
-    background-color: black;
-    color: white;
-    text-transform: uppercase;
-    font-family: 'Roboto Slab', serif;
-    font-size: small;
-    font-weight: bolder;
-    border: none;
-    cursor: pointer;
-  
-    &:hover {
-      background-color: white;
-      color: black;
-      border: 1px solid black;
-    }
+.capitalized-button, .run-code-button {
+  width: 170px;
+  height: 35px;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+  margin: 12px;
+  border-radius: 25px;
+  padding: 0 10px 0 10px;
+  font-size: 11px;
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Roboto Slab', serif;
+  font-weight: bolder;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+  }
+}
+
+.run-code-button {
+  width: 110px;
+  font-size: 12px;
 }

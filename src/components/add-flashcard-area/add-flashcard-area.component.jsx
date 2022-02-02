@@ -8,11 +8,11 @@ import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
 
 import './add-flashcard-area.styles.scss'
 
-const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
+const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeckId }) => {
   const [newFlashcardFront, setNewFlashcardFront] = useState(null);
   const [newFlashcardBack, setNewFlashcardBack] = useState("");
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
-  const [language, setLanguage] = useState("markdown");
+  const [language, setLanguage] = useState("not selected");
   const [languageMode, setLanguageMode] = useState("markdown");
   const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
@@ -51,7 +51,7 @@ const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
 
   // func that will call the Jdoodle code compiler // 
   const runCode = () => {
-    if (language.toLowerCase() === "markdown") {
+    if (language.toLowerCase() === "markdown" || language === "not selected") {
       setCodeInOutputContainer("Make sure you've selected a programming language.")
     } else {
       const compileData = {"code" : newFlashcardFront, "language" : language.toLowerCase()}
@@ -78,12 +78,15 @@ const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
   const submitNewCard = (event) => {
     event.preventDefault();
     if (newFlashcardFront.length === 0 || newFlashcardBack.length === 0) {
-      setCodeInOutputContainer("Alert -- make sure your card contains a front and back!");
+      setCodeInOutputContainer("Make sure your card contains a front and back!");
+    } else if (language === "not selected") {
+      setCodeInOutputContainer("Make sure you've selected a language!");
     } else {
       const newData = { "front": newFlashcardFront, 
                         "back": newFlashcardBack, 
                         "language" : language.toLowerCase() }
         createNewFlashcard(newData);
+        console.log("language:", language)
         // tell user the card addition went through + clean up 
         setCodeInOutputContainer("Your card was successfully added.")
         setNewFlashcardFront("");
@@ -91,33 +94,42 @@ const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
     }
   };
 
-  const OptionsButton = ({ children, ...otherProps }) => (
-    <button 
-      className="options-button" 
-      type="button"
-      {...otherProps}>
-      {children}
-    </button>
-  )
-
   return (
     <div className="add-flashcards-container">
       <div className="add-flashcards-header-container">
-        <h2 className="add-flashcards-title">Add New Flashcard</h2>
-        <LanguageDropDown
-          language={language}
-          includesMarkdown={true}
-          handleLanguageChange={handleLanguageChange}
-        />
+        <div className="run-code-title">
+          <button className="run-code-button" onClick={runCode}>
+            Run Code
+          </button>
+        </div>
+        <div className="add-flashcards-language-dropdown">
+          <LanguageDropDown 
+            language={language}
+            includesMarkdown={true}
+            handleLanguageChange={handleLanguageChange}
+          />
+        </div>
       </div>
 
       <div className="add-card-area">
           <EditableAceEditor 
             languageMode={languageMode}
             code={newFlashcardFront}
+            showLineNums={true}
             updateCode={updateCardFront}
-            height={"200px"}
+            height={"210px"}
+            width={"430px"}
             placeholderText={frontPlaceholder}>
+          </EditableAceEditor>
+          <div className="divider"></div>
+          <EditableAceEditor 
+            languageMode={languageMode}
+            showLineNums={true}
+            code={newFlashcardBack}
+            updateCode={updateCardBack}
+            height={"210px"}
+            width={"430px"}
+            placeholderText={backPlaceholder}>
           </EditableAceEditor>
           <div className='output-wrapper'>
             <div className='output-text-container'>
@@ -125,25 +137,17 @@ const AddFlashCardArea = ({ createNewFlashcard, currentDeckId }) => {
                 {codeInOutputContainer}
               </div>
             </div>
-            <CustomButton onClick={runCode}>
-              Run Code
-            </CustomButton>
           </div>
-          <div>
-          <EditableAceEditor 
-            languageMode={languageMode}
-            code={newFlashcardBack}
-            updateCode={updateCardBack}
-            height={"200px"}
-            placeholderText={backPlaceholder}>
-          </EditableAceEditor>
-        </div>
       </div>
       {currentDeckId && // only render button if a deck has been selected
-        <OptionsButton 
-          onClick={submitNewCard}>
+        <div className="submit-or-cancel-buttons">
+          <button className="capitalized-button" onClick={submitNewCard}>
             Submit Card
-        </OptionsButton>}
+          </button>
+          <button className="capitalized-button" onClick={cancelAddingNewCard}>
+            Finish adding cards
+          </button>
+        </div>}
     </div>
   )
 }

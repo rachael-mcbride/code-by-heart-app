@@ -12,20 +12,21 @@ const ReviewFlashcardsArea = (
     renderAddCardArea, toggleDeckDetailsPage, decrementUpForReviewCards }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
-  const [cardDifficultyLevel, setCardDifficultyLevel] = useState("Very Easy");
+  // const [cardDifficultyLevel, setCardDifficultyLevel] = useState("Very Easy");
 
   const revealCardAnswerFunc = (event) => {
     setCardBackReveal(true);
   }
 
-  const handleDifficultyChange = (newLevel) => {
-    console.log(newLevel)
-    setCardDifficultyLevel(newLevel.value);
-  }
+  // const handleDifficultyChange = (newLevel) => {
+  //   console.log(newLevel)
+  //   setCardDifficultyLevel(newLevel.value);
+  // }
 
-  const submitDifficultyLevel = () => {
+  const submitDifficultyLevel = (level) => {
+    // console.log("this is the level:", level)
     console.log("card pre-click:", currentCard)
-    const difficultyData = { "difficultyString" : cardDifficultyLevel }
+    const difficultyData = { "difficultyString" : level }
     axios
       .put(`http://127.0.0.1:5000/flashcards/${currentCard.id}`, difficultyData)
       .then((response) => {
@@ -62,11 +63,11 @@ const ReviewFlashcardsArea = (
                 </button>
               </div>
               <div className="card-buttons">
-                <button className="card-button" onClick={renderAddCardArea}>
-                  Add Card
-                </button>
                 <button className="card-button" onClick={deleteFlashcard}>
                   Delete Card
+                </button>
+                <button className="card-button" onClick={renderAddCardArea}>
+                  Add Cards
                 </button>
               </div>
           </div>
@@ -93,23 +94,23 @@ const ReviewFlashcardsArea = (
               //   </CardDifficultyDropDown>
               <div className="difficulty-buttons">
                 <button className="difficulty-button-very-easy" 
-                  onClick={submitDifficultyLevel}>
+                  onClick={() => submitDifficultyLevel('Very Easy')}>
                   Very Easy
                 </button>
                 <button className="difficulty-button"
-                  onClick={submitDifficultyLevel}>
+                  onClick={() => submitDifficultyLevel('Easy')}>
                   Easy
                 </button>
                 <button className="difficulty-button"
-                  onClick={submitDifficultyLevel}>
+                  onClick={() => submitDifficultyLevel('Medium')}>
                   Medium
                 </button>
                 <button className="difficulty-button"
-                  onClick={submitDifficultyLevel}>
+                  onClick={() => submitDifficultyLevel('Hard')}>
                   Hard
                 </button>
                 <button className="difficulty-button"
-                  onClick={submitDifficultyLevel}>
+                  onClick={() => submitDifficultyLevel('Review again!')}>
                   Again!
                 </button>
               </div> }

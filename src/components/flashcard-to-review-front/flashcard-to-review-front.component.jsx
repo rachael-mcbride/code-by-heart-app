@@ -9,8 +9,8 @@ const FlashcardFront = ({ frontMsg, language }) => {
           <FixedAceEditor
           msg={frontMsg} 
           language={language}
-          height={'250px'}
-          width={'380px'}/>
+          height={'230px'}
+          width={'360px'}/>
       </div>
     </div>
   );

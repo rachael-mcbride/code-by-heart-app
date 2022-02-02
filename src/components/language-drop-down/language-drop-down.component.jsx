@@ -1,5 +1,5 @@
 // import React from 'react';
-// import './language-drop-down.styles.scss'
+import './language-drop-down.styles.scss'
 
 // const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) => {
 //   if (includesMarkdown) {
@@ -36,6 +36,7 @@ const languageStyles = {
     color: state.isSelected ? '#DC143C' : 'black',
     fontSize: 14,
     padding: 10,
+    // loadingMessage=false
   }),
   control: () => ({
     // none of react-select's styles are passed to <Control />
@@ -71,7 +72,10 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
   return (
     <div className="lang-drop-down">
       <Select 
+        className="Select-input"
         menuPlacement = {"top"}
+        loadingMessage={false}
+        inputId={"search"}
         defaultValue={"python"}
         menuPlacement="auto"
         onChange={setSelectedOption}

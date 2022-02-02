@@ -86,13 +86,31 @@ const ReviewFlashcardsArea = (
                 revealCardAnswerFunc={revealCardAnswerFunc}>
               </FlashcardBack>
               { cardBackReveal && 
-              <div className="card-difficulty-submission-features">
-                <CardDifficultyDropDown 
-                  difficultyLevel={cardDifficultyLevel}
-                  handleDifficultyChange={handleDifficultyChange}>
-                </CardDifficultyDropDown>
-                <button onClick={submitDifficultyLevel}>
-                  Submit
+              // <div className="card-difficulty-submission-features">
+              //   <CardDifficultyDropDown 
+              //     difficultyLevel={cardDifficultyLevel}
+              //     handleDifficultyChange={handleDifficultyChange}>
+              //   </CardDifficultyDropDown>
+              <div className="difficulty-buttons">
+                <button className="difficulty-button-very-easy" 
+                  onClick={submitDifficultyLevel}>
+                  Very Easy
+                </button>
+                <button className="difficulty-button"
+                  onClick={submitDifficultyLevel}>
+                  Easy
+                </button>
+                <button className="difficulty-button"
+                  onClick={submitDifficultyLevel}>
+                  Medium
+                </button>
+                <button className="difficulty-button"
+                  onClick={submitDifficultyLevel}>
+                  Hard
+                </button>
+                <button className="difficulty-button"
+                  onClick={submitDifficultyLevel}>
+                  Again!
                 </button>
               </div> }
           </div>

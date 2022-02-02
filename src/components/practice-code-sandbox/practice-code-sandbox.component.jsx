@@ -94,11 +94,9 @@ const PracticeCodeSandbox = () => {
             height={"485px"}
             placeholderText="Select a language and type some code here.">
           </EditableAceEditor>
-          <div className='output-wrapper'>
-            <div className='output-text-container'>
-              <div className='output-text'>
-                {codeInOutputContainer}
-              </div>
+          <div className='output-text-container'>
+            <div className='output-text'>
+              {codeInOutputContainer}
             </div>
           </div>
         </div>

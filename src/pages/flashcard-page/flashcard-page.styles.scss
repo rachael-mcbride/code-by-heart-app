@@ -2,7 +2,7 @@
   display: grid;
   height: 100vh;
   margin: 15px;
-  margin-bottom: 35px;
+  // margin-bottom: 35px;
   grid-template-columns: repeat(15, 1fr);
   grid-template-areas: 
       "m m m m m c c c c c e e e e e";
@@ -12,13 +12,13 @@
   background-color: #DC143C;
   min-width: 230px;
   margin-left: 10px;
-  margin-top: 10px;
+  // margin-top: 12px;
   border: 1px solid black;
   grid-area: m;
   display: flex;
   flex-direction: column;
   box-shadow: 4px 4px 2px -2px gray;
-  margin-bottom: 15px;
+  // margin-bottom: 15px;
 }
 
 .review-flashcards-container {
@@ -30,7 +30,7 @@
   // border: 1px solid black;
   background-color: white;
   // box-shadow: 4px 4px 2px -2px gray;
-  padding: 12px;
+  // padding: 12px;
   margin: 0px 10px;
   align-items: center;
   grid-area: c;

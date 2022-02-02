@@ -13,8 +13,8 @@ const FlashcardBack = (
     <FixedAceEditor 
       msg={backMsg} 
       language={language} 
-      height={'200px'} 
-      width={'380px'}/>)
+      height={'230px'} 
+      width={'360px'}/>)
   }, [backMsg]);
     
   if (cardBackReveal === true) {

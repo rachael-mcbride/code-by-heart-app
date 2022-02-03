@@ -6,11 +6,22 @@ import EditableAceEditor from '../ace-editor/editable-ace-editor.component';
 import './one-flashcard-details.styles.scss'
 
 const OneFlashcardDetails = ({ flashcard }) => {
-  // attributes to display in "card details" box 
-  const reviewDate = flashcard.date_to_review.slice(0, 22);
+  // formats the language attribute that gets displayed in "card details" box 
   const firstLetterOfLanguage = flashcard.language.slice(0, 1).toUpperCase();
   const restOfLanguage = flashcard.language.slice(1, flashcard.language.length);
-  const language = firstLetterOfLanguage + restOfLanguage;
+  let language = firstLetterOfLanguage + restOfLanguage;
+  const specialLangCases = {
+    "Nodejs" : "JavaScript",
+    "Csharp" : "C#",
+    "Objc" : "Objective C",
+    "Php" : "PHP"
+  }
+  if (language in specialLangCases) {
+    language = specialLangCases[language]
+  }
+
+  // other attributes to display in "card details" box 
+  const reviewDate = flashcard.date_to_review.slice(0, 22);
   const timesReviewed = flashcard.total_times_reviewed;
   const historyMessage = (flashcard.most_recent_difficulty_level !== null);
 

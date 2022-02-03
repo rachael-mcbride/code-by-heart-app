@@ -227,8 +227,6 @@ const FlashcardPage = ( {currentUser} ) => {
       <DeckDetailsPage 
         deckId={currentDeck.id} 
         deckName={currentDeck.name}
-        totalCardNum={currentDeck.num_total_cards}
-        cardsUpForReview={currentDeck.num_cards_up_for_review}
         deleteDeck={deleteDeck}
         toggleDeckDetailsPage={toggleDeckDetailsPage} />
       </div>)

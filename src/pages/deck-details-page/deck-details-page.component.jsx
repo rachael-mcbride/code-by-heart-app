@@ -7,13 +7,12 @@ import FlashcardDetailsList from '../../components/flashcard-details-list/flashc
 
 import './deck-details-page.styles.scss';
 
-const DeckDetailsPage = (
-  { deckId, deckName, totalCardNum, toggleDeckDetailsPage, 
-  cardsUpForReview, deleteDeck }
-  ) => {
+const DeckDetailsPage = ({ deckId, deckName, toggleDeckDetailsPage, deleteDeck }) => {
   const [flashcardsData, setFlashcardsData] = useState(null);
+  const [totalCardNum, setTotalCardNum] = useState(0);
+  const [cardsUpForReviewNum, setCardsUpForReviewNum] = useState(0);
 
-  // load flashcards when component first mounts
+  // load flashcards and numerical data when component first mounts
   useEffect(() => {
     const loadFlashcards = () => {
     axios
@@ -21,8 +20,20 @@ const DeckDetailsPage = (
         `http://127.0.0.1:5000/decks/${deckId}/flashcards`
       )
       .then((response) => {
-        setFlashcardsData(response.data);
-        // console.log("response details:", response.data);
+        const flashcards = response.data;
+        setFlashcardsData(flashcards);
+        setTotalCardNum(flashcards.length);
+
+        // calculate which cards are currently up for review
+        let totalCardsUpForReview = 0;
+        let rightNow = new Date();
+        for (let i = 0; i < flashcards.length; i++) {
+          let cardReviewDate = new Date(flashcards[i].date_to_review);
+          if (cardReviewDate < rightNow) {
+            totalCardsUpForReview++
+          };
+        };
+        setCardsUpForReviewNum(totalCardsUpForReview)
       })
       .catch((error) => {
         console.log(error);
@@ -30,6 +41,10 @@ const DeckDetailsPage = (
     };
     loadFlashcards();
   }, []);
+
+  useEffect(() => {
+    setCardsUpForReviewNum(cardsUpForReviewNum)
+  }, [cardsUpForReviewNum])
 
   return (
     <div className="deck-details-page">
@@ -40,7 +55,7 @@ const DeckDetailsPage = (
             Total cards:<b>{totalCardNum}</b>
           </div>
           <div className="up-for-review-num">
-            Cards up for review: <b>{cardsUpForReview}</b>
+            Cards up for review: <b>{cardsUpForReviewNum}</b>
           </div>
         </div>
         <div className="return-button">

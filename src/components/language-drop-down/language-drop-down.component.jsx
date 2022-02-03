@@ -31,30 +31,30 @@ import './language-drop-down.styles.scss'
 import React, { useState, useEffect } from 'react';
 import Select from 'react-select';
 
-const languageStyles = {
-  option: (state) => ({
-    color: state.isSelected ? '#DC143C' : 'black',
-    fontSize: 14,
-    padding: 10,
-    // loadingMessage=false
-  }),
-  control: () => ({
-    // none of react-select's styles are passed to <Control />
-    width: 100,
-    fontSize: 14,
-    fontFamily: 'Roboto Slab', 
-    color: '#DC143C',
-  }),
-  singleValue: (provided, state) => {
-    // const opacity = state.isDisabled ? 0.5 : 1;
-    // const transition = 'opacity 300ms';
-
-    return;
-  }
-};
-
 const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) => {
   const [selectedOption, setSelectedOption] = useState({value: 'python', label: 'Python'});
+
+  const languageStyles = {
+    option: (state) => ({
+      color: state.isSelected ? '#DC143C' : 'black',
+      fontSize: 14,
+      padding: 10,
+      // loadingMessage=false
+    }),
+    control: () => ({
+      // none of react-select's styles are passed to <Control />
+      width: 100,
+      fontSize: 14,
+      fontFamily: 'Roboto Slab', 
+      color: '#DC143C',
+    }),
+    singleValue: (provided, state) => {
+      // const opacity = state.isDisabled ? 0.5 : 1;
+      // const transition = 'opacity 300ms';
+
+      return;
+    }
+  };
 
   const options = [
   { value: 'python', label: 'Python' },
@@ -62,7 +62,7 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
   { value: 'ruby', label: 'Ruby' }, 
   ];
   if (includesMarkdown) {
-    options.push({ value: 'markdown', label: 'Markdown' })
+    options.unshift({ value: 'markdown', label: 'Markdown' })
   }
 
   useEffect(() => {

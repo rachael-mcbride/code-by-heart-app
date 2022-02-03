@@ -30,7 +30,7 @@ const LandingPage = () => (
             <a href="https://leetcode.com/discuss/general-discussion/1124635/how-to-leetcode-what-i-learned-from-a-year-of-leetcoding-challenge-problems" target="_blank">
               How Spaced Repetition Can Help with Prepping for Leetcode-Style Interviews More Broadly
             </a>
-            <a>One more link here - test</a>
+            <a>One more link here - test test</a>
           </div>
         </div>
       </div>

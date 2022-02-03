@@ -13,8 +13,10 @@ const PracticeCodeSandbox = () => {
   const [codeInInputContainer, setCodeInIntputContainer] = useState(null);
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
   const [language, setLanguage] = useState("not selected");
-  const [languageMode, setLanguageMode] = useState("python");
-  const [indentUnitInfo, setindentUnitInfo] = useState(4);
+  // const [tabSize, setTabSize] = useState(4);
+  // const [languageMode, setLanguageMode] = useState("python");
+
+  // const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
   // useEffects // 
   // make sure language is always up-to-date
@@ -24,18 +26,15 @@ const PracticeCodeSandbox = () => {
   }, [language]); 
 
   // make sure indent is always up-to-date
-  useEffect(() => {
-    (language.toLowerCase() === 'python') ?
-      setindentUnitInfo(4) : setindentUnitInfo(2)
-    console.log("current indent:", indentUnitInfo)
-  }, [language, indentUnitInfo]); 
+  // useEffect(() => {
+  //   (language.toLowerCase() === 'python') ?
+  //     setTabSize(4) : setTabSize(2)
+  //     console.log("current tabSize:", tabSize)
+  // }, [language, tabSize]); 
 
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage);
-    setLanguageMode(newLanguage.toLowerCase());
-
-    // console.log("current language:", language)
   }
 
   const updateInputContainer = (event) => {
@@ -86,7 +85,7 @@ const PracticeCodeSandbox = () => {
 
       <div className="add-card-area">
           <EditableAceEditor 
-            languageMode={languageMode}
+            language={language}
             showLineNums={true}
             code={codeInInputContainer}
             updateCode={updateInputContainer}

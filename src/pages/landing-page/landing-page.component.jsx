@@ -28,7 +28,7 @@ const LandingPage = () => (
               How Spaced Repetition Helped Another Developer Prep for a Google Interview
             </a>
             <a href="https://leetcode.com/discuss/general-discussion/1124635/how-to-leetcode-what-i-learned-from-a-year-of-leetcoding-challenge-problems" target="_blank">
-              How Spaced Repetition Can Help with Leetcode-Style Interviews More Broadly
+              How Spaced Repetition Can Help with Prepping for Leetcode-Style Interviews More Broadly
             </a>
             <a>One more link here</a>
           </div>

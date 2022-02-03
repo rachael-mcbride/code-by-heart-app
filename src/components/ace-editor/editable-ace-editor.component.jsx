@@ -12,23 +12,28 @@ import 'ace-builds/src-noconflict/mode-markdown';
 import 'ace-builds/src-noconflict/mode-ruby';
 import 'ace-builds/src-noconflict/mode-golang';
 
-const EditableAceEditor = ({ languageMode, code, placeholderText, height, width, updateCode, showLineNums }) => {
+const EditableAceEditor = ({ language, code, placeholderText, height, 
+                              width, updateCode, showLineNums }) => {
+  
+  const tabSize = (language === "python" || language === "markdown") ? 4 : 2;
+
   return (
     <AceEditor 
     style={{
       height: `${height}`,
       width: `${width}`,            
       }}
-    placeholder={placeholderText}
-    mode={languageMode}
     theme='github'
     name='basic-code-editor' 
+    placeholder={placeholderText}
+    tabSize={tabSize}
+    value={code}
+    mode={language}
     onChange={(event) => updateCode(event)}
     fontSize={12}
     showPrintMargin={false}
     showGutter={showLineNums}
     highlightActiveLine={false}
-    value={code}
     setOptions={{
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: false,

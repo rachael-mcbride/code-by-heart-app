@@ -4,7 +4,6 @@ import axios from 'axios';
 import { ReactComponent as Logo } from '../../assets/heart-logo.svg'
 import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component";
 import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component";
-import CardDifficultyDropDown from "../card-difficulty-drop-down/card-difficulty-drop-down.component";
 
 import "./review-flashcards-area.styles.scss";
 

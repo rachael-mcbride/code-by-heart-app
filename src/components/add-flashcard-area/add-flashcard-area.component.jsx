@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-// import PropTypes from "prop-types";
 import axios from "axios";
+// import PropTypes from "prop-types";
 
-import CustomButton from '../custom-button/custom-button.component'
 import LanguageDropDown from '../language-drop-down/language-drop-down.component'
 import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
 
@@ -13,32 +12,10 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
   const [newFlashcardBack, setNewFlashcardBack] = useState("");
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
   const [language, setLanguage] = useState("not selected");
-  const [languageMode, setLanguageMode] = useState("markdown");
-  const [indentUnitInfo, setindentUnitInfo] = useState(4);
-
-  const frontPlaceholder = "Front of new flashcard";
-  const backPlaceholder = "Back of new flashcard";
-
-  // useEffects // 
-  // make sure language is always up-to-date
-  useEffect(() => {
-    handleLanguageChange(language)
-    console.log("current language:", language)
-  }, [language]); 
-
-  // make sure indent is always up-to-date
-  useEffect(() => {
-    (language.toLowerCase() === 'python' || language.toLowerCase() === 'markdown') ?
-      setindentUnitInfo(4) : setindentUnitInfo(2)
-    console.log("current indent:", indentUnitInfo)
-  }, [language, indentUnitInfo]); 
 
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
-    setLanguage(newLanguage);
-    setLanguageMode(newLanguage.toLowerCase());
-
-    // console.log("current language:", language)
+    setLanguage(newLanguage.toLowerCase());
   }
 
   const updateCardFront = (event) => {
@@ -94,6 +71,12 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
     }
   };
 
+  // useEffect to make sure language is always up-to-date // 
+  useEffect(() => {
+    handleLanguageChange(language)
+    console.log("current language:", language)
+  }, [language]); 
+
   return (
     <div className="add-flashcards-container">
       <div className="add-flashcards-header-container">
@@ -113,23 +96,23 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
 
       <div className="add-card-area">
           <EditableAceEditor 
-            languageMode={languageMode}
+            language={language}
             code={newFlashcardFront}
             showLineNums={true}
             updateCode={updateCardFront}
             height={"205px"}
             width={"430px"}
-            placeholderText={frontPlaceholder}>
+            placeholderText={"Front of new flashcard"}>
           </EditableAceEditor>
           <div className="divider"></div>
           <EditableAceEditor 
-            languageMode={languageMode}
+            language={language}
             showLineNums={true}
             code={newFlashcardBack}
             updateCode={updateCardBack}
             height={"205px"}
             width={"430px"}
-            placeholderText={backPlaceholder}>
+            placeholderText={"Back of new flashcard"}>
           </EditableAceEditor>
           <div className='output-wrapper'>
             <div className='output-text-container'>

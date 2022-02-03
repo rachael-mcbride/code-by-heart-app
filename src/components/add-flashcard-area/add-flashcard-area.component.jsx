@@ -15,6 +15,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
 
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
+    console.log(newLanguage);
     setLanguage(newLanguage.toLowerCase());
   }
 
@@ -33,7 +34,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
     } else {
       const compileData = {"code" : newFlashcardFront, "language" : language.toLowerCase()}
       axios
-      .post(`http://127.0.0.1:5000/compile`, compileData)
+      .post(`https://code-by-heart-backend.herokuapp.com/compile`, compileData)
       .then((response) => {
           // note: empty objs and arrays are a special case 
           if (JSON.stringify(response.data) === '{}') { 

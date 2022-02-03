@@ -12,23 +12,17 @@ const ReviewFlashcardsArea = (
     renderAddCardArea, toggleDeckDetailsPage, decrementUpForReviewCards }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
-  // const [cardDifficultyLevel, setCardDifficultyLevel] = useState("Very Easy");
 
   const revealCardAnswerFunc = (event) => {
     setCardBackReveal(true);
   }
-
-  // const handleDifficultyChange = (newLevel) => {
-  //   console.log(newLevel)
-  //   setCardDifficultyLevel(newLevel.value);
-  // }
 
   const submitDifficultyLevel = (level) => {
     // console.log("this is the level:", level)
     console.log("card pre-click:", currentCard)
     const difficultyData = { "difficultyString" : level }
     axios
-      .put(`http://127.0.0.1:5000/flashcards/${currentCard.id}`, difficultyData)
+      .put(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${currentCard.id}`, difficultyData)
       .then((response) => {
           console.log("updated card post-click:", response.data)
           const newDate = new Date(response.data.date_to_review);

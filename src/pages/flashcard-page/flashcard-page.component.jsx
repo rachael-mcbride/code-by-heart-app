@@ -46,7 +46,7 @@ const FlashcardPage = ( {currentUser} ) => {
       email: currentUser.email
     }
     axios
-      .post("http://127.0.0.1:5000/load-user-decks", userData)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/load-user-decks`, userData)
       .then((response) => {
         // console.log(response)
         setDecksData(response.data);
@@ -61,7 +61,7 @@ const FlashcardPage = ( {currentUser} ) => {
         deck_name: newDeck["name"]
       }
     axios
-    .post(`http://127.0.0.1:5000/decks/${currentUser.id}`, newDeckData)
+    .post(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentUser.id}`, newDeckData)
     .then((response) => {
       // console.log("response:", response.data);
       const decks = [...decksData];
@@ -83,7 +83,7 @@ const FlashcardPage = ( {currentUser} ) => {
   
   const deleteDeck = () => {
     axios
-      .delete(`http://127.0.0.1:5000/decks/${currentDeck.id}`)
+      .delete(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentDeck.id}`)
       .then((response) => {
         // console.log(response);
         const updatedDecksData = decksData.filter(
@@ -100,40 +100,42 @@ const FlashcardPage = ( {currentUser} ) => {
       });
   };
 
+// currentDeck.id === "" || 
   // Flashcard methods // 
   const loadFlashcards = () => {
-    if (currentDeck.id === null) {
+    if (currentDeck.id === null || currentDeck.id === "") {
       console.log('User has signed in, but no deck has been selected yet.');
       return;
+    } else {
+      axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_URL}/decks/${currentDeck.id}/flashcards_to_review`
+        )
+        .then((response) => {
+          setFlashcardsData(response.data);
+          if (response.data.length > 0) {
+            setCurrentCard(response.data[0])
+          } else {
+            setCurrentCard({
+              back: "", date_to_review: new Date(0), deck_id: null, difficulty_level: 0,
+              front: "", id: null, interval: 0, language: "", previous_ease_factor: 0,
+              previous_repetitions: 0 })
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-    axios
-      .get(
-        `http://127.0.0.1:5000/decks/${currentDeck.id}/flashcards_to_review`
-      )
-      .then((response) => {
-        setFlashcardsData(response.data);
-        if (response.data.length > 0) {
-          setCurrentCard(response.data[0])
-        } else {
-          setCurrentCard({
-            back: "", date_to_review: new Date(0), deck_id: null, difficulty_level: 0,
-            front: "", id: null, interval: 0, language: "", previous_ease_factor: 0,
-            previous_repetitions: 0 })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const createNewFlashcard = (newCardData) => {
     // newCardData shape -> { "front": flashcardFront, "back": flashcardBack }
     axios
-      .post(`http://127.0.0.1:5000/decks/${currentDeck.id}/flashcards`, newCardData)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentDeck.id}/flashcards`, newCardData)
       .then((response) => {
         // console.log("Response:", response);
         const updatedCardsData  = [...flashcardsData];
-        updatedCardsData .push(response.data);
+        updatedCardsData.push(response.data);
         setFlashcardsData(updatedCardsData);
         setCurrentCard(currentCard)
         setCurrentUpForReviewCardsInDeck(currentUpForReviewCardsInDeck+1);
@@ -148,8 +150,10 @@ const FlashcardPage = ( {currentUser} ) => {
   };
 
   const deleteFlashcard = () => {
+    console.log('click')
     axios
-      .delete(`http://127.0.0.1:5000/flashcards/${currentCard.id}`)
+    // `${process.env.REACT_APP_BACKEND_URL}/flashcards/${currentCard.id}`
+      .delete(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${currentCard.id}`)
       .then((response) => {
         console.log(response);
         const updatedCardsData = flashcardsData.filter(
@@ -185,6 +189,10 @@ const FlashcardPage = ( {currentUser} ) => {
 
   // useEffects // 
 
+  useEffect(() => {
+    setCurrentCard(currentCard);
+  }, [currentCard])
+
   // load deck list when user logs in, when data in decks changes, or when
   // the # of up-for-review cards changes (i.e. from difficulty selection)
   useEffect(() => {
@@ -204,20 +212,23 @@ const FlashcardPage = ( {currentUser} ) => {
   }, [currentDeck.id, deckDetailsButtonClicked]);
 
   // ensure current flashcard always up-to-date (like post-`moveToNextCard` click)
-  // also, whenever the current card changes, make what's rendered is the "practice area"
-  // rather than the "add flashcard area"
   useEffect(() => {
     setCurrentCard(currentCard);
-    setAddNewCardAreaRenders(false);
   }, [currentCard]); 
 
   // ensure current deck always up-to-date (like after selecting new deck) 
   // as well as the numerical data for that deck
   useEffect(() => {
     updateCurrentDeck(currentDeck);
-    setCurrentUpForReviewCardsInDeck(currentDeck.num_cards_up_for_review);
     // console.log("flashcards data:", flashcardsData)
-  }, [currentDeck, flashcardsData]); 
+  }, [currentDeck, flashcardsData]);
+
+  // whenever the currentCard changes (like after a user selects a difficulty),
+  // make sure the currentUpForReview number is up-to-date) 
+  // without this, sometimes the number lags behind! 
+  useEffect(() => {
+    setCurrentUpForReviewCardsInDeck(currentDeck.num_cards_up_for_review);
+  }, [currentCard])
 
   return (
     <div>

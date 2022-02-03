@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useSearchParams, useNavigate, useHistory } from "react-router-dom";
 
-import CustomButton from '../../components/custom-button/custom-button.component';
 import FlashcardDetailsList from '../../components/flashcard-details-list/flashcard-details-list.component';
 
 import './deck-details-page.styles.scss';

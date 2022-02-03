@@ -48,7 +48,7 @@ const PracticeCodeSandbox = () => {
     } else {
       const compileData = {"code" : codeInInputContainer, "language" : language.toLowerCase()}
       axios
-      .post(`http://127.0.0.1:5000/compile`, compileData)
+      .post(`https://code-by-heart-backend.herokuapp.com/compile`, compileData)
       .then((response) => {
           // note: empty objs and arrays are a special case 
           if (JSON.stringify(response.data) === '{}') { 

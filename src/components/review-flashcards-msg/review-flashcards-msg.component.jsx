@@ -1,20 +1,21 @@
 import './review-flashcards-msg.styles.scss'
-
-import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component";
-import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component";
+import { ReactComponent as Logo } from '../../assets/heart-logo-small.svg'
 
 const ReviewFlashcardsMsg = () => {
-
   return (
-      <div className="review-cards-container">
-        <div className="deck-header">
-          <div className="select-a-deck-title">Select a deck</div>
-        </div>
-
-        <div className="flashcard-placeholder">
-          <div>Flashcards will appear here</div>
+    <div className="review-msg-container">
+      <div className='logo-wrapper'>
+        <Logo className='logo' />
       </div>
-    </div>
+      <div className="review-session-finished">
+        <div className="review-session-finished-msg">
+          <div>Select or create a deck</div>
+        </div>
+      </div>
+        <div className='logo-wrapper'>
+          <Logo className='logo' />
+        </div>
+      </div>
   );
 }
 

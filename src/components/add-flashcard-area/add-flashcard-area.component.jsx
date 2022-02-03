@@ -9,7 +9,7 @@ import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
 import './add-flashcard-area.styles.scss'
 
 const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeckId }) => {
-  const [newFlashcardFront, setNewFlashcardFront] = useState(null);
+  const [newFlashcardFront, setNewFlashcardFront] = useState("");
   const [newFlashcardBack, setNewFlashcardBack] = useState("");
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
   const [language, setLanguage] = useState("not selected");
@@ -52,7 +52,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
   // func that will call the Jdoodle code compiler // 
   const runCode = () => {
     if (language.toLowerCase() === "markdown" || language === "not selected") {
-      setCodeInOutputContainer("Make sure you've selected a programming language before.")
+      setCodeInOutputContainer("Make sure you've selected a programming language.")
     } else {
       const compileData = {"code" : newFlashcardFront, "language" : language.toLowerCase()}
       axios
@@ -78,9 +78,9 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
   const submitNewCard = (event) => {
     event.preventDefault();
     if (newFlashcardFront.length === 0 || newFlashcardBack.length === 0) {
-      setCodeInOutputContainer("Make sure your card contains a front and back!");
+      setCodeInOutputContainer("Make sure your card contains a front and back.");
     } else if (language === "not selected") {
-      setCodeInOutputContainer("Make sure you've selected a language!");
+      setCodeInOutputContainer("Make sure you've selected a language.");
     } else {
       const newData = { "front": newFlashcardFront, 
                         "back": newFlashcardBack, 
@@ -117,7 +117,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
             code={newFlashcardFront}
             showLineNums={true}
             updateCode={updateCardFront}
-            height={"210px"}
+            height={"205px"}
             width={"430px"}
             placeholderText={frontPlaceholder}>
           </EditableAceEditor>
@@ -127,7 +127,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
             showLineNums={true}
             code={newFlashcardBack}
             updateCode={updateCardBack}
-            height={"210px"}
+            height={"205px"}
             width={"430px"}
             placeholderText={backPlaceholder}>
           </EditableAceEditor>

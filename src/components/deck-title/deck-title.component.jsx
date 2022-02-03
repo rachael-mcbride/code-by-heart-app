@@ -9,7 +9,7 @@ const DeckTitle = ({ updateCurrentDeck, deckData, selected }) => {
     const newCurrentDeck = {
       id: deckData.id,
       name: deckData.name,
-      ownder_id: deckData.owner_id,
+      owner_id: deckData.owner_id,
       num_total_cards: deckData.num_total_cards,
       num_cards_up_for_review: deckData.num_cards_up_for_review
     };

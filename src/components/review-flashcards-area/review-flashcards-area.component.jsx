@@ -1,6 +1,7 @@
 // import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import { ReactComponent as Logo } from '../../assets/heart-logo.svg'
 import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component";
 import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component";
 import CardDifficultyDropDown from "../card-difficulty-drop-down/card-difficulty-drop-down.component";
@@ -72,10 +73,11 @@ const ReviewFlashcardsArea = (
               </div>
           </div>
         </div>
-
         <div className="flashcard">
-          {currentCard.id && 
-            <div>
+          {/* conditionally renders either flashcards 
+          or msg informing user that no cards in deck are up-for-review */}
+          {currentCard.id ? 
+            (<div>
               <FlashcardFront 
                 language = {currentCard.language}
                 frontMsg = {currentCard.front}>
@@ -87,11 +89,6 @@ const ReviewFlashcardsArea = (
                 revealCardAnswerFunc={revealCardAnswerFunc}>
               </FlashcardBack>
               { cardBackReveal && 
-              // <div className="card-difficulty-submission-features">
-              //   <CardDifficultyDropDown 
-              //     difficultyLevel={cardDifficultyLevel}
-              //     handleDifficultyChange={handleDifficultyChange}>
-              //   </CardDifficultyDropDown>
               <div className="difficulty-buttons">
                 <button className="difficulty-button-very-easy" 
                   onClick={() => submitDifficultyLevel('Very Easy')}>
@@ -114,13 +111,17 @@ const ReviewFlashcardsArea = (
                   Again!
                 </button>
               </div> }
+          </div>) 
+          : 
+        (<div className="review-session-finished">
+          <div className="review-session-finished-msg">
+            <div>No cards currently up-for-review</div>
           </div>
-        } 
-        { (!currentCard.id) && 
-        <div className="review-session-finished">
-          There are no cards currently up-for-review in this deck.
-        </div>
-        }
+          <div className='logo-wrapper'>
+            <Logo className='logo' />
+          </div>
+        </div>)
+      }
       </div>
     </div>
   );

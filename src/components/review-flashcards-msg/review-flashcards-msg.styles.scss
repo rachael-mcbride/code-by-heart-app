@@ -1,42 +1,7 @@
-.review-cards-container {
+.review-msg-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  .deck-header {
-    font-size: 20px;
-    border-radius: 30px;
-    flex-direction: column;
-    align-items: center;
-
-    .select-a-deck-title {
-      display: flex;
-      justify-content: center;
-      font-size: 40px;
-      font-weight: bold;
-      margin: 10px;
-      margin-bottom: 20px;
-      padding: 5px 0px 5px 0px;
-      background-color: white;
-      box-shadow: 4px 4px 2px -2px gray;
-      color: black;
-      border: 1px solid black;
-    }
-  }
-}
-
-.flashcard-placeholder {
-  display: flex;
-  margin-top: 5px;
-  margin-bottom: 5px;
   align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  // font-weight: bolder;
-  border-radius: 10px;
-  width: 400px;
-  height: 180px;
-  border: 1px solid black;
-  box-shadow: 3px 3px;
-  padding: 10px;
+  margin-left: 20px;
+  margin-top: 10px;
 }

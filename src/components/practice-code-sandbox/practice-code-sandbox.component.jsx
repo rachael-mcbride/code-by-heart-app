@@ -91,7 +91,7 @@ const PracticeCodeSandbox = () => {
             code={codeInInputContainer}
             updateCode={updateInputContainer}
             width={"430px"}
-            height={"485px"}
+            height={"470px"}
             placeholderText="Select a language and type some code here.">
           </EditableAceEditor>
           <div className='output-text-container'>

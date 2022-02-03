@@ -1,5 +1,4 @@
-import AceEditor from 'react-ace'; 
-// docs - https://www.npmjs.com/package/react-ace
+import AceEditor from 'react-ace'; // https://www.npmjs.com/package/react-ace
 
 import "ace-builds/src-noconflict/theme-github";
 import 'ace-builds/src-noconflict/ext-language_tools'
@@ -11,6 +10,8 @@ import 'ace-builds/src-noconflict/mode-golang'
 import './fixed-ace-editor.styles.scss'
 
 const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
+  const tabSize = (language === "python" || language === "markdown") ? 4 : 2;
+
   return (
     <AceEditor 
       className = "fixed-editor"
@@ -18,17 +19,16 @@ const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
         height: height,
         width: width,            
         }}
-      // placeholder={msg}
+      value={msg}
       mode={language}
       theme='github'
       name='basic-code-editor'
       // onChange={currentCode => setCode(currentCode)}
       fontSize={12}
-      cursorStart={1}
+      tabSize={tabSize}
       showPrintMargin={false}
       showGutter={false}
       highlightActiveLine={false}
-      value={msg}
       setOptions={{
         readOnly: true,
         highlightActiveLine: false,
@@ -37,8 +37,6 @@ const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
         enableLiveAutocompletion: false,
         enableSnippets: false,
         showLineNumbers: false,
-        // hScrollBarAlwaysVisible: true,
-        // vScrollBarAlwaysVisible: true,
         cursorStyle: "slim"
       }}        
   />)

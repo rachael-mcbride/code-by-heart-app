@@ -113,7 +113,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
               <EditableAceEditor 
                 placeholderText={"Click \"save\" when you are done editing."} 
                 code={newFlashcardFront}
-                language={"python"}
+                language={flashcard.language}
                 updateCode={updateCardFront}
                 showLineNums={false}
                 height={'95px'}
@@ -145,7 +145,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
               <EditableAceEditor 
                 placeholderText={"Click \"save\" when you are done editing."} 
                 code={newFlashcardBack}
-                language={"python"}
+                language={flashcard.language}
                 updateCode={updateCardBack}
                 showLineNums={false}
                 height={'95px'}
@@ -160,7 +160,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
             <div className="ace-editor-in-flashcard">
               <FixedAceEditor 
                 msg={newFlashcardBack} 
-                language={"python"}
+                language={flashcard.language}
                 height={'95px'}
                 width={'300px'}/>
               <EditButton onClick={editFlashcardBack}>Edit</EditButton>

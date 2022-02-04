@@ -25,9 +25,11 @@ const NewDeck = ({ createNewDeck }) => {
     <form className="new-deck-style" onSubmit={submitNewDeck}>
       <input
         className="name-box"
+        style={{ height: 20, width: "80%", borderColor: 'black', 
+                  borderWidth: 1, padding: 5, textAlign: "center" }}
         type="text"
         maxLength={22}
-        placeholder="type new deck name"
+        placeholder="Enter a new deck name"
         value={formFields.name}
         onChange={onNameChange}
       />

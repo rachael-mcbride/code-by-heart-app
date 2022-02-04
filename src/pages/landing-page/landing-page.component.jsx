@@ -14,7 +14,7 @@ const LandingPage = () => (
         <div className="section1-body">
           <span>One of the most effective ways to learn something new is through <b>spaced repetition</b>--a technique that involves reviewing and recalling information at spaced intervals until knowledge is fully  embedded in long-term memory.</span>
           <span>Code By Heart is an application specifically <b>designed for developers and programming language learners</b> that leverages spaced repetition and is based upon the <a href="https://www.supermemo.com/en/archives1990-2015/english/ol/sm2" target="_blank">SM-2 algorithm</a>.</span>
-          <span>It allows a user to <b>create</b>, <b>execute</b>, and <b>save flashcards</b> in a particular programming language or markdown, and then later review these cards at spaced intervals for optimum retention.</span>
+          <span>It allows a user to <b>create</b>, <b>execute</b>, and <b>save flashcards</b> in a particular programming language, and then later review these cards at spaced intervals for optimum retention.</span>
         </div>
         <div className="section1-body2">
           <div className="section1-body2-subtitle">

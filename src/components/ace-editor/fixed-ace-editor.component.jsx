@@ -1,23 +1,25 @@
-import AceEditor from 'react-ace'; // https://www.npmjs.com/package/react-ace
-
+import AceEditor from 'react-ace';
+import 'ace-builds/webpack-resolver'
+import 'ace-builds/src-noconflict/ext-language_tools';
+import 'ace-builds/src-noconflict/ext-beautify';
 import "ace-builds/src-noconflict/theme-github";
-import 'ace-builds/src-noconflict/ext-language_tools'
-import 'ace-builds/src-noconflict/ext-beautify'
-import 'ace-builds/src-noconflict/mode-python'
-import 'ace-builds/src-noconflict/mode-ruby'
-import 'ace-builds/src-noconflict/mode-golang'
 
 import './fixed-ace-editor.styles.scss'
 
 const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
+  // set language mode 
   const specialCases = {
     "nodejs" : "javascript",
     "cpp" : "c_cpp",
     "c" : "c_cpp",
-    "objc" : "objectivec"
+    "objc" : "objectivec",
+    "plain text" : null
   }
   const mode = (language in specialCases) ? specialCases[language] : language;
-  const tabSize = (language === "python" || language === "markdown") ? 4 : 2;
+
+  // set tab size 
+  const fourSpaceLangs = ["python", "rust", "swift", "kotlin", "java"];
+  const tabSize = (fourSpaceLangs.includes(language)) ? 4 : 2;
 
   return (
     <AceEditor 
@@ -30,7 +32,6 @@ const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
       mode={mode}
       theme='github'
       name='basic-code-editor'
-      // onChange={currentCode => setCode(currentCode)}
       fontSize={12}
       tabSize={tabSize}
       showPrintMargin={false}

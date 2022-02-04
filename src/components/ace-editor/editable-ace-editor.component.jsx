@@ -2,26 +2,23 @@ import AceEditor from 'react-ace';
 import 'ace-builds/webpack-resolver'
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
-
-// theme 
 import "ace-builds/src-noconflict/theme-github";
-
-// languages 
-import 'ace-builds/src-noconflict/mode-python';
-import 'ace-builds/src-noconflict/mode-markdown';
-import 'ace-builds/src-noconflict/mode-ruby';
-import 'ace-builds/src-noconflict/mode-golang';
 
 const EditableAceEditor = ({ language, code, placeholderText, height, 
                               width, updateCode, showLineNums }) => {
+  // set language mode 
   const specialCases = {
     "nodejs" : "javascript",
     "cpp" : "c_cpp",
     "c" : "c_cpp",
-    "objc" : "objectivec"
+    "objc" : "objectivec",
+    "plain text" : null
   }
   const mode = (language in specialCases) ? specialCases[language] : language;
-  const tabSize = (language === "python" || language === "markdown") ? 4 : 2;
+
+  // set tab size 
+  const fourSpaceLangs = ["python", "rust", "swift", "kotlin", "java", "csharp"];
+  const tabSize = (fourSpaceLangs.includes(language)) ? 4 : 2;
 
   return (
     <AceEditor 

@@ -29,7 +29,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
 
   // func that will call the Jdoodle code compiler // 
   const runCode = () => {
-    if (language.toLowerCase() === "markdown" || language === "not selected") {
+    if (language.toLowerCase() === "plain text" || language === "not selected") {
       setCodeInOutputContainer("Make sure you've selected a programming language.")
     } else {
       const compileData = {"code" : newFlashcardFront, "language" : language.toLowerCase()}

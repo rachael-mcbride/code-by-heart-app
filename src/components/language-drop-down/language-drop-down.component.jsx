@@ -84,7 +84,7 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
   { value: 'elixir', label: 'Elixir' },
   ];
   if (includesMarkdown) {
-    options.unshift({ value: 'markdown', label: 'Markdown' })
+    options.unshift({ value: 'plain text', label: 'Plain Text' })
   }
 
   const NoOptionsMessage = props => {

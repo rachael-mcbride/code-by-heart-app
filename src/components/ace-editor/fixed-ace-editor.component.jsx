@@ -10,6 +10,13 @@ import 'ace-builds/src-noconflict/mode-golang'
 import './fixed-ace-editor.styles.scss'
 
 const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
+  const specialCases = {
+    "nodejs" : "javascript",
+    "cpp" : "c_cpp",
+    "c" : "c_cpp",
+    "objc" : "objectivec"
+  }
+  const mode = (language in specialCases) ? specialCases[language] : language;
   const tabSize = (language === "python" || language === "markdown") ? 4 : 2;
 
   return (
@@ -20,7 +27,7 @@ const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
         width: width,            
         }}
       value={msg}
-      mode={language}
+      mode={mode}
       theme='github'
       name='basic-code-editor'
       // onChange={currentCode => setCode(currentCode)}

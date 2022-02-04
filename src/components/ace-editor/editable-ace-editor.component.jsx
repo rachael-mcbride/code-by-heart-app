@@ -14,21 +14,28 @@ import 'ace-builds/src-noconflict/mode-golang';
 
 const EditableAceEditor = ({ language, code, placeholderText, height, 
                               width, updateCode, showLineNums }) => {
-  
+  const specialCases = {
+    "nodejs" : "javascript",
+    "cpp" : "c_cpp",
+    "c" : "c_cpp",
+    "objc" : "objectivec"
+  }
+  const mode = (language in specialCases) ? specialCases[language] : language;
   const tabSize = (language === "python" || language === "markdown") ? 4 : 2;
 
   return (
     <AceEditor 
+    className = "editable-editor"
     style={{
-      height: `${height}`,
-      width: `${width}`,            
+      height: height,
+      width: width,            
       }}
     theme='github'
     name='basic-code-editor' 
     placeholder={placeholderText}
     tabSize={tabSize}
     value={code}
-    mode={language}
+    mode={mode}
     onChange={(event) => updateCode(event)}
     fontSize={12}
     showPrintMargin={false}
@@ -37,7 +44,7 @@ const EditableAceEditor = ({ language, code, placeholderText, height,
     setOptions={{
         enableBasicAutocompletion: true,
         enableLiveAutocompletion: false,
-        enableSnippets: true,
+        enableSnippets: false,
         showLineNumbers: showLineNums,
         readOnly: false,
         cursorStyle: "slim"
@@ -45,5 +52,4 @@ const EditableAceEditor = ({ language, code, placeholderText, height,
   />)
 }
 
-// EditableAceEditor.config.set('basePath', 'path'); 
 export default EditableAceEditor;

@@ -69,8 +69,8 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
 
   const options = [
   { value: 'python', label: 'Python' },
-  { value: 'go', label: 'Go' },
   { value: 'nodejs', label: 'JavaScript' },
+  { value: 'go', label: 'Go' },
   { value: 'cpp', label: 'C++' },
   { value: 'c', label: 'C' },
   { value: 'csharp', label: 'C#' },
@@ -78,11 +78,9 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
   { value: 'ruby', label: 'Ruby' }, 
   { value: 'java', label: 'Java' },
   { value: 'scala', label: 'Scala' },
-  { value: 'php', label: 'PHP' },
   { value: 'swift', label: 'Swift' },
   { value: 'rust', label: 'Rust' },
   { value: 'kotlin', label: 'Kotlin' },
-  { value: 'racket', label: 'Racket' },
   { value: 'elixir', label: 'Elixir' },
   ];
   if (includesMarkdown) {

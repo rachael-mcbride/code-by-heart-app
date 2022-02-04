@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 // import PropTypes from "prop-types";
 import axios from "axios";
 
-import CustomButton from '../custom-button/custom-button.component'
 import LanguageDropDown from '../language-drop-down/language-drop-down.component'
 import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
 
@@ -48,7 +47,7 @@ const PracticeCodeSandbox = () => {
     } else {
       const compileData = {"code" : codeInInputContainer, "language" : language.toLowerCase()}
       axios
-      .post(`https://code-by-heart-backend.herokuapp.com/compile`, compileData)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/compile`, compileData)
       .then((response) => {
           // note: empty objs and arrays are a special case 
           if (JSON.stringify(response.data) === '{}') { 

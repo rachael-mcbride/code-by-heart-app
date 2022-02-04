@@ -34,7 +34,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
     } else {
       const compileData = {"code" : newFlashcardFront, "language" : language.toLowerCase()}
       axios
-      .post(`https://code-by-heart-backend.herokuapp.com/compile`, compileData)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/compile`, compileData)
       .then((response) => {
           // note: empty objs and arrays are a special case 
           if (JSON.stringify(response.data) === '{}') { 

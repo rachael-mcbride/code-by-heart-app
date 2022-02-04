@@ -51,3 +51,5 @@ const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
 };
 
 export default FixedAceEditor; 
+
+// AceEditor.renderer.$cursorLayer.element.style.display = "none";

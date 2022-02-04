@@ -14,8 +14,9 @@ const DeckDetailsPage = ({ deckId, deckName, toggleDeckDetailsPage, deleteDeck }
   useEffect(() => {
     const loadFlashcards = () => {
     axios
+    // .post(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentUser.id}`, newDeckData)
       .get(
-        `http://127.0.0.1:5000/decks/${deckId}/flashcards`
+        `${process.env.REACT_APP_BACKEND_URL}/decks/${deckId}/flashcards`
       )
       .then((response) => {
         const flashcards = response.data;

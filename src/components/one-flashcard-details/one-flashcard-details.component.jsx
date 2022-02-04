@@ -43,7 +43,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
   const saveFlashcardFront = () => {
     const newData = { "front" : newFlashcardFront };
     axios
-      .put(`http://127.0.0.1:5000/flashcards/${flashcard.id}`, newData)
+      .put(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${flashcard.id}`, newData)
       .then((response) => {
         console.log(response.data);
         setEditButtonFrontClicked(false);
@@ -66,7 +66,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
   const saveFlashcardBack = () => {
     const newData = { "back" : newFlashcardBack };
     axios
-      .put(`http://127.0.0.1:5000/flashcards/${flashcard.id}`, newData)
+      .put(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${flashcard.id}`, newData)
       .then((response) => {
         console.log(response.data);
         setEditButtonBackClicked(false);

@@ -12,6 +12,9 @@ import ReviewFlashcardsMsg from '../../components/review-flashcards-msg/review-f
 import './flashcard-page.styles.scss'
 
 const FlashcardPage = ( {currentUser} ) => {
+  // console.log(currentUser)
+
+
   // conditional rendering states // 
   const [deckDetailsButtonClicked, setDeckDetailsButtonClicked] = useState(false);
   const [addNewCardAreaRenders, setAddNewCardAreaRenders] = useState(false);
@@ -100,7 +103,6 @@ const FlashcardPage = ( {currentUser} ) => {
       });
   };
 
-// currentDeck.id === "" || 
   // Flashcard methods // 
   const loadFlashcards = () => {
     if (currentDeck.id === null || currentDeck.id === "") {

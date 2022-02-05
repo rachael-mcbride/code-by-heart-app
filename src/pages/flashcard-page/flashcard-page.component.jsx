@@ -60,9 +60,9 @@ const FlashcardPage = ( {currentUser} ) => {
   };
 
   const createNewDeck = (newDeck) => {
-      const newDeckData = {
-        deck_name: newDeck["name"]
-      }
+    const newDeckData = {
+      deck_name: newDeck["name"]
+    }
     axios
     .post(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentUser.id}`, newDeckData)
     .then((response) => {
@@ -157,7 +157,7 @@ const FlashcardPage = ( {currentUser} ) => {
     // `${process.env.REACT_APP_BACKEND_URL}/flashcards/${currentCard.id}`
       .delete(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${currentCard.id}`)
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         const updatedCardsData = flashcardsData.filter(
           (card) => card.id !== currentCard.id
         );
@@ -190,22 +190,19 @@ const FlashcardPage = ( {currentUser} ) => {
   }
 
   // useEffects // 
-
-  useEffect(() => {
-    setCurrentCard(currentCard);
-  }, [currentCard])
-
   // load deck list when user logs in, when data in decks changes, or when
   // the # of up-for-review cards changes (i.e. from difficulty selection)
   useEffect(() => {
     loadDecks();
+  }, [flashcardsData, currentCard, currentUpForReviewCardsInDeck]); 
+
+  useEffect(() => {
     // when a new card is added to a previously-empty deck, 
     // set the current card to this card that was just added
     if (flashcardsData.length === 1) {
       setCurrentCard(flashcardsData[0]);
     };
-
-  }, [flashcardsData, currentCard, currentUpForReviewCardsInDeck]); 
+  }, [flashcardsData]); 
 
   // load or reload flashcards whenever the current deck changes or the user 
   // clicks deckDetailsButton (b/c they could've edited cards on that page)
@@ -214,8 +211,12 @@ const FlashcardPage = ( {currentUser} ) => {
   }, [currentDeck.id, deckDetailsButtonClicked]);
 
   // ensure current flashcard always up-to-date (like post-`moveToNextCard` click)
+  // also, whenever the currentCard changes (like after a user selects a difficulty),
+  // make sure the currentUpForReview number is up-to-date) 
+  // without this, sometimes the number lags behind! 
   useEffect(() => {
     setCurrentCard(currentCard);
+    setCurrentUpForReviewCardsInDeck(currentDeck.num_cards_up_for_review)
   }, [currentCard]); 
 
   // ensure current deck always up-to-date (like after selecting new deck) 
@@ -225,12 +226,6 @@ const FlashcardPage = ( {currentUser} ) => {
     // console.log("flashcards data:", flashcardsData)
   }, [currentDeck, flashcardsData]);
 
-  // whenever the currentCard changes (like after a user selects a difficulty),
-  // make sure the currentUpForReview number is up-to-date) 
-  // without this, sometimes the number lags behind! 
-  useEffect(() => {
-    setCurrentUpForReviewCardsInDeck(currentDeck.num_cards_up_for_review);
-  }, [currentCard])
 
   return (
     <div>

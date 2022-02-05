@@ -4,12 +4,13 @@ import axios from 'axios';
 import { ReactComponent as Logo } from '../../assets/heart-logo.svg'
 import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component";
 import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component";
+import OneFlashcardForReview from "../one-flashcard-for-review/one-flashcard-for-review.component";
 
 import "./review-flashcards-area.styles.scss";
 
 const ReviewFlashcardsArea = ( 
-  { currentCard, currentDeck, deleteFlashcard, moveToNextCard, 
-    renderAddCardArea, toggleDeckDetailsPage, decrementUpForReviewCards }
+  { currentCard, currentDeck, deleteFlashcard, moveToNextCard, renderAddCardArea,
+    toggleDeckDetailsPage, decrementUpForReviewCards }
   ) => {
   const [cardBackReveal, setCardBackReveal] = useState(false);
 
@@ -30,7 +31,7 @@ const ReviewFlashcardsArea = (
           if (newDate > rightNow) {
             // console.log('the review date is later than right now!')
             decrementUpForReviewCards()
-          }
+          } 
       })
       .catch((error) => {
           console.log("there was an error", error);
@@ -67,55 +68,12 @@ const ReviewFlashcardsArea = (
           </div>
         </div>
         <div className="flashcard">
-          {/* conditionally renders either flashcards 
-          or msg informing user that no cards in deck are up-for-review */}
-          {currentCard.id ? 
-            (<div>
-              <FlashcardFront 
-                language = {currentCard.language}
-                frontMsg = {currentCard.front}>
-              </FlashcardFront>
-              <FlashcardBack
-                language = {currentCard.language}
-                backMsg = {currentCard.back}
-                cardBackReveal={cardBackReveal}
-                revealCardAnswerFunc={revealCardAnswerFunc}>
-              </FlashcardBack>
-              { cardBackReveal && 
-              <div className="difficulty-buttons">
-                <button className="difficulty-button-very-easy" 
-                  onClick={() => submitDifficultyLevel('Very Easy')}>
-                  Very Easy
-                </button>
-                <button className="difficulty-button"
-                  onClick={() => submitDifficultyLevel('Easy')}>
-                  Easy
-                </button>
-                <button className="difficulty-button"
-                  onClick={() => submitDifficultyLevel('Medium')}>
-                  Medium
-                </button>
-                <button className="difficulty-button"
-                  onClick={() => submitDifficultyLevel('Hard')}>
-                  Hard
-                </button>
-                <button className="difficulty-button"
-                  onClick={() => submitDifficultyLevel('Review again!')}>
-                  Again!
-                </button>
-              </div> }
-          </div>) 
-          : 
-        (<div className="review-session-finished">
-          <div className="review-session-finished-msg">
-            <div>No cards currently up-for-review</div>
-          </div>
-          <div className='logo-wrapper'>
-            <Logo className='logo' />
-          </div>
-        </div>)
-      }
-      </div>
+          <OneFlashcardForReview 
+            currentCard={currentCard}
+            cardBackReveal={cardBackReveal}
+            submitDifficultyLevel={submitDifficultyLevel}
+            revealCardAnswerFunc={revealCardAnswerFunc} />
+        </div>
     </div>
   );
 };

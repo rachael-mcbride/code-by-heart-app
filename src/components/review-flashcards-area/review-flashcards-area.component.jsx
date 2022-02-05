@@ -20,12 +20,12 @@ const ReviewFlashcardsArea = (
 
   const submitDifficultyLevel = (level) => {
     // console.log("this is the level:", level)
-    console.log("card pre-click:", currentCard)
+    // console.log("card pre-click:", currentCard)
     const difficultyData = { "difficultyString" : level }
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${currentCard.id}`, difficultyData)
       .then((response) => {
-          console.log("updated card post-click:", response.data)
+          // console.log("updated card post-click:", response.data)
           const newDate = new Date(response.data.date_to_review);
           const rightNow = new Date(0);
           if (newDate > rightNow) {

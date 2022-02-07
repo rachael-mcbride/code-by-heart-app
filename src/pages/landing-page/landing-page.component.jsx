@@ -23,21 +23,23 @@ const LandingPage = () => (
           <ul className="section1-body2-list">
             <li>
               <a href="https://sive.rs/srs" target="_blank">
-                Why One Developer Describes Spaced Repetition as "<b>the most helpful learning technique I've found in 14 years of computer programming</b>"
+                Why one developer described spaced repetition as "<b>the most helpful learning technique I've found in 14 years of computer programming</b>"
+              </a>
+            </li>
+            <li>
+              <a href="https://senrigan.io/blog/chasing-10x-leveraging-a-poor-memory-in-software-engineering/" target="_blank">
+                Why another developer says spaced repetition "<b>saved my software career</b>"
               </a>
             </li>
             <li>
               <a href="https://www.freecodecamp.org/news/why-i-studied-full-time-for-8-months-for-a-google-interview-cc662ce9bb13#.3d9qfnhq5" target="_blank">
-                How Spaced Repetition Helped Another Developer Prep for a Google Interview
+                How spaced repetition helped one developer <b>prepare for a big interview</b>
               </a>
             </li>
             <li>
               <a href="https://leetcode.com/discuss/general-discussion/1124635/how-to-leetcode-what-i-learned-from-a-year-of-leetcoding-challenge-problems" target="_blank">
-                How Spaced Repetition Can Help with Prepping for Leetcode-Style Interviews More Broadly
+                How spaced repetition can help you <b>recognize problem-solving patterns</b> for tough technical interviews more broadly
               </a>
-            </li>
-            <li>
-              <a>One more link here - test test</a>
             </li>
           </ul>
         </div>

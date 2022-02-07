@@ -47,6 +47,10 @@
         // border: 1px solid black;
         // border-radius: 25px;
         // padding: 10px;
+
+        a {
+          text-decoration: underline;
+        }
       }
 
       .section1-body2 {
@@ -65,7 +69,7 @@
 
         .section1-body2-subtitle {
           margin-top: 5px;
-          margin-bottom: 10px;
+          margin-bottom: 5px;
           font-weight: bolder;
           font-size: 18px;
         }
@@ -74,7 +78,6 @@
           display: flex;
           justify-content: center;
           flex-direction: column;
-          // padding: 10px;
           font-size: 15px;
 
           a {

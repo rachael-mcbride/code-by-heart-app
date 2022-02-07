@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
-// import { useNavigate } from 'react-router';
-import { auth, signInWithGoogle, createUserProfileDocument } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import Header from "./components/header/header.component";
 import LandingPage from "./pages/landing-page/landing-page.component";

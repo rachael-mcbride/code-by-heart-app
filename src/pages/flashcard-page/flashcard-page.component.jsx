@@ -12,7 +12,7 @@ import ReviewFlashcardsMsg from '../../components/review-flashcards-msg/review-f
 
 import './flashcard-page.styles.scss'
 
-const FlashcardPage = ({ currentUser} ) => {
+const FlashcardPage = ({ currentUser}  ) => {
   console.log("currentuser:", currentUser)
 
 
@@ -49,10 +49,11 @@ const FlashcardPage = ({ currentUser} ) => {
       displayName: currentUser.displayName,
       email: currentUser.email
     }
+    console.log("backend url:", process.env.REACT_APP_BACKEND_URL)
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/load-user-decks`, userData)
+      .post(`https://codebyheart-backend.herokuapp.com/load-user-decks`, userData)
       .then((response) => {
-        // console.log(response)
+        console.log("this is the specific response:", response)
         setDecksData(response.data);
       })
       .catch((error) => {

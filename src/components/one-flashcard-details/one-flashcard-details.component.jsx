@@ -23,7 +23,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
   }
 
   // other attributes to display in "card details" box 
-  const reviewDate = flashcard.date_to_review.slice(0, 22);
+  const reviewDate = String(new Date(flashcard.date_to_review)).slice(0, 21);
   const timesReviewed = flashcard.total_times_reviewed;
   const historyMessage = (flashcard.most_recent_difficulty_level !== null);
 
@@ -62,7 +62,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
 
   const editFlashcardBack = (msg) => { 
     setEditButtonBackClicked(true);
-    console.log(editButtonBackClicked)
+    // console.log(editButtonBackClicked)
   };
 
   const saveFlashcardBack = () => {
@@ -70,7 +70,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${flashcard.id}`, newData)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setEditButtonBackClicked(false);
       })
       .catch((error) => {

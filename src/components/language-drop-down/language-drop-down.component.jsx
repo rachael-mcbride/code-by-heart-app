@@ -1,71 +1,12 @@
-// import React from 'react';
-import './language-drop-down.styles.scss'
-
-// const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) => {
-//   if (includesMarkdown) {
-//     return (
-//     <div className="custom-select">
-//       <select name="language-drop-down" 
-//         className="language-drop-down-menu"
-//         value={language} 
-//         onChange={event => handleLanguageChange(event.target.value)}>
-//         <option className="language-item" id="0">Markdown</option>
-//         <option className="language-item" id="1">Python</option>
-//         <option className="language-item" id="2">Ruby</option>
-//         <option className="language-item" id="3">Golang</option>
-//       </select>
-//     </div>
-//   )} else {
-//   return (
-//     <select name="language-drop-down" 
-//       className="language-drop-down-menu"
-//       value={language} 
-//       onChange={event => handleLanguageChange(event.target.value)}>
-//       <option className="language-item" id="1">Python</option>
-//       <option className="language-item" id="2">Ruby</option>
-//       <option className="language-item" id="3">Golang</option>
-//     </select>
-//   )};
-// };
-
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from "prop-types";
 import Select from 'react-select';
-
 import { components } from 'react-select';
 
-// const NoOptionsMessage = props => {
-//   return (
-//      <components.NoOptionsMessage {...props}>
-//         Test…
-//      </components.NoOptionsMessage>
-//   );
-// };
+import './language-drop-down.styles.scss'
 
 const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) => {
   const [selectedOption, setSelectedOption] = useState({value: 'python', label: 'Python'});
-
-  const languageStyles = {
-    option: (state) => ({
-      color: state.isSelected ? '#DC143C' : 'black',
-      fontSize: 14,
-      padding: 11,
-      // loadingMessage=false
-    }),
-    // {({inputValue}) => !inputValue ? noOptionsText : "No results found"},
-    // noOptionsMessage: { inputValue: null },
-    control: () => ({
-      // none of react-select's styles are passed to <Control />
-      width: 100,
-      fontSize: 14,
-      fontFamily: 'Roboto Slab', 
-      color: '#DC143C',
-    }),
-    singleValue: (provided, state) => {
-      // const opacity = state.isDisabled ? 0.5 : 1;
-      // const transition = 'opacity 300ms';
-      return;
-    }
-  };
 
   const options = [
   { value: 'python', label: 'Python' },
@@ -87,10 +28,27 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
     options.unshift({ value: 'plain text', label: 'Plain Text' })
   }
 
+  const languageStyles = {
+    option: (state) => ({
+      color: state.isSelected ? '#DC143C' : 'black',
+      fontSize: 14,
+      padding: 11,
+    }),
+    control: () => ({
+      width: 100,
+      fontSize: 14,
+      fontFamily: 'Roboto Slab', 
+      color: '#DC143C',
+    }),
+    singleValue: (provided, state) => {
+      return;
+    }
+  };
+
   const NoOptionsMessage = props => {
     return (
       <components.NoOptionsMessage {...props} className="custon-no-options-box">
-        <span className="custom-no-options-msg"></span> 
+        <span className="no-options-msg"></span> 
       </components.NoOptionsMessage>
     );
   };
@@ -108,13 +66,18 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
         menuPlacement="auto"
         onChange={setSelectedOption}
         options={options}
-        // menuIsOpen={true}
         styles={languageStyles}
         width='60px'
         components={{ NoOptionsMessage }}
       />
     </div>
   );
+};
+
+LanguageDropDown.propTypes = {
+  language: PropTypes.string,
+  handleLanguageChange: PropTypes.func,
+  includesMarkdown: PropTypes.bool
 };
 
 export default LanguageDropDown;

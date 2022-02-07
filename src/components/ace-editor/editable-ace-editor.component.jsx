@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import AceEditor from 'react-ace';
 import 'ace-builds/webpack-resolver'
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -47,6 +49,16 @@ const EditableAceEditor = ({ language, code, placeholderText, height,
         cursorStyle: "slim"
     }}              
   />)
-}
+};
+
+EditableAceEditor.propTypes = {
+  language: PropTypes.string,
+  code: PropTypes.string,
+  placeholderText: PropTypes.string,
+  height: PropTypes.string,
+  width: PropTypes.string,
+  updateCode: PropTypes.func,
+  showLineNums: PropTypes.bool
+};
 
 export default EditableAceEditor;

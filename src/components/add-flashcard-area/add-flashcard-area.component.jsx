@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import LanguageDropDown from '../language-drop-down/language-drop-down.component'
 import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
@@ -136,9 +136,10 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
   )
 }
 
-// AddFlashCardArea.propTypes = {
-//   createNewFlashcard: PropTypes.func,
-//   currentDeckId: PropTypes.string
-// };
+AddFlashCardArea.propTypes = {
+  createNewFlashcard: PropTypes.func,
+  cancelAddingNewCard: PropTypes.func,
+  currentDeckId: PropTypes.string
+};
 
 export default AddFlashCardArea;

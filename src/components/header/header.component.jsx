@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from "prop-types";
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils'
 import { ReactComponent as Logo } from '../../assets/heart-logo.svg'
 import CustomButton from '../custom-button/custom-button.component';
@@ -6,8 +6,10 @@ import CustomButton from '../custom-button/custom-button.component';
 import './header.styles.scss'
 
 const Header = ({ currentUser }) => {
-  // change header color depending on whether user is signed in 
+  // change header color conditionally
   const headerSignedIn = (currentUser) ? 'signed-in' : 'not-signed-in' ;
+
+  console.log("current user from header:", currentUser)
 
   return (
   <div className="header">
@@ -30,6 +32,15 @@ const Header = ({ currentUser }) => {
       </div>
     </div>
   </div>)
+};
+
+Header.propTypes = {
+  currentUser: PropTypes.shape({
+    createdAt: PropTypes.object,
+    displayName: PropTypes.string,
+    id: PropTypes.string,
+    email: PropTypes.string
+  })
 };
 
 export default Header;

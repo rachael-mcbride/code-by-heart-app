@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 import AceEditor from 'react-ace';
 import 'ace-builds/webpack-resolver'
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -50,6 +52,12 @@ const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
   />)
 };
 
-export default FixedAceEditor; 
+FixedAceEditor.propTypes = {
+  language: PropTypes.string,
+  msg: PropTypes.string,
+  height: PropTypes.string,
+  width: PropTypes.string,
+  editFlashcard: PropTypes.func,
+};
 
-// AceEditor.renderer.$cursorLayer.element.style.display = "none";
+export default FixedAceEditor; 

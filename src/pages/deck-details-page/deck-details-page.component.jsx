@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
 import FlashcardDetailsList from '../../components/flashcard-details-list/flashcard-details-list.component';
 
@@ -14,7 +15,6 @@ const DeckDetailsPage = ({ deckId, deckName, toggleDeckDetailsPage, deleteDeck }
   useEffect(() => {
     const loadFlashcards = () => {
     axios
-    // .post(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentUser.id}`, newDeckData)
       .get(
         `${process.env.REACT_APP_BACKEND_URL}/decks/${deckId}/flashcards`
       )
@@ -76,6 +76,13 @@ const DeckDetailsPage = ({ deckId, deckName, toggleDeckDetailsPage, deleteDeck }
       </div> }
     </div>
   );
+};
+
+DeckDetailsPage.propTypes = {
+  deckId: PropTypes.number,
+  deckName: PropTypes.string,
+  toggleDeckDetailsPage: PropTypes.func,
+  deleteDeck: PropTypes.func
 };
 
 export default DeckDetailsPage;

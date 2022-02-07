@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import PropTypes from "prop-types";
 
 import DeckDetailsPage from '../deck-details-page/deck-details-page.component'
 import AddFlashcardArea from '../../components/add-flashcard-area/add-flashcard-area.component'
@@ -11,8 +12,8 @@ import ReviewFlashcardsMsg from '../../components/review-flashcards-msg/review-f
 
 import './flashcard-page.styles.scss'
 
-const FlashcardPage = ( {currentUser} ) => {
-  // console.log(currentUser)
+const FlashcardPage = ({ currentUser} ) => {
+  console.log("currentuser:", currentUser)
 
 
   // conditional rendering states // 
@@ -283,6 +284,15 @@ const FlashcardPage = ( {currentUser} ) => {
       </div>)}
     </div>
   );
+};
+
+FlashcardPage.propTypes = {
+  currentUser: PropTypes.shape({
+    createdAt: PropTypes.object,
+    displayName: PropTypes.string,
+    id: PropTypes.string,
+    email: PropTypes.string
+  })
 };
 
 export default FlashcardPage;

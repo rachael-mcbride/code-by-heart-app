@@ -2,6 +2,8 @@ import { ReactComponent as Logo } from '../../assets/heart-logo.svg'
 import FlashcardFront from "../flashcard-to-review-front/flashcard-to-review-front.component";
 import FlashcardBack from "../flashcard-to-review-back/flashcard-to-review-back.component";
 
+import PropTypes from "prop-types";
+
 import './one-flashcard-for-review.styles.scss'
 
 const OneFlashCardForReview = ({ currentCard, cardBackReveal, 
@@ -51,6 +53,27 @@ const OneFlashCardForReview = ({ currentCard, cardBackReveal,
       </div>) }
     </div>
   )
+};
+
+OneFlashCardForReview.propTypes = {
+  cardBackReveal: PropTypes.bool,
+  revealCardAnswerFunc: PropTypes.func,
+  submitDifficultyLevel: PropTypes.func,
+  currentCard: PropTypes.shape({
+    back: PropTypes.string,
+    date_to_review: PropTypes.string,
+    deck_id: PropTypes.number,
+    difficulty_level: PropTypes.number,
+    front: PropTypes.string,
+    id: PropTypes.number,
+    interval: PropTypes.number,
+    language: PropTypes.string,
+    most_recent_difficulty_level: PropTypes.string,
+    most_recent_review_date: PropTypes.string,
+    previous_ease_factor: PropTypes.number,
+    previous_repetitions: PropTypes.number,
+    total_times_reviewed: PropTypes.number,
+  })
 };
 
 export default OneFlashCardForReview;

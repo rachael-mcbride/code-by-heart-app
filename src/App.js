@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+// import { useNavigate } from 'react-router';
+import { auth, signInWithGoogle, createUserProfileDocument } from "./firebase/firebase.utils";
 
 import Header from "./components/header/header.component";
 import LandingPage from "./pages/landing-page/landing-page.component";
 import FlashcardPage from "./pages/flashcard-page/flashcard-page.component";
-import DeckDetailsPage from "./pages/deck-details-page/deck-details-page.component";
 import NotFoundPage from "./pages/not-found-page/not-found-page.component";
 
 class App extends React.Component {
@@ -18,7 +18,7 @@ class App extends React.Component {
     };
   }
 
-  unsubscribeFromAuth = null; // class method?
+  unsubscribeFromAuth = null; 
 
   // lets our app listen to authentication state changes
   componentDidMount() {
@@ -39,12 +39,14 @@ class App extends React.Component {
     });
   }
 
-  // will close subscription upon app unmounting (clean up function)
+  // clean up function
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
 
   render() {
+    console.log(this.state.currentUser)
+
     const SignInWrapper = ({ children, currentUser }) => {
       return currentUser ? <Navigate to="/flashcards" replace /> : children;
     };
@@ -73,14 +75,6 @@ class App extends React.Component {
               </SignOutWrapper>
             }
           />
-          <Route
-            path="/deck-details"
-            element={
-              <SignOutWrapper currentUser={this.state.currentUser}>
-                <DeckDetailsPage />
-              </SignOutWrapper>
-            }
-          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
@@ -88,37 +82,64 @@ class App extends React.Component {
   }
 }
 
-// Note to self: can't figure out how to use hooks instead of classes here! Too confused!
-// Question: Should I convert this over with the help of a teacher/TA so I don't have 2 different styles in one project?
-// const App = () => {
-//   [currentUser, setCurrentUser] = useState(null);
-//   // let unsubscribeFromAuth = null;
 
-// Note: this would take the place of componentDidMount
-//   useEffect(() => {
-//     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-//       if (userAuth) {
-//         const userRef = await createUserProfileDocument(userAuth);
+// const App = () => {
+//   const [currentUser, setCurrentUser] = useState({ currentUser: null });
+//   let navigate = useNavigate();
+
+//   useEffect = (() => {
+//       if (auth.onAuthStateChanged) {
+//         const userRef = createUserProfileDocument(userAuth);
 //           userRef.onSnapshot((snapShot) => {
 //             setCurrentUser({
-//               currentUser: {
+//                 currentUser: {
 //                 id: snapShot.id,
 //                 ...snapShot.data(),
 //               },
 //             });
 //           });
-//         }
-//         this.setState({ currentUser: userAuth }); // sets currentUser to null if user logs out
-//   }, [currentUser])
+//       }
+//       setCurrentUser({ currentUser: userAuth });
+//   }, [userAuth]);
 
-// Note: this would take the place of componentWillUnmount
-// unEffect(() => {
-// const unsubscribeFromAuth = something
+//   const SignInWrapper = ({ children, currentUser }) => {
+//     navigate("/flashcards")
+//   };
 
-// return () => {
-//   unsubscribeFromAuth();
-// }
-// }, [])
-// }
+//   const SignOutWrapper = ({ children, currentUser }) => {
+//     navigate("/")
+//   };
+
+//   const handleSignIn = () => {
+//     signInWithGoogle()
+//     navigate("/flashcards")
+
+//   }
+
+//   return (
+//     <div>
+//       <Header currentUser={currentUser.currentUser} handleSignIn={handleSignIn} />
+//       <Routes>
+//         <Route
+//           path="/"
+//           element={
+//             <SignInWrapper currentUser={currentUser.currentUser}>
+//               <LandingPage />
+//             </SignInWrapper>
+//           }
+//         />
+//         <Route
+//           path="/flashcards"
+//           element={
+//             <SignOutWrapper currentUser={currentUser.currentUser}>
+//               <FlashcardPage currentUser={currentUser.currentUser} />
+//             </SignOutWrapper>
+//           }
+//         />
+//         <Route path="*" element={<NotFoundPage />} />
+//       </Routes>
+//     </div>
+//   ); 
+// };
 
 export default App;

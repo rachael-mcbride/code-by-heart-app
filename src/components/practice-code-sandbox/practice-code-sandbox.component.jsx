@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
-// import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import LanguageDropDown from '../language-drop-down/language-drop-down.component'
 import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
-
 
 import './practice-code-sandbox.styles.scss'
 
@@ -12,10 +10,6 @@ const PracticeCodeSandbox = () => {
   const [codeInInputContainer, setCodeInIntputContainer] = useState(null);
   const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
   const [language, setLanguage] = useState("not selected");
-  // const [tabSize, setTabSize] = useState(4);
-  // const [languageMode, setLanguageMode] = useState("python");
-
-  // const [indentUnitInfo, setindentUnitInfo] = useState(4);
 
   // useEffects // 
   // make sure language is always up-to-date
@@ -23,13 +17,6 @@ const PracticeCodeSandbox = () => {
     handleLanguageChange(language)
     console.log("current language:", language)
   }, [language]); 
-
-  // make sure indent is always up-to-date
-  // useEffect(() => {
-  //   (language.toLowerCase() === 'python') ?
-  //     setTabSize(4) : setTabSize(2)
-  //     console.log("current tabSize:", tabSize)
-  // }, [language, tabSize]); 
 
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
@@ -42,10 +29,10 @@ const PracticeCodeSandbox = () => {
 
   // func that will call the Jdoodle code compiler // 
   const runCode = () => {
-    if (language.toLowerCase() === "not selected") {
+    if (language === "not selected") {
       setCodeInOutputContainer("Make sure you've selected a programming language.")
     } else {
-      const compileData = {"code" : codeInInputContainer, "language" : language.toLowerCase()}
+      const compileData = {"code" : codeInInputContainer, "language" : language}
       axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/compile`, compileData)
       .then((response) => {

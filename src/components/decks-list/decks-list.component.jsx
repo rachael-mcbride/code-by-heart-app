@@ -1,6 +1,8 @@
-// import PropTypes from "prop-types";
-import "./decks-list.styles.scss";
+import PropTypes from "prop-types";
+
 import DeckTitle from "../deck-title/deck-title.component";
+
+import "./decks-list.styles.scss";
 
 const DecksList = ({ decksData, updateCurrentDeck, currentDeck }) => {
   const decks = decksData;
@@ -24,18 +26,25 @@ const DecksList = ({ decksData, updateCurrentDeck, currentDeck }) => {
   )
 };
 
-// DecksList.propTypes = {
-//   updateCurrentDeck: PropTypes.func,
-//   decksData: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number.isRequired,
-//       name: PropTypes.string.isRequired,
-//       owner_id: PropTypes.string.isRequired,
-//       num_total_cards: PropTypes.number.isRequired,
-//       num_cards_up_for_review: PropTypes.number.isRequired,
-//     })
-//   ),
-// };
+DecksList.propTypes = {
+  updateCurrentDeck: PropTypes.func,
+  currentDeck: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    owner_id: PropTypes.string,
+    num_total_cards: PropTypes.number,
+    num_cards_up_for_review: PropTypes.number,
+  }),
+  decksData: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      owner_id: PropTypes.string,
+      num_total_cards: PropTypes.number,
+      num_cards_up_for_review: PropTypes.number,
+    })
+  ),
+};
 
 
 export default DecksList;

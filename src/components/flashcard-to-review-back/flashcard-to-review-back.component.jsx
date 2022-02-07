@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
+
 import FixedAceEditor from '../ace-editor/fixed-ace-editor.component';
+
 import './flashcard-to-review-back.styles.scss'
 
 const FlashcardBack = (

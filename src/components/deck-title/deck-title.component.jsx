@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from 'react';
+
 import './deck-title.styles.scss'
 
 const DeckTitle = ({ updateCurrentDeck, deckData, selected }) => {
@@ -41,9 +41,11 @@ DeckTitle.propTypes = {
   updateCurrentDeck: PropTypes.func,
   selected: PropTypes.bool,
   deckData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    owner_id: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    owner_id: PropTypes.string,
+    num_total_cards: PropTypes.number,
+    num_cards_up_for_review: PropTypes.number,
   }),
 };
 

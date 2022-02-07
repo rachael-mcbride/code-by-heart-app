@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from "prop-types";
+
 import './new-deck.styles.scss';
 
 const NewDeck = ({ createNewDeck }) => {
   const [formFields, setFormFields] = useState("");
 
-  // this prevents user from adding a deck with no name to decks 
+  // this prevents user from adding a deck with no name  
   const newDeckIsEnabled = formFields.length > 0;
 
   const onNameChange = (event) => {

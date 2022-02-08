@@ -1,0 +1,45 @@
+.review-session-finished {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .review-session-finished-msg {
+    font-size: 20px;
+    display: flex;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    box-shadow: 3px 3px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 380px;
+    height: 165px;
+    padding: 20px 10px 20px 10px;
+  }
+}
+
+.difficulty-buttons {
+  display: flex;
+  justify-content: space-between;
+
+  .difficulty-button {
+    width: 77px;
+    letter-spacing: 0.5px;
+    font-size: 11px;
+    color: white;
+    &:hover { 
+      color: black;
+    }
+  }
+
+  .difficulty-button-very-easy {
+    width: 78px;
+    letter-spacing: 0px;
+    font-size: 11px;
+    color: white;
+    &:hover { 
+      color: black;
+    }
+  }
+}

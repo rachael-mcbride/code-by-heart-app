@@ -1,10 +1,8 @@
 .main-container {
   display: grid;
   height: 100vh;
-  // width: 1400px;
   margin: 15px;
   margin-top: 30px;
-  // margin-bottom: 35px;
   grid-template-columns: repeat(15, 1fr);
   grid-template-areas: 
       "m c c c c c c c e e e e e e e";
@@ -15,7 +13,6 @@
   width: 230px;
   max-height: 640px;
   margin-left: 10px;
-  // margin-top: 12px;
   border: 1px solid black;
   grid-area: m;
   display: flex;
@@ -25,27 +22,16 @@
 }
 
 .review-flashcards-container {
-  // background-color: rgb(250, 184, 250);
   display: flex;
-  // border: 1px solid black;
   min-width: 440px;
   flex-direction: column;
-  // border: 1px solid black;
   background-color: white;
-  // box-shadow: 4px 4px 2px -2px gray;
-  // padding: 12px;
-  // margin: 0px 10px;
   align-items: center;
   grid-area: c;
 }
 
 .add-flashcard-container {
-  // background-color: rgb(232, 237, 238);
   min-width: 500px;
-  // width: 500px;
-  // border: 1px solid black;
-  // border: 1px solid black;
-  // box-shadow: 4px 4px 2px -2px gray;
   grid-area: e;
   display: flex;
   flex-direction: column;
@@ -53,14 +39,7 @@
 }
 
 button {
-  border: 1px solid var(--focus-purple);
   border-radius: 1rem;
-  color: var(--focus-purple);
   cursor: pointer;
-  display: inline-block;
   height: 2rem;
-  line-height: calc(2rem - 2px);
-  margin: 0;
-  outline: none;
-  padding: 0;
 }

@@ -2,121 +2,54 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.add-flashcards-header-container {
-  display: flex;
-  justify-content: center;
-  font-size: 40px;
-  width: 448px;
-  height: 53px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  padding: 5px 0px 5px 0px;
-  // margin-left: 10px;
-  display: flex;
-  align-items:center;
-  flex-direction: row;
-  // border: 1px solid black;
   
-    .add-flashcards-language-dropdown {
-      margin-left: 150px;
-    }
-    .run-code-title {
-      // align-self: flex-end;
-      margin-right: 80px;
-      margin-top: 20px;
-      // margin-bottom: 10px;
-      color: white;
-      // border: 1px solid black;
-      padding: 5px 18px 5px 18px;
-      // border-radius: 25px;
-      font-size: 12px;
-      text-transform: uppercase;
-    }
-}
-
-.add-card-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #DC143C;
-  padding: 10px;
-}
-
-.output-wrapper {
-  display: flex;
-  justify-content: space-between;
-  background-color: black;
-
-  .output-text-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: black;
-      width: 415px;
-      font-size: 12px;
-      color: white;
-  }
-
-  .output-text {
-    display: flex;
-    align-items: center;
-    max-width: 420px;
-    color: white;
+  .capitalized-button, .run-code-button {
+    width: 170px;
+    height: 35px;
+    letter-spacing: 0.5px;
+    line-height: 20px;
+    margin: 12px;
+    border-radius: 25px;
+    padding: 0 10px 0 10px;
+    font-size: 11px;
     background-color: black;
-    font-size: small;
+    color: white;
+    text-transform: uppercase;
     font-family: 'Roboto Slab', serif;
+    font-weight: bolder;
+    border: none;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: white;
+      color: black;
+      border: 1px solid black;
+    }
   }
-}
+  
+  .run-code-button {
+    width: 110px;
+    font-size: 12px;
+  }
+  
+  .card-output-wrapper {
+    display: flex;
+    justify-content: center;
+    background-color: #181818;
+    width: 430px;
+    height: 185px;
+    padding-top: 8px;
+  }
 
-.divider {
-  height: 8px;
-  background-color: blue;
-}
+  .divider {
+    height: 8px;
+  }
 
-.capitalized-button, .run-code-button {
-  width: 170px;
-  height: 35px;
-  letter-spacing: 0.5px;
-  line-height: 20px;
-  margin: 12px;
-  border-radius: 25px;
-  padding: 0 10px 0 10px;
-  font-size: 11px;
-  background-color: black;
-  color: white;
-  text-transform: uppercase;
-  font-family: 'Roboto Slab', serif;
-  font-weight: bolder;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
+  .code-output-wrapper {
+    margin-top: 10px;
+    padding: 10px;
     background-color: white;
-    color: black;
-    border: 1px solid black;
+    width: 410px;
+    height: 70px;
   }
-}
-
-.run-code-button {
-  width: 110px;
-  font-size: 12px;
-}
-
-.code-output-wrapper {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: white;
-  width: 410px;
-  height: 70px;
-}
-
-.card-output-wrapper {
-  display: flex;
-  justify-content: center;
-  background-color: #181818;
-  width: 430px;
-  height: 185px;
-  padding-top: 8px;
 }

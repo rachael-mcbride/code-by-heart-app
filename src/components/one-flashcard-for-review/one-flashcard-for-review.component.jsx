@@ -6,6 +6,10 @@ import PropTypes from "prop-types";
 
 import './one-flashcard-for-review.styles.scss'
 
+const sleep = (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 const OneFlashCardForReview = ({ currentCard, cardBackReveal, 
       revealCardAnswerFunc, submitDifficultyLevel }) => {
 
@@ -74,6 +78,6 @@ OneFlashCardForReview.propTypes = {
     previous_repetitions: PropTypes.number,
     total_times_reviewed: PropTypes.number,
   })
-};
+}
 
 export default OneFlashCardForReview;

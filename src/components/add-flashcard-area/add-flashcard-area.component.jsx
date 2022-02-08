@@ -15,7 +15,6 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
 
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
-    console.log(newLanguage);
     setLanguage(newLanguage.toLowerCase());
   };
 
@@ -48,10 +47,9 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
           } else {
             setCodeInOutputContainer(response.data)
           }
-        // console.log(response.data)
       })
       .catch((error) => {
-          console.log("there was an error:", error);
+          console.log(error);
       });
     }
   };
@@ -68,9 +66,8 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
                         "back": newFlashcardBack, 
                         "language" : language.toLowerCase() }
         createNewFlashcard(newData);
-        console.log("language:", language)
-        // tell user the card addition went through + clean up 
         setCodeInOutputContainer("Your card was successfully added.")
+        // clean up 
         setNewFlashcardFront("");
         setNewFlashcardBack("");
     }
@@ -79,7 +76,6 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
   // useEffect to make sure language is always up-to-date // 
   useEffect(() => {
     handleLanguageChange(language)
-    console.log("current language:", language)
   }, [language]); 
 
   return (

@@ -6,8 +6,10 @@ import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/ext-beautify';
 import "ace-builds/src-noconflict/theme-github";
 
-const EditableAceEditor = ({ language, code, placeholderText, height, 
-                              width, updateCode, showLineNums, theme }) => {
+import "./ace-editor.styles.scss"
+
+const CustomAceEditor = ({ language, code, placeholderText, height, width,
+                              readOnly, updateCode, showLineNums, theme }) => {
   // set language mode 
   const specialCases = {
     "nodejs" : "javascript",
@@ -30,7 +32,6 @@ const EditableAceEditor = ({ language, code, placeholderText, height,
       width: width,            
       }}
     theme={theme}
-    name='basic-code-editor' 
     placeholder={placeholderText}
     tabSize={tabSize}
     value={code}
@@ -45,13 +46,13 @@ const EditableAceEditor = ({ language, code, placeholderText, height,
         enableLiveAutocompletion: false,
         enableSnippets: false,
         showLineNumbers: showLineNums,
-        readOnly: false,
+        readOnly: readOnly,
         cursorStyle: "slim"
     }}              
   />)
 };
 
-EditableAceEditor.propTypes = {
+CustomAceEditor.propTypes = {
   language: PropTypes.string,
   code: PropTypes.string,
   placeholderText: PropTypes.string,
@@ -59,7 +60,8 @@ EditableAceEditor.propTypes = {
   width: PropTypes.string,
   theme: PropTypes.string,
   updateCode: PropTypes.func,
-  showLineNums: PropTypes.bool
+  showLineNums: PropTypes.bool,
+  readOnly: PropTypes.bool
 };
 
-export default EditableAceEditor;
+export default CustomAceEditor;

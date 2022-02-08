@@ -3,7 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 
 import LanguageDropDown from '../language-drop-down/language-drop-down.component'
-import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
+import CustomAceEditor from '../ace-editor/ace-editor.component'
 
 import './add-flashcard-area.styles.scss'
 
@@ -101,40 +101,40 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
 
       <div className="add-card-area">
         <div className="card-output-wrapper">
-            <EditableAceEditor 
+            <CustomAceEditor 
               language={language}
               code={newFlashcardFront}
               theme={"chaos"}
               showLineNums={true}
+              readOnly={false}
               updateCode={updateCardFront}
               height={"185px"}
               width={"430px"}
-              placeholderText={"FLASHCARD FRONT"}>
-            </EditableAceEditor>
+              placeholderText={"FLASHCARD FRONT"} />
           </div>
           <div className="divider"></div>
           <div className="card-output-wrapper">
-            <EditableAceEditor 
+            <CustomAceEditor 
               language={language}
               theme={"chaos"}
               showLineNums={true}
+              readOnly={false}
               code={newFlashcardBack}
               updateCode={updateCardBack}
               height={"185px"}
               width={"430px"}
-              placeholderText={"FLASHCARD BACK"}>
-            </EditableAceEditor>
+              placeholderText={"FLASHCARD BACK"} />
           </div>
           <div className="code-output-wrapper">
-            <EditableAceEditor 
+            <CustomAceEditor 
               language={language}
               showLineNums={false}
+              readOnly={true}
               code={codeInOutputContainer}
               updateCode={updateOutputContainer}
               theme={"github"}
               width={"410px"}
-              height={"70px"}>
-            </EditableAceEditor>
+              height={"75px"} />
           </div>
       </div>
       {currentDeckId && // only render button if a deck has been selected

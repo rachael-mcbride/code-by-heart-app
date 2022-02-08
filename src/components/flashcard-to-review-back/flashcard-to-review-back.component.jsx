@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from "prop-types";
 
-import FixedAceEditor from '../ace-editor/fixed-ace-editor.component';
+import CustomAceEditor from '../ace-editor/ace-editor.component';
 
 import './flashcard-to-review-back.styles.scss'
 
@@ -12,11 +12,16 @@ const FlashcardBack = (
   // update back of card's Ace editor component when the backMsg changes
   useEffect(() => {
     setCardBack(
-    <FixedAceEditor 
-      msg={backMsg} 
+      <CustomAceEditor 
+      code={backMsg} 
+      theme={"github"}
+      placeholderText={""}
       language={language} 
       height={'230px'} 
-      width={'360px'}/>)
+      width={'360px'}
+      readOnly={true} 
+      showLineNums={false}
+    />)
   }, [backMsg]);
     
   if (cardBackReveal === true) {

@@ -2,8 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import FixedAceEditor from '../ace-editor/fixed-ace-editor.component';
-import EditableAceEditor from '../ace-editor/editable-ace-editor.component';
+import CustomAceEditor from '../ace-editor/ace-editor.component';
 
 import './one-flashcard-details.styles.scss'
 
@@ -18,9 +17,7 @@ const OneFlashcardDetails = ({ flashcard }) => {
     "Objc" : "Objective C",
     "Php" : "PHP"
   }
-  if (language in specialLangCases) {
-    language = specialLangCases[language]
-  }
+  language = (language in specialLangCases) ? specialLangCases[language] : language;
 
   // other attributes to display in "card details" box 
   const reviewDate = String(new Date(flashcard.date_to_review)).slice(0, 21);
@@ -70,7 +67,6 @@ const OneFlashcardDetails = ({ flashcard }) => {
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${flashcard.id}`, newData)
       .then((response) => {
-        // console.log(response.data);
         setEditButtonBackClicked(false);
       })
       .catch((error) => {
@@ -117,17 +113,20 @@ const OneFlashcardDetails = ({ flashcard }) => {
           </div> }
       </div>
 
+    {/* CARD FRONT  */}
     {/* renders fixed or editable area based on 'editButtonFrontClicked' state */}
       <div>
         { editButtonFrontClicked ? (
           <div className="flashcard-container">
             <div className="flashcard-side">Front</div>
             <div className="ace-editor-in-flashcard">
-              <EditableAceEditor 
+              <CustomAceEditor 
                 placeholderText={"Click \"save\" when you are done editing."} 
                 code={newFlashcardFront}
                 language={flashcard.language}
                 updateCode={updateCardFront}
+                readOnly={false}
+                theme={"github"}
                 showLineNums={false}
                 height={'95px'}
                 width={'300px'}/> 
@@ -139,9 +138,13 @@ const OneFlashcardDetails = ({ flashcard }) => {
           <div className="flashcard-container">
             <div className="flashcard-side">Front</div>
             <div className="ace-editor-in-flashcard">
-              <FixedAceEditor 
-                msg={newFlashcardFront} 
+              <CustomAceEditor 
+                code={newFlashcardFront} 
                 language={flashcard.language}
+                placeholderText={""} 
+                theme={"github"}
+                showLineNums={false}
+                readOnly={true}
                 height={'95px'}
                 width={'300px'}/>
               <EditButton onClick={editFlashcardFront}>Edit</EditButton>
@@ -149,18 +152,21 @@ const OneFlashcardDetails = ({ flashcard }) => {
           </div>) }
       </div>
 
+    {/* CARD BACK  */}
     {/* renders fixed or editable area based on 'editButtonBackClicked' state */}
       <div>
         { editButtonBackClicked ? (
           <div className="flashcard-container">
             <div className="flashcard-side">Back</div>
             <div className="ace-editor-in-flashcard">
-              <EditableAceEditor 
+              <CustomAceEditor 
                 placeholderText={"Click \"save\" when you are done editing."} 
+                theme={"github"}
                 code={newFlashcardBack}
                 language={flashcard.language}
                 updateCode={updateCardBack}
                 showLineNums={false}
+                readOnly={false}
                 height={'95px'}
                 width={'300px'}/> 
               <EditButton onClick={saveFlashcardBack}>Save</EditButton>
@@ -171,9 +177,13 @@ const OneFlashcardDetails = ({ flashcard }) => {
           <div className="flashcard-container">
             <div className="flashcard-side">Back</div>
             <div className="ace-editor-in-flashcard">
-              <FixedAceEditor 
-                msg={newFlashcardBack} 
+              <CustomAceEditor 
+                code={newFlashcardBack} 
+                placeholderText={""} 
                 language={flashcard.language}
+                showLineNums={false}
+                readOnly={true}
+                theme={"github"}
                 height={'95px'}
                 width={'300px'}/>
               <EditButton onClick={editFlashcardBack}>Edit</EditButton>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import LanguageDropDown from '../language-drop-down/language-drop-down.component'
-import EditableAceEditor from '../ace-editor/editable-ace-editor.component'
+import CustomAceEditor from '../ace-editor/ace-editor.component'
 
 import './practice-code-sandbox.styles.scss'
 
@@ -74,27 +74,27 @@ const PracticeCodeSandbox = () => {
 
       <div className="add-card-area">
           <div className="sandbox-output-wrapper">
-            <EditableAceEditor 
+            <CustomAceEditor 
               language={language}
               showLineNums={true}
+              readOnly={false}
               code={codeInInputContainer}
               updateCode={updateInputContainer}
               theme={"chaos"}
               width={"430px"}
               height={"435px"}
-              placeholderText="TYPE CODE HERE">
-            </EditableAceEditor>
+              placeholderText="TYPE CODE HERE" />
           </div>
           <div className="code-output-wrapper">
-            <EditableAceEditor 
+            <CustomAceEditor 
               language={language}
               showLineNums={false}
+              readOnly={true}
               code={codeInOutputContainer}
               updateCode={updateOutputContainer}
               theme={"github"}
               width={"410px"}
-              height={"60px"} >
-            </EditableAceEditor>
+              height={"75px"} />
           </div>
         </div>
       </div>

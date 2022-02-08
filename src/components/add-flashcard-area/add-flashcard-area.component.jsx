@@ -17,15 +17,19 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
   const handleLanguageChange = (newLanguage) => {
     console.log(newLanguage);
     setLanguage(newLanguage.toLowerCase());
-  }
+  };
 
   const updateCardFront = (event) => {
     setNewFlashcardFront(event)
-  }
+  };
 
   const updateCardBack = (event) => {
     setNewFlashcardBack(event)
-  }
+  };
+
+  const updateOutputContainer = (event) => {
+    setCodeInOutputContainer(event)
+  };
 
   // func that will call the Jdoodle code compiler // 
   const runCode = () => {
@@ -50,7 +54,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
           console.log("there was an error:", error);
       });
     }
-  }
+  };
 
   // func that will add card to the DB // 
   const submitNewCard = (event) => {
@@ -96,31 +100,41 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
       </div>
 
       <div className="add-card-area">
-          <EditableAceEditor 
-            language={language}
-            code={newFlashcardFront}
-            showLineNums={true}
-            updateCode={updateCardFront}
-            height={"205px"}
-            width={"430px"}
-            placeholderText={"Front of new flashcard"}>
-          </EditableAceEditor>
+        <div className="card-output-wrapper">
+            <EditableAceEditor 
+              language={language}
+              code={newFlashcardFront}
+              theme={"chaos"}
+              showLineNums={true}
+              updateCode={updateCardFront}
+              height={"185px"}
+              width={"430px"}
+              placeholderText={"FLASHCARD FRONT"}>
+            </EditableAceEditor>
+          </div>
           <div className="divider"></div>
-          <EditableAceEditor 
-            language={language}
-            showLineNums={true}
-            code={newFlashcardBack}
-            updateCode={updateCardBack}
-            height={"205px"}
-            width={"430px"}
-            placeholderText={"Back of new flashcard"}>
-          </EditableAceEditor>
-          <div className='output-wrapper'>
-            <div className='output-text-container'>
-              <div className='output-text'>
-                {codeInOutputContainer}
-              </div>
-            </div>
+          <div className="card-output-wrapper">
+            <EditableAceEditor 
+              language={language}
+              theme={"chaos"}
+              showLineNums={true}
+              code={newFlashcardBack}
+              updateCode={updateCardBack}
+              height={"185px"}
+              width={"430px"}
+              placeholderText={"FLASHCARD BACK"}>
+            </EditableAceEditor>
+          </div>
+          <div className="code-output-wrapper">
+            <EditableAceEditor 
+              language={language}
+              showLineNums={false}
+              code={codeInOutputContainer}
+              updateCode={updateOutputContainer}
+              theme={"github"}
+              width={"410px"}
+              height={"70px"}>
+            </EditableAceEditor>
           </div>
       </div>
       {currentDeckId && // only render button if a deck has been selected

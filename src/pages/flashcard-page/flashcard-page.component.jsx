@@ -51,9 +51,8 @@ const FlashcardPage = ({ currentUser}  ) => {
     }
     console.log("backend url:", process.env.REACT_APP_BACKEND_URL)
     axios
-      .post(`https://codebyheart-backend.herokuapp.com/load-user-decks`, userData)
+      .post(`${process.env.REACT_APP_BACKEND_URL}/load-user-decks`, userData)
       .then((response) => {
-        console.log("this is the specific response:", response)
         setDecksData(response.data);
       })
       .catch((error) => {
@@ -68,7 +67,6 @@ const FlashcardPage = ({ currentUser}  ) => {
     axios
     .post(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentUser.id}`, newDeckData)
     .then((response) => {
-      // console.log("response:", response.data);
       const decks = [...decksData];
       decks.push(response.data);
       setDecksData(decks);

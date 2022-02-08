@@ -23,80 +23,38 @@
     margin-left: 150px;
   }
   .run-code-title {
-    // align-self: flex-end;
     margin-right: 80px;
     margin-top: 20px;
-    // margin-bottom: 10px;
     color: white;
-    // border: 1px solid black;
     padding: 5px 18px 5px 18px;
-    // border-radius: 25px;
     font-size: 12px;
     text-transform: uppercase;
   }
+}
+
+.code-output-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 410px;
+  height: 75px;
 }
 
 .add-card-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: black;
+  background-color: #DC143C;
+  box-shadow: 4px 4px 2px -2px gray;
+  border: 1px solid black;
   padding: 10px;
 }
 
-// .output-wrapper {
-//   // display: flex;
-//   // justify-content: center;
-//   // align-items: center;
-//   width: 380px;
-//   height: 50px;
-//   background-color: black;
-
-//   .output-text-container {
-//     // display: flex;
-//     // align-items: center;
-//     // justify-content: center;
-//   }
-
-//   .output-text {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     color: rgb(238, 237, 237);
-//     margin: 27px 0px 20px 0px;
-//     font-size: small;
-//     font-family: 'Roboto Slab', serif;
-//   }
-// }
-
-.output-text-container {
+.sandbox-output-wrapper {
   display: flex;
-  align-items: center;
-  background-color: black;
-  margin-top: 5px;
-  height: 70px;
-  font-size: 12px;
-  color: white;
-
-  .output-text {
-    display: flex;
-    // align-items: center;
-    max-width: 420px;
-    color: white;
-    background-color: black;
-    font-size: small;
-    font-family: 'Roboto Slab', serif;
-  }
+  justify-content: center;
+  background-color: #181818;
+  padding-top: 8px;
+  width: 430px;
 }
-
-
-// .output-text {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   color: black;
-//   // color: rgb(238, 237, 237);
-//   margin: 27px 0px 20px 0px;
-//   font-size: small;
-//   font-family: 'Roboto Slab', serif;
-// }

@@ -34,7 +34,7 @@ const FixedAceEditor = ({ msg, language, height, width, editFlashcard }) => {
       mode={mode}
       theme='github'
       name='basic-code-editor'
-      fontSize={12}
+      fontSize={13}
       tabSize={tabSize}
       showPrintMargin={false}
       showGutter={false}

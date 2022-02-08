@@ -7,7 +7,7 @@ import 'ace-builds/src-noconflict/ext-beautify';
 import "ace-builds/src-noconflict/theme-github";
 
 const EditableAceEditor = ({ language, code, placeholderText, height, 
-                              width, updateCode, showLineNums }) => {
+                              width, updateCode, showLineNums, theme }) => {
   // set language mode 
   const specialCases = {
     "nodejs" : "javascript",
@@ -29,14 +29,14 @@ const EditableAceEditor = ({ language, code, placeholderText, height,
       height: height,
       width: width,            
       }}
-    theme='github'
+    theme={theme}
     name='basic-code-editor' 
     placeholder={placeholderText}
     tabSize={tabSize}
     value={code}
     mode={mode}
     onChange={(event) => updateCode(event)}
-    fontSize={12}
+    fontSize={13}
     showPrintMargin={false}
     showGutter={showLineNums}
     highlightActiveLine={false}
@@ -57,6 +57,7 @@ EditableAceEditor.propTypes = {
   placeholderText: PropTypes.string,
   height: PropTypes.string,
   width: PropTypes.string,
+  theme: PropTypes.string,
   updateCode: PropTypes.func,
   showLineNums: PropTypes.bool
 };

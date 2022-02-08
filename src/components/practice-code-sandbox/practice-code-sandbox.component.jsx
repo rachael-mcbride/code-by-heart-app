@@ -21,11 +21,15 @@ const PracticeCodeSandbox = () => {
   // funcs that update states // 
   const handleLanguageChange = (newLanguage) => {
     setLanguage(newLanguage);
-  }
+  };
 
   const updateInputContainer = (event) => {
     setCodeInIntputContainer(event)
-  }
+  };
+
+  const updateOutputContainer = (event) => {
+    setCodeInOutputContainer(event)
+  };
 
   // func that will call the Jdoodle code compiler // 
   const runCode = () => {
@@ -36,15 +40,14 @@ const PracticeCodeSandbox = () => {
       axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/compile`, compileData)
       .then((response) => {
-          // note: empty objs and arrays are a special case 
+          // note: empty objs + non-empty arrays are special cases
           if (JSON.stringify(response.data) === '{}') { 
             setCodeInOutputContainer(`${`{}`}`)
-          } else if (JSON.stringify(response.data) === '[]') {
-            setCodeInOutputContainer(`${`[]`}`)
+          } else if (Array.isArray(response.data)) {
+            setCodeInOutputContainer(`${`[${response.data}]`}`)
           } else {
             setCodeInOutputContainer(response.data)
           }
-        // console.log(response.data)
       })
       .catch((error) => {
           console.log("there was an error:", error);
@@ -70,19 +73,28 @@ const PracticeCodeSandbox = () => {
       </div>
 
       <div className="add-card-area">
-          <EditableAceEditor 
-            language={language}
-            showLineNums={true}
-            code={codeInInputContainer}
-            updateCode={updateInputContainer}
-            width={"430px"}
-            height={"470px"}
-            placeholderText="Select a language and type some code here.">
-          </EditableAceEditor>
-          <div className='output-text-container'>
-            <div className='output-text'>
-              {codeInOutputContainer}
-            </div>
+          <div className="sandbox-output-wrapper">
+            <EditableAceEditor 
+              language={language}
+              showLineNums={true}
+              code={codeInInputContainer}
+              updateCode={updateInputContainer}
+              theme={"chaos"}
+              width={"430px"}
+              height={"430px"}
+              placeholderText="TYPE CODE HERE">
+            </EditableAceEditor>
+          </div>
+          <div className="code-output-wrapper">
+            <EditableAceEditor 
+              language={language}
+              showLineNums={false}
+              code={codeInOutputContainer}
+              updateCode={updateOutputContainer}
+              theme={"github"}
+              width={"410px"}
+              height={"60px"} >
+            </EditableAceEditor>
           </div>
         </div>
       </div>

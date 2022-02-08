@@ -35,7 +35,7 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
       padding: 11,
     }),
     control: () => ({
-      width: 100,
+      width: 110,
       fontSize: 14,
       fontFamily: 'Roboto Slab', 
       color: '#DC143C',
@@ -67,7 +67,7 @@ const LanguageDropDown = ({ language, handleLanguageChange, includesMarkdown }) 
         onChange={setSelectedOption}
         options={options}
         styles={languageStyles}
-        width='60px'
+        // width='65px'
         components={{ NoOptionsMessage }}
       />
     </div>

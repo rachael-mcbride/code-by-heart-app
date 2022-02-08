@@ -6,7 +6,7 @@ import './new-deck.styles.scss';
 const NewDeck = ({ createNewDeck }) => {
   const [formFields, setFormFields] = useState("");
 
-  // this prevents user from adding a deck with no name  
+  // prevents user from adding a deck with no name  
   const newDeckIsEnabled = formFields.length > 0;
 
   const onNameChange = (event) => {
@@ -18,8 +18,7 @@ const NewDeck = ({ createNewDeck }) => {
     createNewDeck({
       name: formFields
     });
-    // console.log(formFields)
-    setFormFields(""); // reset form
+    setFormFields({ "name" : "" }); // reset form
   };
 
   return (

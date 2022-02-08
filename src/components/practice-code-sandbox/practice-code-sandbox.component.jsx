@@ -81,7 +81,7 @@ const PracticeCodeSandbox = () => {
               updateCode={updateInputContainer}
               theme={"chaos"}
               width={"430px"}
-              height={"430px"}
+              height={"435px"}
               placeholderText="TYPE CODE HERE">
             </EditableAceEditor>
           </div>

@@ -10,7 +10,7 @@ import './add-flashcard-area.styles.scss'
 const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeckId }) => {
   const [newFlashcardFront, setNewFlashcardFront] = useState("");
   const [newFlashcardBack, setNewFlashcardBack] = useState("");
-  const [codeInOutputContainer, setCodeInOutputContainer] = useState(null);
+  const [codeInOutputContainer, setCodeInOutputContainer] = useState("");
   const [language, setLanguage] = useState("not selected");
 
   // funcs that update states // 
@@ -19,15 +19,15 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
   };
 
   const updateCardFront = (event) => {
-    setNewFlashcardFront(event)
+    setNewFlashcardFront(event.toString())
   };
 
   const updateCardBack = (event) => {
-    setNewFlashcardBack(event)
+    setNewFlashcardBack(event.toString())
   };
 
   const updateOutputContainer = (event) => {
-    setCodeInOutputContainer(event)
+    setCodeInOutputContainer(event.toString())
   };
 
   // func that will call the Jdoodle code compiler // 
@@ -41,9 +41,11 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
       .then((response) => {
           // note: empty objs and arrays are a special case 
           if (JSON.stringify(response.data) === '{}') { 
-            setCodeInOutputContainer(`${`{}`}`)
+            setCodeInOutputContainer(`${`{}\n`}`)
           } else if (JSON.stringify(response.data) === '[]') {
-            setCodeInOutputContainer(`${`[]`}`)
+            setCodeInOutputContainer(`${`[]\n`}`)
+          } else if (Array.isArray(response.data)) {
+            setCodeInOutputContainer(JSON.stringify(response.data) + "\n")
           } else {
             setCodeInOutputContainer(response.data)
           }

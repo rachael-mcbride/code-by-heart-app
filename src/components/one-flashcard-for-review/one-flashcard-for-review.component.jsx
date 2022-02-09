@@ -65,7 +65,10 @@ OneFlashCardForReview.propTypes = {
   submitDifficultyLevel: PropTypes.func,
   currentCard: PropTypes.shape({
     back: PropTypes.string,
-    date_to_review: PropTypes.string,
+    date_to_review: PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.string
+    ]),
     deck_id: PropTypes.number,
     difficulty_level: PropTypes.number,
     front: PropTypes.string,

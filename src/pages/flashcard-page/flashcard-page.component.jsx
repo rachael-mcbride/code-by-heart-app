@@ -12,10 +12,7 @@ import ReviewFlashcardsMsg from '../../components/review-flashcards-msg/review-f
 
 import './flashcard-page.styles.scss'
 
-const FlashcardPage = ({ currentUser}  ) => {
-  console.log("currentuser:", currentUser)
-
-
+const FlashcardPage = ({ currentUser }) => {
   // conditional rendering states // 
   const [deckDetailsButtonClicked, setDeckDetailsButtonClicked] = useState(false);
   const [addNewCardAreaRenders, setAddNewCardAreaRenders] = useState(false);
@@ -49,14 +46,13 @@ const FlashcardPage = ({ currentUser}  ) => {
       displayName: currentUser.displayName,
       email: currentUser.email
     }
-    console.log("backend url:", process.env.REACT_APP_BACKEND_URL)
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/load-user-decks`, userData)
       .then((response) => {
         setDecksData(response.data);
       })
       .catch((error) => {
-        console.log("there was an error", error);
+        console.log(error);
       });
   };
 
@@ -72,7 +68,7 @@ const FlashcardPage = ({ currentUser}  ) => {
       setDecksData(decks);
     })
     .catch((error) => {
-      console.log("error:", error)
+      console.log(error)
     });
   };
 
@@ -88,7 +84,6 @@ const FlashcardPage = ({ currentUser}  ) => {
     axios
       .delete(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentDeck.id}`)
       .then((response) => {
-        // console.log(response);
         const updatedDecksData = decksData.filter(
           (deck) => deck.id !== currentDeck.id
         );
@@ -106,7 +101,6 @@ const FlashcardPage = ({ currentUser}  ) => {
   // Flashcard methods // 
   const loadFlashcards = () => {
     if (currentDeck.id === null || currentDeck.id === "") {
-      console.log('User has signed in, but no deck has been selected yet.');
       return;
     } else {
       axios
@@ -135,7 +129,6 @@ const FlashcardPage = ({ currentUser}  ) => {
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/decks/${currentDeck.id}/flashcards`, newCardData)
       .then((response) => {
-        // console.log("Response:", response);
         const updatedCardsData  = [...flashcardsData];
         updatedCardsData.push(response.data);
         setFlashcardsData(updatedCardsData);
@@ -143,7 +136,7 @@ const FlashcardPage = ({ currentUser}  ) => {
         setCurrentUpForReviewCardsInDeck(currentUpForReviewCardsInDeck+1);
       })
       .catch((error) => {
-        console.log("Error:", error);
+        console.log(error);
       });
   };
 
@@ -152,12 +145,10 @@ const FlashcardPage = ({ currentUser}  ) => {
   };
 
   const deleteFlashcard = () => {
-    console.log('click')
     axios
     // `${process.env.REACT_APP_BACKEND_URL}/flashcards/${currentCard.id}`
       .delete(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${currentCard.id}`)
       .then((response) => {
-        // console.log(response);
         const updatedCardsData = flashcardsData.filter(
           (card) => card.id !== currentCard.id
         );
@@ -184,9 +175,6 @@ const FlashcardPage = ({ currentUser}  ) => {
     } else {
       setCurrentCard(nextCard);
     }
-    // console.log("idx of next card in deck:", idxOfNextCard);
-    // console.log("next card details:", nextCard);
-    // console.log("current deck length:", currentDeckLength);
   }
 
   // useEffects // 
@@ -223,7 +211,6 @@ const FlashcardPage = ({ currentUser}  ) => {
   // as well as the numerical data for that deck
   useEffect(() => {
     updateCurrentDeck(currentDeck);
-    // console.log("flashcards data:", flashcardsData)
   }, [currentDeck, flashcardsData]);
 
 

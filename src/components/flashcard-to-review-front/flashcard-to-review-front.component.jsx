@@ -14,7 +14,7 @@ const FlashcardFront = ({ frontMsg, language }) => {
           placeholderText={""}
           language={language} 
           height={'230px'} 
-          width={'360px'}
+          width={'375px'}
           readOnly={true} 
           showLineNums={false}
         />

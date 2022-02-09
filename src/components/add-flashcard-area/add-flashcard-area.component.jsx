@@ -100,7 +100,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
             <CustomAceEditor 
               language={language}
               code={newFlashcardFront}
-              theme={"chaos"}
+              theme={"dracula"}
               showLineNums={true}
               readOnly={false}
               updateCode={updateCardFront}
@@ -112,7 +112,7 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
           <div className="card-output-wrapper">
             <CustomAceEditor 
               language={language}
-              theme={"chaos"}
+              theme={"dracula"}
               showLineNums={true}
               readOnly={false}
               code={newFlashcardBack}

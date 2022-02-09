@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
@@ -17,9 +17,8 @@ class App extends React.Component {
     };
   }
 
-  unsubscribeFromAuth = null; 
+  unsubscribeFromAuth = null;
 
-  // lets our app listen to authentication state changes
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
@@ -44,8 +43,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.currentUser)
-
     const SignInWrapper = ({ children, currentUser }) => {
       return currentUser ? <Navigate to="/flashcards" replace /> : children;
     };
@@ -80,65 +77,5 @@ class App extends React.Component {
     );
   }
 }
-
-
-// const App = () => {
-//   const [currentUser, setCurrentUser] = useState({ currentUser: null });
-//   let navigate = useNavigate();
-
-//   useEffect = (() => {
-//       if (auth.onAuthStateChanged) {
-//         const userRef = createUserProfileDocument(userAuth);
-//           userRef.onSnapshot((snapShot) => {
-//             setCurrentUser({
-//                 currentUser: {
-//                 id: snapShot.id,
-//                 ...snapShot.data(),
-//               },
-//             });
-//           });
-//       }
-//       setCurrentUser({ currentUser: userAuth });
-//   }, [userAuth]);
-
-//   const SignInWrapper = ({ children, currentUser }) => {
-//     navigate("/flashcards")
-//   };
-
-//   const SignOutWrapper = ({ children, currentUser }) => {
-//     navigate("/")
-//   };
-
-//   const handleSignIn = () => {
-//     signInWithGoogle()
-//     navigate("/flashcards")
-
-//   }
-
-//   return (
-//     <div>
-//       <Header currentUser={currentUser.currentUser} handleSignIn={handleSignIn} />
-//       <Routes>
-//         <Route
-//           path="/"
-//           element={
-//             <SignInWrapper currentUser={currentUser.currentUser}>
-//               <LandingPage />
-//             </SignInWrapper>
-//           }
-//         />
-//         <Route
-//           path="/flashcards"
-//           element={
-//             <SignOutWrapper currentUser={currentUser.currentUser}>
-//               <FlashcardPage currentUser={currentUser.currentUser} />
-//             </SignOutWrapper>
-//           }
-//         />
-//         <Route path="*" element={<NotFoundPage />} />
-//       </Routes>
-//     </div>
-//   ); 
-// };
 
 export default App;

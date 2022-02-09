@@ -29,7 +29,7 @@ const DecksList = ({ decksData, updateCurrentDeck, currentDeck }) => {
 DecksList.propTypes = {
   updateCurrentDeck: PropTypes.func,
   currentDeck: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     name: PropTypes.string,
     owner_id: PropTypes.string,
     num_total_cards: PropTypes.number,

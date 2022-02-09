@@ -4,7 +4,6 @@ import './deck-title.styles.scss'
 
 const DeckTitle = ({ updateCurrentDeck, deckData, selected }) => {
   const selectCurrentDeck = (event) => {
-    console.log(deckData)
     event.preventDefault()
     const newCurrentDeck = {
       id: deckData.id,

@@ -10,12 +10,14 @@ import "./ace-editor.styles.scss"
 
 const CustomAceEditor = ({ language, code, placeholderText, height, width,
                               readOnly, updateCode, showLineNums, theme }) => {
+
   // set language mode 
   const specialCases = {
     "nodejs" : "javascript",
     "cpp" : "c_cpp",
     "c" : "c_cpp",
     "objc" : "objectivec",
+    "go" : "golang",
     "plain text" : null
   }
   const mode = (language in specialCases) ? specialCases[language] : language;
@@ -54,7 +56,7 @@ const CustomAceEditor = ({ language, code, placeholderText, height, width,
 
 CustomAceEditor.propTypes = {
   language: PropTypes.string,
-  code: PropTypes.string,
+  // code: PropTypes.string,
   placeholderText: PropTypes.string,
   height: PropTypes.string,
   width: PropTypes.string,

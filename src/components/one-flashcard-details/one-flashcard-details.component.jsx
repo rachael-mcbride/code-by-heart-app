@@ -44,7 +44,6 @@ const OneFlashcardDetails = ({ flashcard }) => {
     axios
       .put(`${process.env.REACT_APP_BACKEND_URL}/flashcards/${flashcard.id}`, newData)
       .then((response) => {
-        console.log(response.data);
         setEditButtonFrontClicked(false);
       })
       .catch((error) => {
@@ -59,7 +58,6 @@ const OneFlashcardDetails = ({ flashcard }) => {
 
   const editFlashcardBack = (msg) => { 
     setEditButtonBackClicked(true);
-    // console.log(editButtonBackClicked)
   };
 
   const saveFlashcardBack = () => {

@@ -9,8 +9,6 @@ const Header = ({ currentUser }) => {
   // change header color conditionally
   const headerSignedIn = (currentUser) ? 'signed-in' : 'not-signed-in' ;
 
-  console.log("current user from header:", currentUser)
-
   return (
   <div className="header">
     <div className={headerSignedIn}>

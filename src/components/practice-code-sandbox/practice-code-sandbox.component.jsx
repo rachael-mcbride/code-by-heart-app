@@ -15,7 +15,6 @@ const PracticeCodeSandbox = () => {
   // make sure language is always up-to-date
   useEffect(() => {
     handleLanguageChange(language)
-    console.log("current language:", language)
   }, [language]); 
 
   // funcs that update states // 
@@ -80,7 +79,7 @@ const PracticeCodeSandbox = () => {
               readOnly={false}
               code={codeInInputContainer}
               updateCode={updateInputContainer}
-              theme={"chaos"}
+              theme={"dracula"}
               width={"430px"}
               height={"435px"}
               placeholderText="TYPE CODE HERE" />

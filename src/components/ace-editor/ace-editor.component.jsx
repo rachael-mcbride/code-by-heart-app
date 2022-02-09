@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import AceEditor from 'react-ace';
 import 'ace-builds/webpack-resolver'
 import 'ace-builds/src-noconflict/ext-language_tools';
@@ -18,7 +16,8 @@ const CustomAceEditor = ({ language, code, placeholderText, height, width,
     "c" : "c_cpp",
     "objc" : "objectivec",
     "go" : "golang",
-    "plain text" : null
+    "plain text" : null,
+    "not selected" : null
   }
   const mode = (language in specialCases) ? specialCases[language] : language;
 
@@ -52,18 +51,6 @@ const CustomAceEditor = ({ language, code, placeholderText, height, width,
         cursorStyle: "slim"
     }}              
   />)
-};
-
-CustomAceEditor.propTypes = {
-  language: PropTypes.string,
-  // code: PropTypes.string,
-  placeholderText: PropTypes.string,
-  height: PropTypes.string,
-  width: PropTypes.string,
-  theme: PropTypes.string,
-  updateCode: PropTypes.func,
-  showLineNums: PropTypes.bool,
-  readOnly: PropTypes.bool
 };
 
 export default CustomAceEditor;

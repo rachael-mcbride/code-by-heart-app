@@ -149,7 +149,10 @@ const AddFlashCardArea = ({ createNewFlashcard, cancelAddingNewCard, currentDeck
 AddFlashCardArea.propTypes = {
   createNewFlashcard: PropTypes.func,
   cancelAddingNewCard: PropTypes.func,
-  currentDeckId: PropTypes.string
+  currentDeckId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
 };
 
 export default AddFlashCardArea;

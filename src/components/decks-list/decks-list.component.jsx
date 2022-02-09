@@ -29,7 +29,10 @@ const DecksList = ({ decksData, updateCurrentDeck, currentDeck }) => {
 DecksList.propTypes = {
   updateCurrentDeck: PropTypes.func,
   currentDeck: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]),
     name: PropTypes.string,
     owner_id: PropTypes.string,
     num_total_cards: PropTypes.number,
@@ -37,7 +40,10 @@ DecksList.propTypes = {
   }),
   decksData: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
+      id: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+      ]),
       name: PropTypes.string,
       owner_id: PropTypes.string,
       num_total_cards: PropTypes.number,

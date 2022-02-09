@@ -75,7 +75,7 @@ const ReviewFlashcardsArea = (
 ReviewFlashcardsArea.propTypes = {
   currentCard: PropTypes.shape({
     back: PropTypes.string,
-    date_to_review: PropTypes.string,
+    date_to_review: PropTypes.instanceof(Date),
     deck_id: PropTypes.number,
     difficulty_level: PropTypes.number,
     front: PropTypes.string,

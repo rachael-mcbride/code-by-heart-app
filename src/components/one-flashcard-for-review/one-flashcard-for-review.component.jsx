@@ -49,7 +49,7 @@ const OneFlashCardForReview = ({ currentCard, cardBackReveal,
       : 
       (<div className="review-session-finished">
         <div className="review-session-finished-msg">
-          <div>No cards currently up-for-review</div>
+          <div>No cards currently up for review</div>
         </div>
         <div className='logo-wrapper'>
           <Logo className='logo' />

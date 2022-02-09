@@ -39,20 +39,22 @@ const PracticeCodeSandbox = () => {
       axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/compile`, compileData)
       .then((response) => {
-          // note: empty objs + non-empty arrays are special cases
-          if (JSON.stringify(response.data) === '{}') { 
-            setCodeInOutputContainer(`${`{}`}`)
-          } else if (Array.isArray(response.data)) {
-            setCodeInOutputContainer(`${`[${response.data}]`}`)
+        let data = response.data;
+          if (JSON.stringify(data) === '{}') { 
+            setCodeInOutputContainer(`${`{}\n`}`)
+          } else if (JSON.stringify(data) === '[]') {
+            setCodeInOutputContainer(`${`[]\n`}`)
+          } else if (Array.isArray(data) || (Number.isInteger(data))) {
+            setCodeInOutputContainer(JSON.stringify(data) + "\n")
           } else {
-            setCodeInOutputContainer(response.data)
+            setCodeInOutputContainer(data)
           }
       })
       .catch((error) => {
-          console.log("there was an error:", error);
+          console.log(error);
       });
     }
-  }
+  };
 
   return (
     <div className="add-flashcards-container">

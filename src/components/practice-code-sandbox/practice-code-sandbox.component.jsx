@@ -44,7 +44,7 @@ const PracticeCodeSandbox = () => {
             setCodeInOutputContainer(`${`{}\n`}`)
           } else if (JSON.stringify(data) === '[]') {
             setCodeInOutputContainer(`${`[]\n`}`)
-          } else if (Array.isArray(data) || (Number.isInteger(data))) {
+          } else if (Array.isArray(data) || (Number.isFinite(data))) {
             setCodeInOutputContainer(JSON.stringify(data) + "\n")
           } else {
             setCodeInOutputContainer(data)

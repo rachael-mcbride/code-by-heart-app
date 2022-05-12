@@ -24,7 +24,7 @@ JDOODLE_CLIENT_SECRET=whatever_your_client_secret_is
 7. To start up the backend, run `flask run`. 
 
 ### Frontend 
-1. Clone this other repository. 
+1. Clone this repository. 
 2. Install dependencies by running `npm install` or `yarn install`.
 3. Create a `.env` file and add this line: `REACT_APP_BACKEND_URL=whatever_your_backend_url_will_be`. For example: `REACT_APP_BACKEND_URL=http://127.0.0.1:5000`.
 4. To start up the frontend, run `yarn start` (or npm).  

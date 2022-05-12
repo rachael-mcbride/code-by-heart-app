@@ -6,12 +6,12 @@ import PropTypes from "prop-types";
 
 import './one-flashcard-for-review.styles.scss'
 
-const sleep = (ms) => {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-};
-
-const OneFlashCardForReview = ({ currentCard, cardBackReveal, 
-      revealCardAnswerFunc, submitDifficultyLevel }) => {
+const OneFlashCardForReview = ({ 
+  currentCard, 
+  cardBackReveal, 
+  revealCardAnswerFunc, 
+  submitDifficultyLevel }
+  ) => {
 
   return ( 
     <div className="flashcard">

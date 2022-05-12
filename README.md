@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# Code by Heart
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
+Code By Heart is a flashcard app that lets you create and save decks of flashcards, and then later review these cards at optimally-spaced intervals according to a spaced repetition algorithm (based on SM-2: https://www.supermemo.com/en/archives1990-2015/english/ol/sm2). Each flashcard can take the form of either a code snippet (in a variety of programming languages) or plain text. Programming languages supported: Python, JavaScript, Go, C++, C, C#, Objective C, Ruby, Java, Scala, Swift, Rust, Kotlin, Elixir. 
 
-## Available Scripts
+## Demo 
 
-In the project directory, you can run:
+https://user-images.githubusercontent.com/71302837/153951055-03ff59a4-f79d-452a-97bd-3f1c5e1f8475.mp4
 
-### `npm start`
+## Installation 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Clone this repository: https://github.com/rachael-mcbride/code-by-heart-back-end. 
+2. Set up a virtual environment: `python3 -m venv venv` and `source venv/bin/activate`. 
+3. Install the requirements: `pip install -r requirements.txt`. 
+4. Get a free API key from https://www.jdoodle.com/. Keep this key private, and create a `.env` file with:
+```
+JDOODLE_CLIENT_ID=whatever_your_client_id_is
+JDOODLE_CLIENT_SECRET=whatever_your_client_secret_is
+```
+5. Create a local PostgreSQL database called `code_by_heart`, and then add to the `.env` file the environment variable `SQLALCHEMY_DATABASE_URI` to hold the path to this database. For example: `SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://postgres:postgres@localhost:5432/code_by_heart`
+6. Run `flask db init` and `flask db migrate`, and ensure three tables appear in the `code_by_heart` database: `client`, `deck` and `flashcard`. 
+7. To start up the backend, run `flask run`. 
 
-### `npm test`
+### Frontend 
+1. Clone this other repository. 
+2. Install dependencies by running `npm install` or `yarn install`.
+3. Create a `.env` file and add this line: `REACT_APP_BACKEND_URL=whatever_your_backend_url_will_be`. For example: `REACT_APP_BACKEND_URL=http://127.0.0.1:5000`.
+4. To start up the frontend, run `yarn start` (or npm).  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Firebase Authentication 
+For user authentication, create a Google Firebase project for Code By Heart. Within it, enable Google as a sign-in method, and add your local host as an authorized domain. Update the `src/firebase/firebase.utils.js` file in the frontend repository with your API key. This key may be exposed to the public (see here: https://medium.com/@paulbreslin/is-it-safe-to-expose-your-firebase-api-key-to-the-public-7e5bd01e637b).

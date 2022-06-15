@@ -5,7 +5,7 @@ Code By Heart is a flashcard app that lets you create and save decks of flashcar
 
 ## Demo 
 
-https://user-images.githubusercontent.com/71302837/153951055-03ff59a4-f79d-452a-97bd-3f1c5e1f8475.mp4
+[https://user-images.githubusercontent.com/71302837/153951055-03ff59a4-f79d-452a-97bd-3f1c5e1f8475.mp4](https://user-images.githubusercontent.com/71302837/173711608-a756059e-da39-4e25-9dcc-ae3c9bf219a9.mp4)
 
 ## Installation 
 

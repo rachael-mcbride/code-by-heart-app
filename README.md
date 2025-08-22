@@ -11,6 +11,12 @@ Code By Heart is a full-stack flashcard app that lets users create and save deck
 
 ### Backend 
 
+### Firebase Authentication 
+1.	Create a Firebase project for Code By Heart.
+2.	Enable Google Sign-In and add your local host as an authorized domain.
+3.	Update src/firebase/firebase.utils.js with your Firebase API key after cloning the backend repo. Note: Firebase API keys are safe to expose publicly ([reference](https://medium.com/@paulbreslin/is-it-safe-to-expose-your-firebase-api-key-to-the-public-7e5bd01e637b)).
+
+### Backend
 1. Clone this [backend repo](https://github.com/rachael-mcbride/code-by-heart-back-end).
 2. Create and activate a virtual environment (`python3 -m venv venv` and `source venv/bin/activate`), and install dependencies. 
 3. Get a free JDoodle API key (jdoodle.com) and create a .env file with:
@@ -27,9 +33,3 @@ JDOODLE_CLIENT_SECRET=your_client_secret
 2. Install dependencies.
 3. Create a .env file with your backend URL.
 4. Start up the frontend: `yarn start`.  
-
-### Firebase Authentication 
-1.	Create a Firebase project for Code By Heart.
-2.	Enable Google Sign-In and add your local host as an authorized domain.
-3.	Update src/firebase/firebase.utils.js with your Firebase API key. Note: Firebase API keys are safe to expose publicly ([reference](https://medium.com/@paulbreslin/is-it-safe-to-expose-your-firebase-api-key-to-the-public-7e5bd01e637b)).
-
